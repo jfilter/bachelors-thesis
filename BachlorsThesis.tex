@@ -67,18 +67,20 @@ The digital revolution is affecting every part of our life. Also the humanities 
  They successfully implemented a FCA algorithm but lack an interactive web-based user interface which will be developed in this thesis. \\
    
  While FCA is a mathematically well-funded principle, the resulting traditional visualization of large concept lattices are a problem. Large concept lattices arose when you apply FCA to large amount of entities (Details will be explained in Chapter 2). When applying FCA to a document collection, you are likely to occur huge amount of entities. That is why alternative visualization techniques are important to get the insights of FCA, even if the lattice is large. \\
- 
+  
  This thesis does not focus on the visualization of FCA itself. It focus on the visualization of FCA for information retrieval - especially exploratory search. Exploratory search is vaguely defined as the ned to find something you did not know about before. \\
  
 This user interface will be running in the browser. Because of the fast-changing environment of the web, it is important to keep with the latest technologies and techniques to not fall apart. Besides others, the software utilizes the frameworks d3.js and Bootstrap to create a pleasant user interface. The website is fast-responding because it reduces the communication between browser and web server to a minimum. In most cases, instead of reloading the page, the interface only changes DOM elements. \\ 
     
  The remainder of this thesis is structured as follows: The background of Formal Concept Analysis will be presented in Chapter 2 and the background of User Search Interfaces in Chapter 3. In Chapter 4 I will present my (first) approach and the implementation, which will be evaluated in Chapter 5. Built on the Evaluation, I will adjust my work and present an updated version of my work in Chapter 6. I conclude in Chapter 7 and give ideas for future work.
  
-\chapter{Formal Concept Analysis}
+\chapter{Background}
 
-This chapter defines Formal Concept Analysis in the first part, then presents visualization techniques and finally explains the problems with the visualization of larges lattices.
+This chapter describes Formal Concept Analysis in the first part and the 'information seeking mantra' a guideline for user interface design in the second.
 
-\section{Definition}
+\section{Formal Concept Analysis}
+
+\subsection{Definition}
 
 Formal Concept Analysis (FCA) \cite{Ganter2012} is a mathematically well-funded technique to find relationships among objects. Formally, a \textit{formal context} is defined as as a tripple $K = (G, M, I)$ where $G$ is a set of objects, $M$ is a set of attributes and $I$ is a binary relation $I \subseteq G \times M$. $I$ specifies whether an object has an attribute or not. Table \ref{table:example} illustrates an example (from David Eppstein \cite{fcaexample}) where $G$ comprises the integers from 1 to 10 and $M$ comprises the attributes composite, even, odd, prime and square.
 
@@ -135,7 +137,7 @@ We will describe in the next section how we can apply FCA to Information Retriev
 	\includegraphics[width=\linewidth]{fcaExample}
 \end{figure*}
 
-\section{FCA for Information Retrieval}
+\subsection{Formal Concept Analysis for Information Retrieval}
 
 Carpineto et al.\cite{Carpineto2005} describe the start of FCA in information retrieval:
 
@@ -147,7 +149,14 @@ This essentially means the appliance of the Standard Boolean Retrieval Model, wh
 
 According to Poelmans et al. has been FCA "applied in many disciplines such as software engineering, knowledge discovery and information retrieval" \cite{Poelmans2013} and they did two comprehensive surveys on the application of FCA \cite{Poelmans2013, Poelmans2013b}. This thesis focusses on the visualization of a concept lattice and not on the act of creating of one. The interested reader can read literature from Carpineto et al. \cite{carpineto2004concept,Carpineto2005} to further investigate this area.
 
-\section{Visualization of Large Concept Lattices}
+\section{Information Seeking Mantra}
+The Information Seeking Mantra (The mantra) was introduced by Ben S. and summeraized user interface design principles. Albeit it was intented to be a desrciption, he wrtoe "", it is well respected in the scientific communty. Some paper question it an make clear, that there is no evidence for its success.
+\subsection{The Mantra}
+
+
+
+
+\chapter{Related Work}
 
 It has been shown, that FCA can be applied to information retrieval, but for now we did not considered the visualization of the concept lattice. While some user studies proclaim that non-experts can read Hasse diagram\cite{Eklund2004}, the study has been conducted on relatively small lattices. On the field of information retrieval the objects can easily outreach a few dozens. Kuznetsov et al. \cite{Kuznetsov20072}  describe this resulting visualization.
 \begin{quote}
@@ -157,7 +166,7 @@ Especially enormes edge crossing can hinder the visual representation. Take a lo
 
 The visual representation of Hasse diagrams can be improved by fine-tuning visual components like labels, edges etc.. Or some ideas like a Fish-Eye Views XXX-QUOTE have to applied to FCA. But this actions does not scale well and wont help us with large concept lattices. To cope with large lattices, three reduction techniques exists which will be presented in the following: One where you visualize only a part of the lattice, one to transform it into a tree and one where you remove nodes from the concept lattice which means, that you modify the structure of the lattice.
 
-\subsubsection{Local View}
+\section{Local View}
 
 Instead of showing the whole Hasse diagram to the user, only a small part of the lattice is visualized. The focus lies on one concept and its neighborhood. There exists several names and small variations of this ideas. Eklund et al. name this idea \textit{conceptual neighborhood} \cite{Eklund2009,Eklund2012}. The user can query the system or navigate through the lattice by going up (removing terms) or going down (adding terms). Only adjacent nodes are displaced in this model. The user can incrementally browse the whole lattice. Eklund et al. applied this approach to a broad range of topic: for the 'Virtual Museum of the Pacific' \cite{Eklund2009,Eklund2012}, image browsing \cite{Ducrou2006,Ducrou2008} and search engines \cite{Dau2008}.
 
@@ -186,13 +195,13 @@ In their following work, CREDO \cite{Carpineto2004}, Carpineto and Romano they r
 \caption{Screenshot of CREDO, after query 'xml' and browsing after 'editor(5)' and 'windows free(2)' \cite{Carpineto2004} }
 \end{figure*} 
 
-\subsubsection{Transform to Tree}
+\section{Transform to Tree}
 
 While transforming the lattice into a tree sounds promising, because you could apply sophisticated tree visualizing techniques to reduce edge crossing, it comes with several drawbacks. One naiv approach is described by Carpineto and Romano \cite{carpineto2004concept}: If a node hast more than one parent, remove that parent an insert a copy of then node and attach it to that parent. This is problematic, because we dramatically increase the number of nodes. 
 
 There exist another approach \cite{Melo2011}: select the 'best' parent and hide edges to all other parents. While this technically not breaks the concept, the visual representation does not correspond to the underlying model.
 
-\subsubsection{Pruning Nodes}
+\section{Pruning Nodes}
 
 A prominent approach to prune lattices called "iceberg lattice" \cite{Stumme2002}. A variation from the frequent item-set mining which specific min-support and min-confidence\cite{Agrawal1993}. It creates a top of the lattice but has some drawbacks because "One should be careful not to overlook small but interesting groups, for example, “exotic” or “emergent” groups not yet represented by a large number of objects, or, groups that contain objects who are not members of any other group."\cite{Kuznetsov20072} The iceberg lattice just focuses on the concepts that contain a lot of documents. That is why an other approaches exist: Stability\cite{Kuznetsov2007}: "A concept is stable if its intent does not depend much on each particular object of the extent." \cite{Kuznetsov20072}
 
@@ -206,35 +215,105 @@ The application of the local view technique in combination with a query interfac
 
 Before I critically analyze the current applications of local views in chapter XX, I want to give background information in (search) interface design principles in the next chapter.
 
-\chapter{User Interfaces}
-
-\section{Fundamentals}
-
-\blindtext
-
-\section{User Search Interfaces}
-
-Well-funded search interface design principles and principles of information visualization will be applied.\cite{Hearst2009,Shneiderman1996} \\
-
-\blindtext
-
-\chapter{Related Work}
-
-I will describe the current state of the art (more in detail) and criticize it when it has some flaws.
 
 \chapter{Fancy FCA 1.0}
 
 \section{My Idea}
 
-Based on the critic from the section above, I will develop my own idea
+We just want to find out if our approach, treating FCA as internal data structure and offering an user search interfaces + guidance (type ahead, showing neighboring concepts), is helpful for human scholars. This can be answered with a usability study.
 
 \section{Implementation}
 
 I will describe important parts of the implementation here.
 
-\chapter{First User Evaluation}
+\chapter{Evaluation of the User Interface}
 
-\blindtext
+The design of an interface is highly subjective. To judge if the user like it, there exist methods to evaluate the work. A small introduction into this field from the computer science perspective gives Hearst in his book on User Search Interfaces in Chapter 2. \cite{Hearst2009}. A comprehensive guide into the "Methods for Evaluating Interactive Information Retrieval Systems with User" gives Kelly \cite{Kelly2007} . The interested reader is advised read those papers because we will only scratch the surface.
+
+
+Computer scientists are not experts in human studies and Zobel \cite{Zobel2004} proclaims: "Far too many human studies in computer science are amateurish and invalid." Nevertheless, I tried to be as scientific as possible to conduct human studies even with strict resource limitations. \\
+
+I will describe the idea of the experiment first and refer to literature to illustrate my choices, I will describe the process of the experiment, and after that explain and evaluate the outcome of the results.
+
+\section{Fundamentals}
+
+  If we walk about an evaluation, it is important to make clear what what aspects are evaluated. Hearst writes \cite{Hearst2009}:
+  \begin{quote}
+  Search interfaces are usually evaluated in terms of three main aspects of usability: effectiveness, efficiency, and satisfaction, which are defined by ISO 9241-11, 1998 \cite{ISO} as:
+\begin{itemize}
+	\item Effectiveness: Accuracy and completeness with which users achieve specified goals.
+	\item Efficiency: Resources expended in relation to the accuracy and completeness with which users achieve goals.
+	\item Satisfaction: Freedom from discomfort, and positive attitudes towards the use of the product.
+\end{itemize}
+These are the criteria that ideally should be measured when evaluating a search user interface."
+\end{quote}
+
+It also nice to know the diference between an experiment and and evaluation.
+
+They different ways how to evaluate the interfaces are described now.
+
+\subsection{Categories of Usability Studies}
+The different studies Hearst \cite{Hearst2009} propose can roughly be categorized as follows:
+
+\subsubsection{Informal Usability Testing}
+Hearst \cite{Hearst2009} describes the process shortly as "Showing designs to participants and recording their responses". It is often used in short iterative cycles to quickly evaluate a design. Thinking out load.
+
+\subsubsection{Formal Studies and Controlled Experiments}
+Hearst \cite{Hearst2009} says that it is a "form of controlled experiments aim to advance the field's understanding of how people use interfaces, to determine which design concepts work well under what circumstances, and why."  In contrast to informal studies, it is important to isolate factors and not threat the whole system as a black box. Using eye tracker in a laboratory with 2-way windows is one example.
+	
+\subsubsection{Longitudinal Studies}
+In contrast to the studies above, this focus more on a longer time period and observes user real behavior. Drawing conclusions from the analysis of Google Search Queries is an example.
+
+\subsubsection{Log Analysis}
+In contrast to the studies above, this focus more on a longer time period and observes user real behavior. Drawing conclusions from the analysis of Google Search Queries is an example.
+
+\subsubsection{Bucket testing (A/B Testing)}
+The traffic to a particular website is split and alternative view. It is evaluated how the users of the alternative website reacts to he new site. For example: Amazon changes its search filters and evaluates if the users buy more.
+
+As you can see, this is only a small categorizatoin and Kelly describes in her work the different approaches more in detail. Because a complete coverage of this topic would exceed this thesis, only some parts are covered here. 
+
+\subsection{Data Collections}
+
+Kelly described different ways to collect data.
+
+\subsubsection{Questionnaires}
+
+A questionnaire comprises set of questions and is cheap and fast way to gather information from people. Kelly et al. \cite{Kelly2008} describe two types of questions as follows:
+
+\begin{quote}
+	Questionnaires can be comprised of closed questions, open questions or a mixture of both. \textit{Closed questions} are questions that provide a fixed set of responses with which subjects must respond. It is common practice for usability questionnaires to include closed questions in the form of statements such as, the system was easy to learn to use. Subjects are typically provided with 5–7-point Likert-type scales for responding, where one scale end-point represents strong agreement and the other represents strong disagreement. [..] \textit{Open questions}, on the other hand, do not provide a response set and subjects are able to provide any type of response they feel is appropriate. 
+	\end{quote}
+
+In study Kelly et al. conducted, they concduc
+
+Hornbæk and Law did a well respected meta-analysis of usability studies and as one of their conclusions they "recommend that standard questionnaires be used when possible, given their higher reliability, and that the more complex effectiveness measures be used when feasible (as they are more likely to give information that cannot be obtained by measures in the other categories)." \cite{Hornb2007} We stick to their advice and use the USE questionnaire \cite{lund2001measuring} which was (partly) used in the investigation from Kelly et all. \cite{Kelly2008}.
+
+Online Pen-and-Paper Interview
+
+\subsubsection{Thinking Alloud}
+
+\subsubsection{Search Logs}
+
+\subsection{Participants}
+
+It is important to reduce a structural bias of an experiment. Zobel \cite{Zobel2004} mentions that "the sample of human subjects should be representative (a class of computer science students may not be typical of users of mobile devices)". We tried to vary the users or at least focus on human scholars because that is the user group that is important for our stuff.
+
+\subsection{Tasks}
+
+To let them 
+
+\section{Methods}
+
+\subsection{Hypothesis}
+
+The interface is useful for the human scholars and they like the interface. It offers rich possibilities for the users to navigate along the different documents. Because of the similarity to popular search engines, they know how to use it. But there some stuff that is not implemented yet that they would like to see.
+
+\subsection{Evaluation Design}
+
+Because of our restricted resources, an informal usability study is the most attractive choice for us. The logs of the system are recored and can evaluated in future, but because of the long-term duration, they cannot be evaluated in this thesis.
+\section{Results}
+
+\section{Conluciosn}
 
 \chapter{Fancy FCA 2.0}
 
