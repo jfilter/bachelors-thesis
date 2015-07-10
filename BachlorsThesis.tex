@@ -147,14 +147,54 @@ In the 80's, basic ideas were put forth - essentially that a concept can be seen
 
 This essentially means the appliance of the Standard Boolean Retrieval Model, which, as Manning et al. \cite{Manning2009} describe, "is a model for information retrieval in which we can pose any query which is in the form of a Boolean expression of terms [..]. The model views each document as just a set of words." . In a simple case, a system only supports conjunction of terms.
 
-According to Poelmans et al. has been FCA "applied in many disciplines such as software engineering, knowledge discovery and information retrieval" \cite{Poelmans2013} and they did two comprehensive surveys on the application of FCA \cite{Poelmans2013, Poelmans2013b}. This thesis focusses on the visualization of a concept lattice and not on the act of creating of one. The interested reader can read literature from Carpineto et al. \cite{carpineto2004concept,Carpineto2005} to further investigate this area.
+According to Poelmans et al. has been FCA "applied in many disciplines such as software engineering, knowledge discovery and information retrieval" \cite{Poelmans2013} and they did two comprehensive surveys on the application of FCA \cite{Poelmans2013, Poelmans2013b}. This thesis focusses on the visualization of a concept lattice and not on the act of creating of one. The interested reader can read literature from Carpineto et al. \cite{carpineto2004concept,Carpineto2005} to further investigate this area. \\
 
-\section{Information Seeking Mantra}
-The Information Seeking Mantra (The mantra) was introduced by Ben S. and summeraized user interface design principles. Albeit it was intented to be a desrciption, he wrtoe "", it is well respected in the scientific communty. Some paper question it an make clear, that there is no evidence for its success.
-\subsection{The Mantra}
+Because the visual perspective is about for this work, let us review some design principles before discussing related work.
 
+\section{Interface Design}
 
+\subsection{Eight Golden Rules of Interface Design}
 
+The rules are from the fifth edditio
+
+\begin{itemize}
+	\item Strive for consistency: consistent sequences of actions should be required in similar situations
+\end{itemize}
+
+\subsection{Visual Information Seeking Mantra}
+
+The visual information seeking mantra (the Mantra) was introduced by Ben Shneiderman \cite{Shneiderman1996} and describes user interface design principles he developed in his projects: overview first, zoom and filter, then details on demand. Albeit the Mantra was intended to be a "descriptive and explanatory" \cite{Card1999}, "in effect, the Mantra has become a prescriptive principle for many information visualization designers", write Craft and Cairns \cite{Craft2005}.
+
+Shneiderman uses the Mantra for interfaces when the "users are viewing collections of items, where items have multiple attributes". Starting with the four task written above, he alltogether describes seven tasks:
+\begin{itemize}
+	\item Overview: Gain an overview of the entire collection.
+	\item Zoom: Zoom in on items of interest
+	\item Filter: Filter out uninteresting items.
+	\item Details-on-demand: Select an item or group and get details when needed.
+	\item Relate: View relationships among items.
+	\item History: Keep a history of actions to support undo, replay, and progressive refinement.
+	\item Extract: Allow extraction of sub-collections and of the query parameters.
+\end{itemize}
+
+Some task needs more explanation which I will give in the following with help from related literature.
+
+\subsubsection{Zoom and Filter}
+
+This task are responsible for reducing the complexity of the data collection. 'Zoom' means that the user focuses on items she wants to see. 'Filter' means that she can hide items which are not interesting for her.
+
+\subsubsection{History}
+
+It is important to give the user the possibility to easily recover from mistakes. In addition, "it is rare that a single user action produces the desired outcome. Information exploration is inherently a process with many steps, so keeping the history of actions and allowing users to retrace their steps is important." writes Shneiderman \cite{Shneiderman1996}.
+
+\subsubsection{Extract}
+
+Once interesting objects are found, the user should have the possibility to extract them from the system. Shneiderman describes printing, emailing or saving the item to the disk as 'extraction'. 
+
+\subsection{Final Remark}
+
+One should note, that the presented guidelines and tasks are only a starting point. Every system is different and requires different use cases. In addition, there is a lot of interpretation of guidelines involved. There exists a lot different guidelines but this thesis just focuses on the most famous ones.\\
+
+ Craft and Cairns \cite{Craft2005} are calling for empirical justification of the Mantra. The presented ideas base mostly on the experience of one person: Ben Shneiderman. While it is important to bear this in mind, the huge number of citations show that for a lot of people his work is influential. But this is not real science and shows that human-computer interaction are just at the start on their career - there is a still a lot to research.
 
 \chapter{Related Work}
 
@@ -228,15 +268,18 @@ I will describe important parts of the implementation here.
 
 \chapter{Evaluation of the User Interface}
 
-The design of an interface is highly subjective. To judge if the user like it, there exist methods to evaluate the work. A small introduction into this field from the computer science perspective gives Hearst in his book on User Search Interfaces in Chapter 2. \cite{Hearst2009}. A comprehensive guide into the "Methods for Evaluating Interactive Information Retrieval Systems with User" gives Kelly \cite{Kelly2007} . The interested reader is advised read those papers because we will only scratch the surface.
+The design of an interface is highly subjective. User studies can help to evaluate an interface but computer scientists are not experts in human studies and Zobel \cite{Zobel2004} proclaims: "Far too many human studies in computer science are amateurish and invalid." Nevertheless, I tried to be as scientific as possible to conduct human studies even with strict resource limitations. \\
 
-
-Computer scientists are not experts in human studies and Zobel \cite{Zobel2004} proclaims: "Far too many human studies in computer science are amateurish and invalid." Nevertheless, I tried to be as scientific as possible to conduct human studies even with strict resource limitations. \\
-
-I will describe the idea of the experiment first and refer to literature to illustrate my choices, I will describe the process of the experiment, and after that explain and evaluate the outcome of the results.
+We will present fundamentals of user studies first and then describe our experiments.
 
 \section{Fundamentals}
 
+A small introduction into this field from the computer science perspective gives Hearst in his book on User Search Interfaces in Chapter 2. \cite{Hearst2009}. A comprehensive guide into the "Methods for Evaluating Interactive Information Retrieval Systems with User" gives Kelly \cite{Kelly2007} . The interested reader is advised read those papers because we will only scratch the surface. \\ 
+
+
+I will describe the idea of the experiment first and refer to literature to illustrate my choices, I will describe the process of the experiment, and after that explain and evaluate the outcome of the results.
+
+\subsection{Introduction}
   If we walk about an evaluation, it is important to make clear what what aspects are evaluated. Hearst writes \cite{Hearst2009}:
   \begin{quote}
   Search interfaces are usually evaluated in terms of three main aspects of usability: effectiveness, efficiency, and satisfaction, which are defined by ISO 9241-11, 1998 \cite{ISO} as:
@@ -248,61 +291,66 @@ I will describe the idea of the experiment first and refer to literature to illu
 These are the criteria that ideally should be measured when evaluating a search user interface."
 \end{quote}
 
-It also nice to know the diference between an experiment and and evaluation.
+It is important to distinguish between the terms 'experiment' and an 'evaluation'. Kelly \cite{Kelly2007} writes: "Evaluations are conducted to assess the goodness of a system, interface or interaction technique and can take many forms [..]. Experiments have historically been the main method for interactive system evaluation, but experiments can also be conducted to understand behavior" and she continues: "Two important characteristics of experiments are that there are at least two things being compared (e.g., system type) and that some manipulation takes place." She further writes:
+\begin{quote}
+"In some types of [interactive information retrieval] studies only a single system is evaluated. This is a weaker form of evaluation since it is not possible to demonstrate how much better users perform or how different their behaviors and inter actions are since there is no point of comparison. Traditional usability tests are examples of this type of evaluation. Traditional usability tests are usually conducted with a single version of a system, with the goal of identifying potential usability problems."	
+\end{quote}
 
-They different ways how to evaluate the interfaces are described now.
+In this thesis, only the usability of the system is evaluated to find usability problems - we do not conduct an experiment. Experiments would be helpful to further investigate the impact of this work but exceed this thesis.
 
-\subsection{Categories of Usability Studies}
-The different studies Hearst \cite{Hearst2009} propose can roughly be categorized as follows:
+\subsection{Categories of User Studies}
+Hearst \cite{Hearst2009} categorizes user studies as follows.
 
 \subsubsection{Informal Usability Testing}
-Hearst \cite{Hearst2009} describes the process shortly as "Showing designs to participants and recording their responses". It is often used in short iterative cycles to quickly evaluate a design. Thinking out load.
+Hearst \cite{Hearst2009} describes the process shortly as "Showing designs to participants and recording their responses". It is often used in short iterative cycles to quickly evaluate a design.
 
 \subsubsection{Formal Studies and Controlled Experiments}
 Hearst \cite{Hearst2009} says that it is a "form of controlled experiments aim to advance the field's understanding of how people use interfaces, to determine which design concepts work well under what circumstances, and why."  In contrast to informal studies, it is important to isolate factors and not threat the whole system as a black box. Using eye tracker in a laboratory with 2-way windows is one example.
 	
 \subsubsection{Longitudinal Studies}
-In contrast to the studies above, this focus more on a longer time period and observes user real behavior. Drawing conclusions from the analysis of Google Search Queries is an example.
+"A longitudinal study tracks participant behavior while using a system over an extended period of time, as opposed to first-time usages which are what are typically assessed in formal and informal studies"
 
 \subsubsection{Log Analysis}
-In contrast to the studies above, this focus more on a longer time period and observes user real behavior. Drawing conclusions from the analysis of Google Search Queries is an example.
+In contrast to the studies above, this focus only on logs of real user interaction. Drawing conclusions from the analysis of Google Search Queries is an example.
 
 \subsubsection{Bucket testing (A/B Testing)}
 The traffic to a particular website is split and alternative view. It is evaluated how the users of the alternative website reacts to he new site. For example: Amazon changes its search filters and evaluates if the users buy more.
 
-As you can see, this is only a small categorizatoin and Kelly describes in her work the different approaches more in detail. Because a complete coverage of this topic would exceed this thesis, only some parts are covered here. 
+As you can see, this is only a small categorization and Kelly describes in her work the different approaches more in detail. Because a complete coverage of this topic would exceed this thesis, only some parts are covered here. 
 
-\subsection{Data Collections}
+\subsection{Data Collection Techniques}
 
-Kelly described different ways to collect data.
+There exists several techniques to collect data from participants besides from interaction logs. We will describe two more here which are inexpsenvie and do not requier special, expensive euipment or are heavily time-consuming..
 
 \subsubsection{Questionnaires}
 
-A questionnaire comprises set of questions and is cheap and fast way to gather information from people. Kelly et al. \cite{Kelly2008} describe two types of questions as follows:
+A questionnaire comprises a set of questions and is cheap and fast way to gather information from people. Kelly et al. \cite{Kelly2008} describe two types of questions as follows:
 
 \begin{quote}
 	Questionnaires can be comprised of closed questions, open questions or a mixture of both. \textit{Closed questions} are questions that provide a fixed set of responses with which subjects must respond. It is common practice for usability questionnaires to include closed questions in the form of statements such as, the system was easy to learn to use. Subjects are typically provided with 5–7-point Likert-type scales for responding, where one scale end-point represents strong agreement and the other represents strong disagreement. [..] \textit{Open questions}, on the other hand, do not provide a response set and subjects are able to provide any type of response they feel is appropriate. 
 	\end{quote}
 
-In study Kelly et al. conducted, they concduc
+Questionnaires can be done with pen-and-paper, online and in an interview session. Kelly et al. \cite{Kelly2008} conducted research on different ways to elicit responses from the participants. Their results suggest that "the post-system questionnaire takes the form of an interview for closed questions, followed by pen-and-paper or electronic mode for open questions." \cite{Kelly2008} \\ 
 
-Hornbæk and Law did a well respected meta-analysis of usability studies and as one of their conclusions they "recommend that standard questionnaires be used when possible, given their higher reliability, and that the more complex effectiveness measures be used when feasible (as they are more likely to give information that cannot be obtained by measures in the other categories)." \cite{Hornb2007} We stick to their advice and use the USE questionnaire \cite{lund2001measuring} which was (partly) used in the investigation from Kelly et all. \cite{Kelly2008}.
+Hornbæk and Law did a well respected meta-analysis of usability studies and as one of their conclusions they "recommend that standard questionnaires be used when possible, given their higher reliability, and that the more complex effectiveness measures be used when feasible (as they are more likely to give information that cannot be obtained by measures in the other categories)." \cite{Hornb2007} 
 
-Online Pen-and-Paper Interview
+\subsubsection{Thinking Aloud}
 
-\subsubsection{Thinking Alloud}
+Kelly \cite{Kelly2007} writes by referring to Ericsson and Simon \cite{Ericsson1993}: "The think-aloud method asks subjects to articulate their thinking and decision-making as they engage in [interactive information retrieval]". The comments from the participants have to be collected. Either by recording the session or by taking notes. It is hoped that the conductors can learn from the thinking process of the participant. There exist variations like that the participant should not always report because it can be exausting, challening and akwards to report all the time. Called "Spontaneous and Prompted Self-Report" the participant is encourges to report a some points or when he wants to do it.
 
-\subsubsection{Search Logs}
+\subsection{Tasks}
+
+The particpants can specific instructions what to do in the experiment. They can be very concrept or vage formulated. There exists studies which show that there is a correlatin betwwen number of different task and found design errors.
 
 \subsection{Participants}
 
 It is important to reduce a structural bias of an experiment. Zobel \cite{Zobel2004} mentions that "the sample of human subjects should be representative (a class of computer science students may not be typical of users of mobile devices)". We tried to vary the users or at least focus on human scholars because that is the user group that is important for our stuff.
 
-\subsection{Tasks}
 
-To let them 
+\section{1. Test}
 
-\section{Methods}
+We stick to their advice and use the USE questionnaire \cite{lund2001measuring} which was (partly) used in the investigation from Kelly et all. \cite{Kelly2008}.
+
 
 \subsection{Hypothesis}
 
