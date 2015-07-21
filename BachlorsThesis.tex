@@ -29,6 +29,8 @@
 
 \input{./title_page.tex}
 
+\renewcommand{\thepage}{\roman{page}}% Roman numerals for page counter
+
 \newpage
 \thispagestyle{empty}
 \mbox{}
@@ -61,13 +63,17 @@
 \thispagestyle{empty}
 \mbox{}
 
+
 \chapter{Introduction}
+
+\renewcommand{\thepage}{\arabic{page}}
+\setcounter{page}{1}
 
 The digital revolution is affecting every part of our life. Also the humanities scholars stand before a big change in their ways when huge analog collections are digitized. They have to apply computer science methods to organize and analyze huge amount of data. The term "Digital Humanities" evolved during the last 10 years which can be defined as an "intersection between the humanities and information technology" \cite{Svensson2010}.\\
 
  The Information Retrieval Department of the Universidad Nacional de Educación a Distancia (UNED) in Madrid (Spain) cooperates with human scholars to conduct research in the Digital Humanities. In this project, there are historical maps which have been digitized and annotated. To extract knowledge from the collection the research group advocates for the use of Formal Concept Analysis (FCA) for topic organization \cite{Castellanos,Cigarran}.\\
  
- They successfully implemented a FCA algorithm but lack an interactive user interface which will be developed in this thesis. \\
+ They successfully implemented a FCA algorithm but lack an interactive user interface which will be developed in this thesis. The work will be evaluated with an user study. \\
    
  While FCA is a mathematically well-funded principle, the resulting traditional visualization of large concept lattices are a problem. Large concept lattices arose when you apply FCA to large amount of entities (Details will be explained in Chapter 2). When applying FCA to a document collection, you are likely to occur huge amount of entities. That is why alternative visualization techniques are important to get the insights of FCA, even if the lattice is large. \\
   
@@ -181,32 +187,28 @@ It is often said that a picture is worth a thousand words. To convey the abstrac
 \caption{Hasse diagramm, with the integers 1 to 10 as objects and attributes square (s), prime (p), composite (c), even (e), and odd (o)}
 \label{figure:example}
 	\centering
-	\includegraphics[width=\linewidth]{fcaExample}
+	\includegraphics[width=\linewidth]{./images/fcaExample}
 \end{figure*}
 
-A Hasse diagram is a special graph where the vertices represent formal concepts and edges represent the relation $\le$ among the formal concepts. An egde between formal concepts $C_i$ and $C_j$ is drawn, when $C_i \le C_j$ and there does not exist a formal concept $C_x$ such as $C_i \le C_x \le C_j$. To reduce the readability, the nodes are ordered in layers. The nodes in top are more general ones, the nodes in the bottom are the more specific ones. There exist two special concepts: 
+A Hasse diagram is a special graph where the vertices represent formal concepts and edges represent the relation $\le$ among the formal concepts. An egde between formal concepts $C_i$ and $C_j$ is drawn, when $C_i \le C_j$ and there does not exist a formal concept $C_x$ such as $C_i \le C_x \le C_j$. To increase the readability, the nodes are ordered in layers. The concepts in top are more general, the concepts in the bottom are the more specific. There are two special concepts: supremum and infimum. The supremum is vertex node in the top and the attributes in its intent are those which are present in all objects. The infimum is the vertex in the bottom and the objects in its extent are those which have all attributes. \\
 
-
-. e vertices represent the formal concepts. The edges are there if they are directly related in the partial order. The most general formal concepts are in the top and the most specific ones are in the bottom. There have been added two special formal concepts. One for the most specific on the top containing all possible objects, and one most general containing no objects in the bottom. 
-
-We will describe in the next section how we can apply FCA to Information Retrieval.
-
-
-
+After this general introduction, we will describe in the next section how we can apply FCA to Information Retrieval.
 
 \subsection{Application for Information Retrieval}
+
+The examples depicted in table \ref{table:example} and figure \ref{figure:example} are only exemplary. How did FCA affected the real world? According to Poelmans et al. has been FCA "applied in many disciplines such as software engineering, knowledge discovery and information retrieval" \cite{Poelmans2013} and they did two comprehensive surveys on the application of FCA \cite{Poelmans2013, Poelmans2013b}. \\
 
 Carpineto et al.\cite{Carpineto2005} describe the start of FCA in information retrieval:
 
 \begin{quote}
-In the 80's, basic ideas were put forth - essentially that a concept can be seen as a query (the intent) with a set of retrieved documents (the extent).
+In the 80's, basic ideas were put forth - essentially that a concept can be seen as a query (the intent) with a set of retrieved documents (the extent) and that neighbor concepts can be seen as minimal query changes."
 \end{quote}
 
-This essentially means the appliance of the Standard Boolean Retrieval Model, which, as Manning et al. \cite{Manning2009} describe, "is a model for information retrieval in which we can pose any query which is in the form of a Boolean expression of terms [..]. The model views each document as just a set of words." . In a simple case, a system only supports conjunction of terms.
+This means that the objects are documents and the documents are treated as a set of words. An attribute means that a word occur in this documents. In this simple form, this has a major drawback because it is not possible to we weight terms or for instance to rank among documents with the same attributes. How the user can navigate through the lattice is described in later sections XX-INSRT REF.\\
 
-According to Poelmans et al. has been FCA "applied in many disciplines such as software engineering, knowledge discovery and information retrieval" \cite{Poelmans2013} and they did two comprehensive surveys on the application of FCA \cite{Poelmans2013, Poelmans2013b}. This thesis focusses on the visualization of a concept lattice and not on the act of creating of one. The interested reader can read literature from Carpineto et al. \cite{carpineto2004concept,Carpineto2005} to further investigate this area. \\
+The different algorithms to create concept lattes or an in-depth analysis of FCA for text mining are not covered in this thesis. The interested reader is guided to study the work from Carpineto and Romano \cite{carpineto2004concept} for an detailed introduction. \\
 
-Because the visual perspective is about for this work, let us review some design principles before discussing related work.
+Selected work of IR+FCA is discussed in the related work section. Before we do this, let us get to know some design principles to discuss the work in regard to those principles.
 
 \section{Interface Design}
 
@@ -269,68 +271,130 @@ The presented ideas base mostly on the experience of one person: Ben Shneiderman
 
 \chapter{Related Work}
 
-With the background in FCA and interface design principles, we review and discuss related work. \\
+After giving a background in formal concept analysis in general advices we are reviewing the state of art in visualizing concept lattices.
 
-\section{Hasse Diagramm}
+\section{Full Hasse Diagrams}
 
-Hasse diagrams were introduces
+The traditional, static visualization of concept lattices are Hasse diagrams as describes in XX. Eklund et al. \cite{Eklund2004} conducted user studies and proclaim that non-FCA-experts can read Hasse Diagrams if you fine-tune the Hasse diagram. For instance by choosing appropriate colors, symbols and positioning of the vertices. \\
 
- While some user studies proclaim that non-experts can read Hasse diagram\cite{Eklund2004}, the study has been conducted on relatively small lattices. On the field of information retrieval the objects can easily outreach a few dozens. Kuznetsov et al. \cite{Kuznetsov20072}  describe this resulting visualization.
-\begin{quote}
-Representing concept lattices constructed from large contexts often results in heavy, complex diagrams that can be impractical to handle and, eventually, to make sense of.	
-\end{quote}
-Especially enormes edge crossing can hinder the visual representation. Take a look at the appendix for the first results of the research group. 
+But in the domain of information (document) retrieval you get formal contexts with a lot of objects. Those Hasse diagrams scale very bad for large concepts lattices. Kuznetsov et al. \cite{Kuznetsov20072}  describe this resulting visualization: "Representing concept lattices constructed from large contexts often results in heavy, complex diagrams that can be impractical to handle and, eventually, to make sense of." Especially the high connectivity of the graph results in enormous edge crossing. The image \ref{figure:firstVisualizaion} shows the first visualization results with their data set. The software XX was used. \\
 
-The visual representation of Hasse diagrams can be improved by fine-tuning visual components like labels, edges etc.. Or some ideas like a Fish-Eye Views XXX-QUOTE have to applied to FCA. But this actions does not scale well and wont help us with large concept lattices. To cope with large lattices, three reduction techniques exists which will be presented in the following: One where you visualize only a part of the lattice, one to transform it into a tree and one where you remove nodes from the concept lattice which means, that you modify the structure of the lattice.
+\begin{figure*}[h]
+\caption{First Visualization of the data set with traditional FCA Software}
+\label{figure:firstVisualizaion}
+	\centering
+	\includegraphics[width=\linewidth]{./images/firstVisualization}
+\end{figure*}
+
+The visualization is useless. What can be done to improve the situation? The Hasse can be pruned by reducing the number of vertices. The different techniques are discussed in the next section.
+
+\section{Pruned Hasse Diagrams}
+
+One way to reduce the number of vertices is to compute an "iceberg lattices" \cite{Stumme2002}. They result after the application of the technique originated from data mining "frequent item-set mining" \cite{Agrawal1993}. Only formal concepts are selected which are considers as 'frequent'. A formal concept is frequent if its intent, the set of attributes, is frequent. This approach has some drawbacks. Kuznetsov et al. \cite{Kuznetsov20072} describe them: "One should be careful not to overlook small but interesting groups, for example, “exotic” or “emergent” groups not yet represented by a large number of objects, or, groups that contain objects who are not members of any other group." They propose to only select 'stable' concepts and write "A concept is stable if its intent does not depend much on each particular object of the extent." \cite{Kuznetsov20072}. It is also possible to apply traditional cluster techniques like fuzzy K-Means clustering to FCA \cite{AswaniKumar2010}. \\
+
+	While all these techniques undoubtable reduces the number of formal concepts, it is to question if the results are any helpful. In our case of information retrieval, we apply FCA to explore the data and get insights about it. When pruning the nodes, you are losing many data relationships, many formal concepts and, consequently, the "power" of FCA as exploratory technique is significantly reduced. When we deal with large concepts lattices, the resulting visualization can only contain a very low percentage of formal formal concept. In the year 2015, the question is not how can I analyze 16 formal concepts as in XX - it is more how can I analyze 16000 formal concepts. For this tasks, this approach is not appropriate. \\
+	
+	Another idea are nested line (/Hasse) diagrams. There the attributes of a formal context are split and a hierarchical order is built up. For instance if you just have two layers: You built up the Hasse diagram for the first layer. And inside the vertex there are is the Hasse Diagram for the second layer and so on. An example is shown in XX. \\
+	
+But how to split the groups? First - manual selection: This is not doable. Second - automatically selection. This can be done for instance by the stability measurement. But his has the sample like described above. But now you do not remove the concepts but 'hide' them. But overall this approach has not found many friends. Maybe it is because it is very complex and not doable for users. And overall a lot more graphs are added and this can be very distracting. For our case this is not doable because we just have to many formal concepts. There exist even over 1000 Formal Concepts with the highest stability measure of 100\%. \\
+
+The reduction of formal concepts and changing the structure of the lattice maybe useful for different applications, for us there are not. In the next section we will see a technique that is used by a lot of applications in the IR field.
 
 \section{Local View}
 
-Instead of showing the whole Hasse diagram to the user, only a small part of the lattice is visualized. The focus lies on one concept and its neighborhood. There exists several names and small variations of this ideas. Eklund et al. name this idea \textit{conceptual neighborhood} \cite{Eklund2009,Eklund2012}. The user can query the system or navigate through the lattice by going up (removing terms) or going down (adding terms). Only adjacent nodes are displaced in this model. The user can incrementally browse the whole lattice. Eklund et al. applied this approach to a broad range of topic: for the 'Virtual Museum of the Pacific' \cite{Eklund2009,Eklund2012}, image browsing \cite{Ducrou2006,Ducrou2008} and search engines \cite{Dau2008}.
+Instead of showing the full Hasse diagram, the user can see a local view on the lattice. We will give an overview about the basic idea and applications before we review one real-world application in detail. \\
+
+\subsection{Basic Idea}
+The interface is always focused on one formal concept. The user can query the system or navigate through the lattice by going up (removing terms) or going down (adding terms). The figure shows the example from the start with the focus on the concept with the attributes. {o,s}. \\ 
+
+
+Eklund et al. define their navigation method \textit{conceptual neighborhood} \cite{Eklund2009,Eklund2012}. Only directly related stuff is shown and the visualization is very different from a Hasse diagram. \\
+
+To fully explore the whole lattice the user iteratively navigate through the lattice. In the following, first the history is described and then the way how to navigates is described with an example. \\
+
+The idea originated from the information retrieval field and was first proposed by Godin et al. \cite{Godin1989}. The user queries the system and find the corresponding formal concepts. The documents are shown but also neighboring formal concepts are shown. So after the initial query, the user does not have to formulate new queries and can browse the system iteratively. \\
+
+Two underlying information seeking models stand behind his approach. First, user tend to start with a short query and then refine their needs. Hearst \cite{Hearst2009} write  while referring to \cite{Marchionini2006,Bates1990}:
+\begin{quote}
+	A commonly-observed search strategy is one in which the information seeker issues a quick, imprecise query in the hopes of getting into approximately the right part of the information space, and then doing a series of local navigation operations to get closer to the information of interest
+\end{quote}
+
+Second, it easier for the user to choose from suggestions than to formulate a query. Aula writes \cite{Aula2005}:
+\begin{quote}
+	Considered in cognitive terms, searching is a more analytical and demanding method for locating information than browsing, as it involves several phases, such as planning and executing queries, evaluating the results, and refining the queries, whereas browsing only requires the user to recognize promising-looking links.
+\end{quote}
+
+Godin et al. \cite{Godin1993} evaluated their work in comparison to boolean retrieval and hierarchical retrieval and proclaim that "[their experiments] suggests that retrieval using a Galois lattice structure may be an attractive alternative since it combines a good performance for subject searching along with browsing potential." \\
+
+\subsection{Examples}a
+
+Carpineto and Romano picked up the idea from Godin et al. and developed a FCA search engines ULYSSES \cite{Carpineto1995,Carpineto1996}. The user can fine-tune what neighboring vertices are displayed by bounding the information seeking space. For instance the minimal distance between focused vertices and other vertices. Or parents, children. In Figure \ref{figure:ulysses} is a screenshot of the system. \\
 
 \begin{figure*}[h]
+	\centering
+	\includegraphics[width=\linewidth]{images/ulysses}
+\caption{Display screen of ULYSSES, focusing on the black node \cite{Carpineto1996} }
+\label{figure:ulysses}
+\end{figure*}
+
+In their following work, CREDO \cite{Carpineto2004}, Carpineto and Romano followed the look of ordinary search engines. The presentation of the concept lattice is not oriented at the Hasse Diagram. It looks more like a folder structure. Shown in \ref{figure:credo}. Nauer and Yannik built CreChainDo \cite{Nauer2009} is built on Credo is a more updated variation. Other works: Koester \cite{Koester2006} and Dau et al.\cite{Dau2008}.\\
+
+\begin{figure*}[h]
+	\centering
+	\includegraphics[width=\linewidth]{images/credo}
+\caption{Screenshot of CREDO, after query 'xml' and browsing after 'editor(5)' and 'windows free(2)' \cite{Carpineto2004} }
+\label{figure:credo}
+\end{figure*} 
+
+\begin{figure*}[h]
+	\centering
+	\includegraphics[width=\linewidth]{images/crechaindo}
+\caption{Screenshot of CreChainDo, after query 'leopard' \cite{Nauer2009} }
+\label{figure:crechaindo}
+\end{figure*} 
+
+For now we looked at search engines. Let us review some more genreal approaches.\\
+
+
+Or the work around Peter Eklund. Eklund et al. applied FCA to email organization\cite{Eklund2004}, image browsing \cite{Ducrou2006,Ducrou2008} and the last work was a 'Virtual Museum of the Pacific' \cite{Eklund2009,Eklund2012} which is accessible on the web \footnote{\url{http://epoc.cs.uow.edu.au/vmp/} - A login is required. You can use. username: filter and password: 45755}. Let us review the museum in-depth because it is very similar to our stuff. \\
+ 
+ \subsection{Review of the Pacific Museum}
+ 
+ If we take the the Mantra (REF XX) we see that some stuff is missing: There is no overview. Or at least there is no overview first. There is details on demand and you zoom into collection an you find interesting. Filter out is really difficult to implement with FCA. It related items are shown. But what there is no way to go back in history. Or to save this document. The problem with the missing is a real problem. It is also in the principle because a history gives the user confident to explore the system. FCA is truly exploratity technique and requieres a lot of confidence to do it. That this is a real problem can be seen in the user studies they conducted. LALA
+ 
+ And for the search interface, it can be approved by sticking to the design of modern search engines.
+ 
+ \begin{figure*}[h]
 \label{figure:pacific}
 	\centering
 	\includegraphics[width=\linewidth]{images/pacific}
 \caption{Screenshot of 'Virtual Museum of the Pacific', focus on concept 'melanesia'}
 \end{figure*}
+ 
+ 
 
-Carpineto and Romano developed a search engines ULYSSES \cite{Carpineto1995,Carpineto1996}, which visualizes the results in a similar way. But it visualizes a small sublattice - more than just the directly adjacent nodes. The size of the sublattices varies and can be fine-tuned by parameters. For instance, you can the degree of children or parents to visualize, which is the minimal distance between two nodes. You can see a screenshot of the software in Figure\ref{figure:ulysses}.
-
-\begin{figure*}[h]
-\label{figure:ulysses}
-	\centering
-	\includegraphics[width=\linewidth]{images/ulysses}
-\caption{Display screen of ULYSSES, focusing on the black node \cite{Carpineto1996} }
-\end{figure*}
-
-In their following work, CREDO \cite{Carpineto2004}, Carpineto and Romano they restricted the system to only show directly neighboring nodes which a folding mechanism.
-
-\begin{figure*}[h]
-\label{figure:credo}
-	\centering
-	\includegraphics[width=\linewidth]{images/credo}
-\caption{Screenshot of CREDO, after query 'xml' and browsing after 'editor(5)' and 'windows free(2)' \cite{Carpineto2004} }
-\end{figure*} 
-
-\section{Transform to Tree}
-
-While transforming the lattice into a tree sounds promising, because you could apply sophisticated tree visualizing techniques to reduce edge crossing, it comes with several drawbacks. One naiv approach is described by Carpineto and Romano \cite{carpineto2004concept}: If a node hast more than one parent, remove that parent an insert a copy of then node and attach it to that parent. This is problematic, because we dramatically increase the number of nodes. 
-
-There exist another approach \cite{Melo2011}: select the 'best' parent and hide edges to all other parents. While this technically not breaks the concept, the visual representation does not correspond to the underlying model.
-
-\section{Pruning Nodes}
-
-A prominent approach to prune lattices called "iceberg lattice" \cite{Stumme2002}. A variation from the frequent item-set mining which specific min-support and min-confidence\cite{Agrawal1993}. It creates a top of the lattice but has some drawbacks because "One should be careful not to overlook small but interesting groups, for example, “exotic” or “emergent” groups not yet represented by a large number of objects, or, groups that contain objects who are not members of any other group."\cite{Kuznetsov20072} The iceberg lattice just focuses on the concepts that contain a lot of documents. That is why an other approaches exist: Stability\cite{Kuznetsov2007}: "A concept is stable if its intent does not depend much on each particular object of the extent." \cite{Kuznetsov20072}
-
-	It is also possible to apply traditional cluster techniques to FCA.\cite{AswaniKumar2010}
+ 
+ After identifing this problems, we want to built on it. but before that let us review some non-fca-based related work.
 
 
-\section{Conclusions}
+\section{Facted Browsers}
 
-We showed that there exist different possibilities to reduce the complexity of larges lattices. But in our case, we cannot change the structure of the lattice. We apply FCA to explore the data and get insights about it. When pruning the nodes, you are losing many data relationships, many formal concepts and, consequently, the "power" of FCA as exploratory technique is significantly reduced.
-The application of the local view technique in combination with a query interface is best for our needs. Especially the use of a query interface is familiar to all user with the rise of web search engines. The 'transform to tree' approach without a query interface seems cumbersome and all together, it is really similar to the local view approach.
+DT are similar. But not for text mining. 
 
-Before I critically analyze the current applications of local views in chapter XX, I want to give background information in (search) interface design principles in the next chapter.
+\section{Conclusion}
+
+FCa is gre
+
+ he has percpectives: also a taxonomy. But by introducing  manual taxinomy may be useful for the user, but it makes the use of FCA useless because there exist better approaches for this kind of stuff (see below)
+
+
+
+
+
+
+
+
+
 
 
 \chapter{Fancy FCA 1.0}
@@ -338,6 +402,14 @@ Before I critically analyze the current applications of local views in chapter X
 \section{My Idea}
 
 We just want to find out if our approach, treating FCA as internal data structure and offering an user search interfaces + guidance (type ahead, showing neighboring concepts), is helpful for human scholars. This can be answered with a usability study.
+
+\subsection{Interface}
+
+The interface should look like a modern search interface. That is why the search bar is on the top. The results are shown in a vertical list. 
+
+The stuff to go deeper is shown as a word cloud but with a scrict seperation between the bubbles. The thought process: Why this interface? An alternative view for instance a list of words. with or without indicating the number of stuff would impose a strict hierachrical order. terms on the top would be clicked a way often. while this approach is not perfect it tries to create a equal way to interact.
+
+Breadcrumbs are under the sreach bar. They are used in most modern website for navigtion.
 
 \section{Implementation}
 
@@ -438,11 +510,13 @@ The interface is useful for the human scholars and they like the interface. It o
 Because of our restricted resources, an informal usability study is the most attractive choice for us. The logs of the system are recored and can evaluated in future, but because of the long-term duration, they cannot be evaluated in this thesis.
 \section{Results}
 
-\section{Conluciosn}
+\section{Conclusions}
 
 \chapter{Fancy FCA 2.0}
 
-\chapter{Second User Evaluations}
+\blindtext
+
+\chapter{Discussions}
 
 \blindtext
 
