@@ -185,10 +185,10 @@ In the next section we will take a look at the static visualization of concept l
 It is often said that a picture is worth a thousand words. To convey the abstract insights of a concept lattice, it can be visually represented in a \textit{Hasse diagram}. Figure \ref{figure:example} shows the Hasse diagram of the concept lattice derived from the formal context described in table \ref{table:example}. \\
 
 \begin{figure*}[h]
-\label{figure:example}
 	\centering
 	\includegraphics[width=\linewidth]{./images/fcaExample}
-	\caption{Hasse diagramm, with the integers 1 to 10 as objects and attributes square (s), prime (p), composite (c), even (e), and odd (o)}
+\caption{Hasse diagram, with the integers 1 to 10 as objects and attributes square (s), prime (p), composite (c), even (e), and odd (o)}
+\label{figure:example}
 \end{figure*}
 
 A Hasse diagram is a graph where the vertices represent formal concepts and edges represent the relation $\le$ among the formal concepts. An edge between formal concepts $C_i$ and $C_j$ is drawn, when $C_i \le C_j$ and there does not exist a formal concept $C_x$ such as $C_i \le C_x \le C_j$. To increase the readability, the nodes are ordered in layers. The concepts in top are more general, the concepts in the bottom are the more specific. There are two special concepts: supremum and infimum. The supremum is vertex node in the top and the attributes in its intent are those which are present in all objects. In most cases its intent is empty. The infimum is the vertex in the bottom and the objects in its extent are those which have all attributes. In most cases its extent is empty.\\
@@ -277,36 +277,57 @@ After introducing formal concept analysis in section \ref{Formal Concept Analysi
 
 \section{Full Hasse Diagrams}
 
-The traditional, static visualization of concept lattices are Hasse diagrams as describes in section \ref{Formal Concept Analysis}. There are also  Eklund et al. \cite{Eklund2004} conducted user studies and proclaim that non-FCA-experts can read Hasse Diagrams if you fine-tune the Hasse diagram. For instance by choosing appropriate colors, symbols and positioning of the vertices. \\
+The traditional, static visualization of concept lattices are Hasse diagrams as describes in section \ref{Formal Concept Analysis}. They are also named \textit{line diagrams}. Eklund et al. \cite{Eklund2004} conducted user studies and proclaim that non-FCA-experts can read Hasse Diagrams if you fine-tune the Hasse diagram. For instance by choosing appropriate colors, making us of symbols and carefully positioning the vertices in layer. \\
 
-But in the domain of information (document) retrieval you get formal contexts with a lot of objects. Those Hasse diagrams scale very bad for large concepts lattices. Kuznetsov et al. \cite{Kuznetsov20072}  describe this resulting visualization: "Representing concept lattices constructed from large contexts often results in heavy, complex diagrams that can be impractical to handle and, eventually, to make sense of." Especially the high connectivity of the graph results in enormous edge crossing. The image \ref{figure:firstVisualizaion} shows the first visualization results with their data set. The software XX was used. \\
+But in the domain of information (document) retrieval you get formal contexts with a lot of objects. Those Hasse diagrams scale very bad for large concepts lattices. Kuznetsov et al. \cite{Kuznetsov20072}  describe this resulting visualization: "Representing concept lattices constructed from large contexts often results in heavy, complex diagrams that can be impractical to handle and, eventually, to make sense of." Especially the high connectivity of the graph results in enormous edge crossing. The image \ref{figure:firstVisualizaion} shows the first results from data in the digital humanities project. The software XX was used. \\
 
 \begin{figure*}[h]
-\caption{First Visualization of the data set with traditional FCA Software}
-\label{figure:firstVisualizaion}
 	\centering
 	\includegraphics[width=\linewidth]{./images/firstVisualization}
+\caption{First visualization of digital humanist data with traditional FCA software}
+\label{figure:firstVisualizaion}
 \end{figure*}
 
 The visualization is useless. What can be done to improve the situation? The Hasse can be pruned by reducing the number of vertices. The different techniques are discussed in the next section.
 
 \section{Pruned Hasse Diagrams}
 
-One way to reduce the number of vertices is to compute an "iceberg lattices" \cite{Stumme2002}. They result after the application of the technique originated from data mining "frequent item-set mining" \cite{Agrawal1993}. Only formal concepts are selected which are considers as 'frequent'. A formal concept is frequent if its intent, the set of attributes, is frequent. This approach has some drawbacks. Kuznetsov et al. \cite{Kuznetsov20072} describe them: "One should be careful not to overlook small but interesting groups, for example, “exotic” or “emergent” groups not yet represented by a large number of objects, or, groups that contain objects who are not members of any other group." They propose to only select 'stable' concepts and write "A concept is stable if its intent does not depend much on each particular object of the extent." \cite{Kuznetsov20072}. It is also possible to apply traditional cluster techniques like fuzzy K-Means clustering to FCA \cite{AswaniKumar2010}. \\
+\subsection{Reduce Number of Formal Concepts}
 
-	While all these techniques undoubtable reduces the number of formal concepts, it is to question if the results are any helpful. In our case of information retrieval, we apply FCA to explore the data and get insights about it. When pruning the nodes, you are losing many data relationships, many formal concepts and, consequently, the "power" of FCA as exploratory technique is significantly reduced. When we deal with large concepts lattices, the resulting visualization can only contain a very low percentage of formal formal concept. In the year 2015, the question is not how can I analyze 16 formal concepts as in XX - it is more how can I analyze 16000 formal concepts. For this tasks, this approach is not appropriate. \\
-	
-	Another idea are nested line (/Hasse) diagrams. There the attributes of a formal context are split and a hierarchical order is built up. For instance if you just have two layers: You built up the Hasse diagram for the first layer. And inside the vertex there are is the Hasse Diagram for the second layer and so on. An example is shown in XX. \\
-	
-But how to split the groups? First - manual selection: This is not doable. Second - automatically selection. This can be done for instance by the stability measurement. But his has the sample like described above. But now you do not remove the concepts but 'hide' them. But overall this approach has not found many friends. Maybe it is because it is very complex and not doable for users. And overall a lot more graphs are added and this can be very distracting. For our case this is not doable because we just have to many formal concepts. There exist even over 1000 Formal Concepts with the highest stability measure of 100\%. \\
+One way to reduce the number of vertices is to compute the \textit{iceberg lattices} as described by Stumme et al.\cite{Stumme2002}. They result after the application of a data mining technique "frequent item-set mining" from Agrawal et al.\cite{Agrawal1993}. Only formal concepts are selected which are considered 'frequent'. A formal concept is frequent if its intent, the set of attributes, is frequent. Let $B$ be the intent and $minSupport \in [0, 1]$, then $B$ is frequent if $ |B'|/|G| \geq minSupport$. This means the attribute set has to specify a high portion of objects; at least $minSupport$. \\
 
-The reduction of formal concepts and changing the structure of the lattice maybe useful for different applications, for us there are not. In the next section we will see a technique that is used by a lot of applications in the IR field.
+ This approach has some drawbacks as Kuznetsov et al. \cite{Kuznetsov20072} point out: "One should be careful not to overlook small but interesting groups, for example, “exotic” or 'emergent' groups not yet represented by a large number of objects, or, groups that contain objects who are not members of any other group." They propose to only select 'stable' concepts and write "A concept is stable if its intent does not depend much on each particular object of the extent." \cite{Kuznetsov20072}. It is also possible to apply traditional cluster techniques like fuzzy K-Means clustering to FCA \cite{AswaniKumar2010}. \\
+
+	While all these techniques undoubtable reduces the number of formal concepts, it is to question if the results are any helpful. In our case of information retrieval, we apply FCA to explore the data and get insights about the lattice structure. When pruning the nodes, you are losing many data relationships, many formal concepts and, consequently, the "power" of FCA as exploratory technique is significantly reduced. When we deal with large concepts lattices, the number of nodes has to be very low if we want to represent them with Hasse diagrams. In the year 2015, the question is not how can I visualize and analyze 16 formal concepts as in figure \ref{figure:example} - it is more how can I analyze 160000 formal concepts. For this tasks, this approach is not appropriate. \\
+	
+	But this reduction techniques can be useful to reduce the clutter in the lattice. They can be used in combination with our visualizing techniques as described in the upcoming section \ref{Local View}. \\
+	
+\subsection{Nest Formal Concepts}	
+
+Another idea are \textit{nested line diagrams} - line diagrams are another name for Hasse diagrams. All attributes of a formal context are partitioned into layers. For instance if you just have two layers. For the first layer: built up the Hasse diagram with the attributes of the first layer. For each vertex in the resulting Hasse diagram, built up a Hasse diagrams \textit{inside} the vertex. This secondary Hasse diagrams are built from the objects in each vertex (extent of the formal concept). This can be done for an arbitrary number of layers. An example from Carpineto and Romano \cite{carpineto2004concept} is shown in figure \ref{figure:nested}. The general idea should be clear without explaining the context - if not Carpineto and Romano \cite{carpineto2004concept} describe it more in detail. \\
+
+\begin{figure*}[h]
+	\centering
+	\includegraphics[width=0.5\linewidth]{./images/nested}
+\caption{Nested line diagram}
+\label{figure:nested}
+\end{figure*}
+	
+But how to partition the attributes? You have to select them manually. If you have an taxonomy of the attributes you can make use of them. In the case of text mining we do not have an taxonomy and thereby cannot make use of it. Furthermore: FCA is good at building relationships with arbitrary attributes. If you have a taxonomy, there are way better techniques one will be presented in section \ref{dyafs}: "Dynamic Taxonomies and Faceted Search". \\
 
 \section{Local View}
+\label{Local View}
 
 Instead of showing the full Hasse diagram, the user can see a local view on the lattice. We will give an overview about the basic idea and applications before we review one real-world application in detail. \\
 
+One could argue that you just have to visualize everything and then allow to zoom on nodes. This techniques is common among network visualizations. But because of the high connectivity of the graph, this is not helpful to Hasse diagrams. You can see this at the tool presented from Neznanov and Parinov \cite{Neznanov2014} when they visualize a concept lattice with over 20000 concepts.
+
+ normal zooming in. But take a look at. The eges are complety useless \\
+
 \subsection{Basic Idea}
+
+
+
 The interface is always focused on one formal concept. The user can query the system or navigate through the lattice by going up (removing terms) or going down (adding terms). The figure shows the example from the start with the focus on the concept with the attributes. {o,s}. \\ 
 
 
@@ -328,7 +349,7 @@ Second, it easier for the user to choose from suggestions than to formulate a qu
 
 Godin et al. \cite{Godin1993} evaluated their work in comparison to boolean retrieval and hierarchical retrieval and proclaim that "[their experiments] suggests that retrieval using a Galois lattice structure may be an attractive alternative since it combines a good performance for subject searching along with browsing potential." \\
 
-\subsection{Examples}a
+\subsection{Examples}
 
 Carpineto and Romano picked up the idea from Godin et al. and developed a FCA search engines ULYSSES \cite{Carpineto1995,Carpineto1996}. The user can fine-tune what neighboring vertices are displayed by bounding the information seeking space. For instance the minimal distance between focused vertices and other vertices. Or parents, children. In Figure \ref{figure:ulysses} is a screenshot of the system. \\
 
