@@ -71,15 +71,15 @@
 
 The digital revolution is affecting every part of our life. Also the humanities scholars stand before a big change in their ways when huge analog collections are digitized. They have to apply computer science methods to organize and analyze huge amount of data. The term "Digital Humanities" evolved during the last 10 years which can be defined as an "intersection between the humanities and information technology" \cite{Svensson2010}.\\
 
- The Information Retrieval Department of the Universidad Nacional de Educación a Distancia (UNED) in Madrid (Spain) cooperates with human scholars to conduct research in the Digital Humanities. In this project, there are historical maps which have been digitized and annotated. To extract knowledge from the collection the research group advocates for the use of Formal Concept Analysis (FCA) for topic organization \cite{Castellanos,Cigarran}.\\
+ The Computer Science Department of the Universidad Nacional de Educación a Distancia (UNED) in Madrid (Spain) cooperates with human scholars to conduct research in the digital humanities. In this project\footnote{\url{http://linhd.uned.es/p/proyecto-dimh/}}, there are historical maps which have been digitized and annotated. To extract knowledge from the collection the research group advocates for the use of Formal Concept Analysis (FCA) for topic organization \cite{Castellanos,Cigarran}.\\
  
  They successfully implemented a FCA algorithm but lack an interactive user interface which will be developed in this thesis. The work will be evaluated with an user study. \\
    
- While FCA is a mathematically well-funded principle, the resulting traditional visualization of large concept lattices are a problem. Large concept lattices arose when you apply FCA to large amount of entities (Details will be explained in Chapter 2). When applying FCA to a document collection, you are likely to occur huge amount of entities. That is why alternative visualization techniques are important to get the insights of FCA, even if the lattice is large. \\
-  
- This thesis does not focus on the visualization of concept lattices itself. It focus on the visualization of concept lattices to explore and browse the data. This is different because it sets the data itself into the center and not the structure that was built around the data, the concept lattice.\\
+ While FCA is a mathematically well-funded principle, the resulting traditional, static visualization of large concept lattices are a problem. Large concept lattices arose when you apply FCA to large amount of entities (Details will be explained in Chapter 2). When applying FCA to a document collection, you are likely to occur huge amount of entities. That is why alternative, interactive visualization techniques are needed. \\
  
-This user interface will be web-based, to avoid dealing with setup problems you encounter when dealing with a heterogeneous operating systems environment. Because of the fast-changing environment of the web, it is important to keep with the latest technologies and techniques to not fall apart. Besides others, the software utilizes the frameworks d3.js and Bootstrap to create a pleasant user interface. The website is fast-responding because it reduces the communication between browser and web server to a minimum. In most cases, instead of reloading the page, the interface only changes DOM elements. \\
+  This thesis focuses on concept lattices that were built from document collection. In this scenario, FCA is especially valuable when the user does not know anything about the collection and wants to explore the data. \\
+  
+ This user interface will be web-based, to avoid dealing with setup problems you encounter when dealing with a heterogeneous operating systems environment. Because of the fast-changing environment of the web, it is important to keep with the latest technologies and techniques to not fall apart. Besides others, the software utilizes the frameworks d3.js and Bootstrap to create a pleasant user interface. The website is fast-responding because it reduces the communication between browser and web server to a minimum. In most cases, instead of reloading the page, the interface only changes DOM elements. \\
     
  The remainder of this thesis is structured as follows: The background of Formal Concept Analysis will be presented in Chapter 2 and the background of User Search Interfaces in Chapter 3. In Chapter 4 I will present my (first) approach and the implementation, which will be evaluated in Chapter 5. Built on the Evaluation, I will adjust my work and present an updated version of my work in Chapter 6. I conclude in Chapter 7 and give ideas for future work.
  
@@ -88,10 +88,11 @@ This user interface will be web-based, to avoid dealing with setup problems you 
 Before we can analyze already existing work in this area, draw our conclusions and develop our own system, we have give background information. This chapter gives an introduction into formal concept analysis, followed by an introduction into user interface design principles.
 
 \section{Formal Concept Analysis}
+\label{Formal Concept Analysis}
 
-Formal Concept Analysis (FCA) is a mathematically well-funded technique to analyze data. FCA builds domain ontologies from object specified by attributes. It derives from old philosophical ideas and was formalized by Rudolf Wille \cite{Ganter2012}. \\
+Formal Concept Analysis (FCA) is a mathematically well-funded technique to analyze data. FCA creates relationships among objects specified by attributes. It derives from old philosophical ideas and was formalized by Rudolf Wille \cite{Ganter2012}. \\
 
-In the first section a small introduction is given and the second part the application for information retrieval are explained.
+First, we describe the formal definitions and explain them with examples. Second, we give examples for the use of FCA in information retrieval. \\
 
 \subsection{Definition}
 
@@ -142,7 +143,7 @@ $B'$ is the set of objects that have at least the attributes given in $B$. \\
 
 If for $A \subseteq G$ such that $A = A''$, then $A$ is called \textit{closed}. The same is true for $B \subseteq M$ and $B = B''$. \\
 
-For example, let a set of objects be defined as $A_1 = \{1,4\} \subseteq G$. This results into: $A_1' = \{square\}$ and $A_1'' = \{1,4,9\}$. $A_1$ is not closed but $A_2 = {1,4,9} \subseteq G$ is called close because $A_2 = A_2''$. \\   
+For example, let a set of objects be defined as $A_1 = \{1,4\} \subseteq G$. This results into: $A_1' = \{square\}$ and $A_1'' = \{1,4,9\}$. $A_1$ is not closed but $A_2 = \{1,4,9\} \subseteq G$ is called close because $A_2 = A_2''$. \\   
 
 A \textit{formal concept} is a pair of $(A, B)$ where $A \subseteq G$ and $B \subseteq M$ and $A = B' \wedge B = A' $. Informally, all objects in $A$ share exactly the same attributes in $B$. $A$ is a set of objects called the \textit{extent} of a formal concept. $B$ a set of attributes called the \textit{intent} of a formal concept. The extent and the intent of all formal concepts are always closed.\\
 
@@ -167,13 +168,13 @@ $C_3$ & \{9\} & \{composite, odd, square\} \\
 \end{tabular}
 \end{table}
 
-It is possible to define an order relation on the formal concepts. Let us introduce the relation $\le$ as follows:
+It is always possible to define an order relation on the formal concepts. Let us introduce the relation $\le$ as follows:
 \begin{align*} (A_i,B_i) \le (A_j, B_j) \Longleftrightarrow	A_i \subseteq A_j
 \end{align*}
 
 With the help of $\le$, we  can derive relationships from the the concepts in table \ref{table:exampleConcepts}. We see that $C_1 \le C_2$. This means that $C_1$ is more specific than $C_2$ and $C_2$ is more general than $C_1$. We can also see that $C_3$ is unrelated to $C_1$, and that $C_3$ is unrelated to $C_2$. \\
 
-A formal context with $\le$ is called a \textit{concept lattice} of the context. It can be shown, that for two formal concepts $C_i$ and $C_j$, there always exist a formal concept $C_x$ such that $C_i \le C_x \wedge C_j \le C_x$. So there exist always exist a formal concept wich is 'above' in the hierarchy and also related to the two formal concepts. \\ 
+A formal context with $\le$ is called a \textit{concept lattice} of the context. It can be shown, that for two formal concepts $C_i$ and $C_j$, there always exists a formal concept $C_x$ such that $C_i \le C_x \wedge C_j \le C_x$. That means that there is always a formal concept wich is 'above' in the hierarchy and also related to the two formal concepts $C_i$ and $C_j$. \\ 
 
 The interested reader is advices to read "The Basic Theorem on Concept Lattices" for instance in \cite{carpineto2004concept} for an formal explanation. \\
 
@@ -184,17 +185,17 @@ In the next section we will take a look at the static visualization of concept l
 It is often said that a picture is worth a thousand words. To convey the abstract insights of a concept lattice, it can be visually represented in a \textit{Hasse diagram}. Figure \ref{figure:example} shows the Hasse diagram of the concept lattice derived from the formal context described in table \ref{table:example}. \\
 
 \begin{figure*}[h]
-\caption{Hasse diagramm, with the integers 1 to 10 as objects and attributes square (s), prime (p), composite (c), even (e), and odd (o)}
 \label{figure:example}
 	\centering
 	\includegraphics[width=\linewidth]{./images/fcaExample}
+	\caption{Hasse diagramm, with the integers 1 to 10 as objects and attributes square (s), prime (p), composite (c), even (e), and odd (o)}
 \end{figure*}
 
-A Hasse diagram is a special graph where the vertices represent formal concepts and edges represent the relation $\le$ among the formal concepts. An egde between formal concepts $C_i$ and $C_j$ is drawn, when $C_i \le C_j$ and there does not exist a formal concept $C_x$ such as $C_i \le C_x \le C_j$. To increase the readability, the nodes are ordered in layers. The concepts in top are more general, the concepts in the bottom are the more specific. There are two special concepts: supremum and infimum. The supremum is vertex node in the top and the attributes in its intent are those which are present in all objects. The infimum is the vertex in the bottom and the objects in its extent are those which have all attributes. \\
+A Hasse diagram is a graph where the vertices represent formal concepts and edges represent the relation $\le$ among the formal concepts. An edge between formal concepts $C_i$ and $C_j$ is drawn, when $C_i \le C_j$ and there does not exist a formal concept $C_x$ such as $C_i \le C_x \le C_j$. To increase the readability, the nodes are ordered in layers. The concepts in top are more general, the concepts in the bottom are the more specific. There are two special concepts: supremum and infimum. The supremum is vertex node in the top and the attributes in its intent are those which are present in all objects. In most cases its intent is empty. The infimum is the vertex in the bottom and the objects in its extent are those which have all attributes. In most cases its extent is empty.\\
 
 After this general introduction, we will describe in the next section how we can apply FCA to Information Retrieval.
 
-\subsection{Application for Information Retrieval}
+\subsection{Application of FCA in Information Retrieval}
 
 The examples depicted in table \ref{table:example} and figure \ref{figure:example} are only exemplary. How did FCA affected the real world? According to Poelmans et al. has been FCA "applied in many disciplines such as software engineering, knowledge discovery and information retrieval" \cite{Poelmans2013} and they did two comprehensive surveys on the application of FCA \cite{Poelmans2013, Poelmans2013b}. \\
 
@@ -204,23 +205,24 @@ Carpineto et al.\cite{Carpineto2005} describe the start of FCA in information re
 In the 80's, basic ideas were put forth - essentially that a concept can be seen as a query (the intent) with a set of retrieved documents (the extent) and that neighbor concepts can be seen as minimal query changes."
 \end{quote}
 
-This means that the objects are documents and the documents are treated as a set of words. An attribute means that a word occur in this documents. In this simple form, this has a major drawback because it is not possible to we weight terms or for instance to rank among documents with the same attributes. How the user can navigate through the lattice is described in later sections XX-INSRT REF.\\
+This means that the objects are documents and the documents are treated as a set of words. An attribute means that a word occur in this documents. In this simple form, this has a major drawback because it is not possible to we weight terms or for instance to rank among documents with same attributes.\\
 
-The different algorithms to create concept lattes or an in-depth analysis of FCA for text mining are not covered in this thesis. The interested reader is guided to study the work from Carpineto and Romano \cite{carpineto2004concept} for an detailed introduction. \\
+The different algorithms to create concept lattes or an in-depth analysis of FCA for text mining are not covered in this thesis. The interested reader is guided to study the work from Carpineto and Romano \cite{carpineto2004concept} for a detailed investigation. \\
 
-Selected work of IR+FCA is discussed in the related work section. Before we do this, let us get to know some design principles to discuss the work in regard to those principles.
+The visual representation of of those information retrieval systems is discussed in the related work section \ref{Related Work}. Before we do this, let us get to know some principles of interface design. \\
 
 \section{Interface Design}
+\label{id}
 
-The interaction from the user with the system is what exactly matters to the user. The interaction of humans with computers own research area (human-computer interaction) and one of its pioneers is Ben Shneiderman. In the following, two principles from him will be presented: The "Eight Golden Rules of Interface Design" and the "Visual Information Seeking Mantra".
+The interaction from the user with the system is what exactly matters to the user. The interaction of humans with computers has its own research area, human-computer interaction, and one of its pioneers is Ben Shneiderman. In the following, two principles from him will be presented: The "Eight Golden Rules of Interface Design" and the "Visual Information Seeking Mantra".
 
 \subsection{Eight Golden Rules of Interface Design}
 
-This rules are genreal advices for user interface designers which should apply to all interfaces. Ben Shneiderman et al. present this rules in their book \cite{Shneiderman2010}. The rules are explained with own remarks. \\
+This rules are genreal advices for user interface designers which should apply to all interfaces. Ben Shneiderman et al. present this rules in their book \cite{Shneiderman2010}. The rules are names and explained with my own remarks. \\
 
 \begin{itemize}
 	\item Strive for consistency: Use similar actions in similar situations. Use identical terminology, colors, fonts etc. throughout the system.	
-	\item Cater to universal usability: Design for the needs of a diverse user group (skill level, age, gender)
+	\item Cater to universal usability: Design for the needs of a diverse user group (skill level, age, gender and others)
 	\item Offer informative feedback: Give system feedback for every action.
 	\item Design dialogs to yield closure: Sequences of actions should be grouped. Give feedback on completion of a group.
 	\item Prevent errors: Design the system that the user cannot even do errors in the first place. But if she does some, offer instructions how to recover.
@@ -237,11 +239,11 @@ This principles can be applied to all user interfaces. In the next section, desi
 
 The visual information seeking mantra (the Mantra) was introduced by Ben Shneiderman \cite{Shneiderman1996} and are based on his experience with past projects. Albeit the Mantra was intended to be a "descriptive and explanatory" \cite{Card1999}, "in effect, the Mantra has become a prescriptive principle for many information visualization designers", write Craft and Cairns \cite{Craft2005}. \\
 
-The Mantra describes user interface design principles for systems when the "users are viewing collections of items, where items have multiple attributes" \cite{Shneiderman1996}. The starting principles are: overview first, zoom and filter, then details on demand. They will be explained below and added by three other principles. \\
+The Mantra describes user interface design principles for systems when the "users are viewing collections of items, where items have multiple attributes" \cite{Shneiderman1996}. The starting principles are: overview first, zoom and filter, and then details on demand. They will be explained below and added by three other principles. \\
 
 \begin{itemize}
 	\item Overview: Gain an overview of the entire collection.
-	\item Zoom: Zoom in on items of interest
+	\item Zoom: Zoom in on items of interest.
 	\item Filter: Filter out uninteresting items.
 	\item Details-on-demand: Select an item or group and get details when needed.
 	\item Relate: View relationships among items.
@@ -257,7 +259,7 @@ This task are responsible for reducing the complexity of the data collection. 'Z
 
 \subsubsection{History}
 
-It is important to give the user the possibility to easily recover from mistakes. In addition, "it is rare that a single user action produces the desired outcome. Information exploration is inherently a process with many steps, so keeping the history of actions and allowing users to retrace their steps is important." writes Shneiderman \cite{Shneiderman1996}.
+It is important to give the user the possibility to easily recover from mistakes or loss of interest. In addition, "it is rare that a single user action produces the desired outcome. Information exploration is inherently a process with many steps, so keeping the history of actions and allowing users to retrace their steps is important." writes Shneiderman \cite{Shneiderman1996}.
 
 \subsubsection{Extract}
 
@@ -265,17 +267,17 @@ Once interesting objects are found, the user should have the possibility to extr
 
 \subsection{Final Remarks}
 
-Only two, very famous design principles were presented here. The are a lot of different alternatives to choose from. There is a lot of interpretation of those guidelines involved. In addition, every system is different and has different requirements. So it is important to threat them with care, but they can help to develop an interface. \\
+The presented ideas are based mostly on the experience of one person: Ben Shneiderman. The huge number of citations show that his work is influential for a lot of people. But this is not real science. Craft and Cairns \cite{Craft2005} are calling for empirical justification of the Mantra. This is an indication that human-computer interaction is only at the start point - there is a still a lot of research to do. \\
 
-The presented ideas base mostly on the experience of one person: Ben Shneiderman. The huge number of citations show that his work is influential for a lot of people. But this is not real science. Craft and Cairns \cite{Craft2005} are calling for empirical justification of the Mantra. This is an indication that human-computer interaction is only at the start point - there is a still a lot of research to do.
+In addition, you have to interpret this rules and adapt them to the current situation. Furthermore, there overall humans are involved, a very complex system which is hardly explored.
 
-\chapter{Related Work}
+\chapter{Related Work} \label{Related Work}
 
-After giving a background in formal concept analysis in general advices we are reviewing the state of art in visualizing concept lattices.
+After introducing formal concept analysis in section \ref{Formal Concept Analysis}, let us review and discuss related work. In the first three sections, we go over a lot of different FCA-based approaches. Eventually, we evaluate one FCA-based real world application in detail in regard to the interface design principles described in section \ref{id}. In section \ref{dyafs}, a non-FCA based approach is shown which is very related to FCA: Dynamic Taxonomies and Faceted Search. \\
 
 \section{Full Hasse Diagrams}
 
-The traditional, static visualization of concept lattices are Hasse diagrams as describes in XX. Eklund et al. \cite{Eklund2004} conducted user studies and proclaim that non-FCA-experts can read Hasse Diagrams if you fine-tune the Hasse diagram. For instance by choosing appropriate colors, symbols and positioning of the vertices. \\
+The traditional, static visualization of concept lattices are Hasse diagrams as describes in section \ref{Formal Concept Analysis}. There are also  Eklund et al. \cite{Eklund2004} conducted user studies and proclaim that non-FCA-experts can read Hasse Diagrams if you fine-tune the Hasse diagram. For instance by choosing appropriate colors, symbols and positioning of the vertices. \\
 
 But in the domain of information (document) retrieval you get formal contexts with a lot of objects. Those Hasse diagrams scale very bad for large concepts lattices. Kuznetsov et al. \cite{Kuznetsov20072}  describe this resulting visualization: "Representing concept lattices constructed from large contexts often results in heavy, complex diagrams that can be impractical to handle and, eventually, to make sense of." Especially the high connectivity of the graph results in enormous edge crossing. The image \ref{figure:firstVisualizaion} shows the first visualization results with their data set. The software XX was used. \\
 
@@ -377,7 +379,8 @@ Or the work around Peter Eklund. Eklund et al. applied FCA to email organization
  After identifing this problems, we want to built on it. but before that let us review some non-fca-based related work.
 
 
-\section{Facted Browsers}
+\section{Dynamic Taxonomies and Faceted Search}
+\label{dyafs}
 
 DT are similar. But not for text mining. 
 
