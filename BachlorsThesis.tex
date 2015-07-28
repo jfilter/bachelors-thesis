@@ -8,6 +8,11 @@
 
 \usepackage{titlesec}
 
+% used for appendix
+\usepackage{pdfpages}
+
+\usepackage[acronym]{glossaries}
+
 %embed urls
 \usepackage{hyperref}
 \usepackage{url}
@@ -24,6 +29,12 @@
 %Removes the Chapter from each chapter headline
 \titleformat{\chapter}[block]
   {\normalfont\huge\bfseries}{\thechapter.}{1em}{\Huge}
+
+\makeglossaries
+\newacronym{fca}{FCA}{Formal Concept Analysis}
+\newacronym{dt}{DT}{Dynamic Taxonomy}
+\newacronym{ir}{IR}{Information Retrieval}
+\newacronym{dom}{DOM}{Document Object Model}
 
 \begin{document}
 
@@ -59,6 +70,8 @@
 \tableofcontents
 \newpage
 
+\printglossary[type=\acronymtype]
+
 \newpage
 \thispagestyle{empty}
 \mbox{}
@@ -69,34 +82,38 @@
 \renewcommand{\thepage}{\arabic{page}}
 \setcounter{page}{1}
 
-The digital revolution is affecting every part of our life. Also the humanities scholars stand before a big change in their ways when huge analog collections are digitized. They have to apply computer science methods to organize and analyze huge amount of data. The term "Digital Humanities" evolved during the last 10 years which can be defined as an "intersection between the humanities and information technology" \cite{Svensson2010}.\\
+The digital revolution is affecting every part of our life. Also the humanities scholars witness a change in their work life when analog collections are digitized. They have to apply computer science methods to organize and analyze huge amount of data. The area "digital humanities" evolved during the last ten years and it can be defined as an "intersection between the humanities and information technology" \cite{Svensson2010}.\\
 
- The Computer Science Department of the Universidad Nacional de Educación a Distancia (UNED) in Madrid (Spain) cooperates with human scholars to conduct research in the digital humanities. In this project\footnote{\url{http://linhd.uned.es/p/proyecto-dimh/}}, there are historical maps which have been digitized and annotated. To extract knowledge from the collection the research group advocates for the use of Formal Concept Analysis (FCA) for topic organization \cite{Castellanos,Cigarran}.\\
+ The computer science department of the Universidad Nacional de Educación a Distancia (UNED) in Madrid (Spain) cooperates with human scholars to conduct research in the digital humanities. In this project\footnote{\url{http://linhd.uned.es/p/proyecto-dimh}}, there are historical maps which have been digitized and annotated. To extract knowledge from the collection, the research group advocates for the use of \acrlong{fca} (\acrshort{fca}) for topic organization \cite{Castellanos,Cigarran}. With this method, the maps are organized on their annotation.\\
  
- They successfully implemented a FCA algorithm but lack an interactive user interface which will be developed in this thesis. The work will be evaluated with an user study. \\
+ They successfully implemented a \acrshort{fca} algorithm but lack an interactive user interface which will be developed in this thesis. The interface will be evaluated with an user study. \\
    
- While FCA is a mathematically well-funded principle, the resulting traditional, static visualization of large concept lattices are a problem. Large concept lattices arose when you apply FCA to large amount of entities (Details will be explained in Chapter 2). When applying FCA to a document collection, you are likely to occur huge amount of entities. That is why alternative, interactive visualization techniques are needed. \\
+ While \acrshort{fca} is a mathematically well-funded principle, the resulting visualization of large concept lattices are a problem. Large concept lattices arose when you apply \acrshort{fca} to large amount of entities (details will be explained in section \ref{Formal Concept Analysis}). When applying \acrshort{fca} to a document collection, you are likely to encounter huge amount of entities. That is why alternative visualization techniques are needed. \\
  
-  This thesis focuses on concept lattices that were built from document collection. In this scenario, FCA is especially valuable when the user does not know anything about the collection and wants to explore the data. \\
+  This thesis focuses on concept lattices that were built from document collection. In this scenario, \acrshort{fca} is especially valuable when the user does not know anything about the collection and wants to browse and explore the data. \\
   
- This user interface will be web-based, to avoid dealing with setup problems you encounter when dealing with a heterogeneous operating systems environment. Because of the fast-changing environment of the web, it is important to keep with the latest technologies and techniques to not fall apart. Besides others, the software utilizes the frameworks d3.js and Bootstrap to create a pleasant user interface. The website is fast-responding because it reduces the communication between browser and web server to a minimum. In most cases, instead of reloading the page, the interface only changes DOM elements. \\
+ This user interface will run in modern web browser to avoid dealing with a heterogeneous operating systems environment. Because of the fast-changing environment of the web, it is important to keep with the latest technologies and techniques to not fall apart. The software utilizes a large amount of frameworks to efficiently create a pleasant user interface. \\
     
- The remainder of this thesis is structured as follows: The background of Formal Concept Analysis will be presented in Chapter 2 and the background of User Search Interfaces in Chapter 3. In Chapter 4 I will present my (first) approach and the implementation, which will be evaluated in Chapter 5. Built on the Evaluation, I will adjust my work and present an updated version of my work in Chapter 6. I conclude in Chapter 7 and give ideas for future work.
+ The remainder of this thesis is structured as follows: The background of Formal Concept Analysis and Interface Design are presented in section \ref{Background}. The discussion of related work takes place in section \ref{Related Work}. Inferring from the related work, I will present my work including idea and implementation in section \ref{Fancy 1.0}. In section \ref{Evaluation} the evaluation takes place. Built upon the results of the evaluation, a new version is presented in section \ref{Fancy 2.0). Eventually concluding in section \ref{Conclusions}.
+ 
+ 
+ In Chapter 4 I will present my (first) approach and the implementation, which will be evaluated in Chapter 5. Built on the Evaluation, I will adjust my work and present an updated version of my work in Chapter 6. I conclude in Chapter 7 and give ideas for future work.
  
 \chapter{Background}
+\label{Background
 
 Before we can analyze already existing work in this area, draw our conclusions and develop our own system, we have give background information. This chapter gives an introduction into formal concept analysis, followed by an introduction into user interface design principles.
 
 \section{Formal Concept Analysis}
 \label{Formal Concept Analysis}
 
-Formal Concept Analysis (FCA) is a mathematically well-funded technique to analyze data. FCA creates relationships among objects specified by attributes. It derives from old philosophical ideas and was formalized by Rudolf Wille \cite{Ganter2012}. \\
+\acrlong{fca} (\acrshort{fca}) is a mathematically well-funded technique to analyze data. \acrshort{fca} creates relationships among objects specified by attributes. It derives from old philosophical ideas and was formalized by Rudolf Wille \cite{Ganter2012}. \\
 
-First, we describe the formal definitions and explain them with examples. Second, we give examples for the use of FCA in information retrieval. \\
+First, we describe the formal definitions and explain them with examples. Second, we give examples for the use of \acrshort{fca} in \acrlong{ir} (\acrshort{ir}). \\
 
 \subsection{Definition}
 
-FCA is constructed from a formal context. A \textit{formal context} is defined as as a tripple $K = (G, M, I)$ where $G$ is a set of objects, $M$ is a set of attributes and $I$ is a binary relation $I \subseteq G \times M$. $I$ specifies whether an object has an attribute or not. ($G$ and $M$ come from the German words 'Gegenstand' and 'Merkmal'.) \\
+\acrshort{fca} is constructed from a formal context. A \textit{formal context} is defined as as a tripple $K = (G, M, I)$ where $G$ is a set of objects, $M$ is a set of attributes and $I$ is a binary relation $I \subseteq G \times M$. $I$ specifies whether an object has an attribute or not. ($G$ and $M$ come from the German words 'Gegenstand' and 'Merkmal'.) \\
 
 Table \ref{table:example} illustrates an example (from David Eppstein \cite{fcaexample}) where $G$ comprises the integers from 1 to 10 and $M$ comprises the attributes composite, even, odd, prime and square. \\
 
@@ -193,13 +210,13 @@ It is often said that a picture is worth a thousand words. To convey the abstrac
 
 A Hasse diagram is a graph where the vertices represent formal concepts and edges represent the relation $\le$ among the formal concepts. An edge between formal concepts $C_i$ and $C_j$ is drawn, when $C_i \le C_j$ and there does not exist a formal concept $C_x$ such as $C_i \le C_x \le C_j$. To increase the readability, the nodes are ordered in layers. The concepts in top are more general, the concepts in the bottom are the more specific. There are two special concepts: supremum and infimum. The supremum is vertex node in the top and the attributes in its intent are those which are present in all objects. In most cases its intent is empty. The infimum is the vertex in the bottom and the objects in its extent are those which have all attributes. In most cases its extent is empty.\\
 
-After this general introduction, we will describe in the next section how we can apply FCA to Information Retrieval.
+After this general introduction, we will describe in the next section how we can apply \acrshort{fca} to \acrshort{ir}.
 
-\subsection{Application of FCA in Information Retrieval}
+\subsection{Application of \acrshort{fca} in \acrshort{ir}}
 
-The examples depicted in table \ref{table:example} and figure \ref{figure:example} are only exemplary. How did FCA affected the real world? According to Poelmans et al. has been FCA "applied in many disciplines such as software engineering, knowledge discovery and information retrieval" \cite{Poelmans2013} and they did two comprehensive surveys on the application of FCA \cite{Poelmans2013, Poelmans2013b}. \\
+The examples depicted in table \ref{table:example} and figure \ref{figure:example} are only exemplary. How did \acrshort{fca} affected the real world? According to Poelmans et al. has been \acrshort{fca} "applied in many disciplines such as software engineering, knowledge discovery and \acrshort{ir}" \cite{Poelmans2013} and they did two comprehensive surveys on the application of \acrshort{fca} \cite{Poelmans2013, Poelmans2013b}. \\
 
-Carpineto et al.\cite{Carpineto2005} describe the start of FCA in information retrieval:
+Carpineto et al.\cite{Carpineto2005} describe the start of \acrshort{fca} in \acrshort{ir}:
 
 \begin{quote}
 In the 80's, basic ideas were put forth - essentially that a concept can be seen as a query (the intent) with a set of retrieved documents (the extent) and that neighbor concepts can be seen as minimal query changes."
@@ -207,9 +224,9 @@ In the 80's, basic ideas were put forth - essentially that a concept can be seen
 
 This means that the objects are documents and the documents are treated as a set of words. An attribute means that a word occur in this documents. In this simple form, this has a major drawback because it is not possible to we weight terms or for instance to rank among documents with same attributes.\\
 
-The different algorithms to create concept lattes or an in-depth analysis of FCA for text mining are not covered in this thesis. The interested reader is guided to study the work from Carpineto and Romano \cite{carpineto2004concept} for a detailed investigation. \\
+The different algorithms to create concept lattes or an in-depth analysis of \acrshort{fca} for text mining are not covered in this thesis. The interested reader is guided to study the work from Carpineto and Romano \cite{carpineto2004concept} for a detailed investigation. \\
 
-The visual representation of of those information retrieval systems is discussed in the related work section \ref{Related Work}. Before we do this, let us get to know some principles of interface design. \\
+The visual representation of of those \acrshort{ir} systems is discussed in the related work section \ref{Related Work}. Before we do this, let us get to know some principles of interface design. \\
 
 \section{Interface Design}
 \label{id}
@@ -273,18 +290,18 @@ In addition, you have to interpret this rules and adapt them to the current situ
 
 \chapter{Related Work} \label{Related Work}
 
-After introducing formal concept analysis in section \ref{Formal Concept Analysis}, let us review and discuss related work. In the first three sections, we go over a lot of different FCA-based approaches. Eventually, we evaluate one FCA-based real world application in detail in regard to the interface design principles described in section \ref{id}. In section \ref{dyafs}, a non-FCA based approach is shown which is very related to FCA: Dynamic Taxonomies and Faceted Search. \\
+After introducing formal concept analysis in section \ref{Formal Concept Analysis}, let us review and discuss related work. In the first three sections, we go over a lot of different \acrshort{fca}-based approaches. Eventually, we evaluate one \acrshort{fca}-based real world application in detail in regard to the interface design principles described in section \ref{id}. In section \ref{dyafs}, a non-\acrshort{fca} based approach is shown which is very related to \acrshort{fca}: \acrshort{dt} and Faceted Search. \\
 
 \section{Full Hasse Diagrams}
 
 The traditional, static visualization of concept lattices are Hasse diagrams as describes in section \ref{Formal Concept Analysis}. They are also named \textit{line diagrams}. Eklund et al. \cite{Eklund2004} conducted user studies and proclaim that non-FCA-experts can read Hasse Diagrams if you fine-tune the Hasse diagram. For instance by choosing appropriate colors, making us of symbols and carefully positioning the vertices in layer. \\
 
-But in the domain of information (document) retrieval you get formal contexts with a lot of objects. Those Hasse diagrams scale very bad for large concepts lattices. Kuznetsov et al. \cite{Kuznetsov20072}  describe this resulting visualization: "Representing concept lattices constructed from large contexts often results in heavy, complex diagrams that can be impractical to handle and, eventually, to make sense of." Especially the high connectivity of the graph results in enormous edge crossing. The image \ref{figure:firstVisualizaion} shows the first results from data in the digital humanities project. The software XX was used. \\
+But in the domain of \acrshort{ir} on documents you get formal contexts with a lot of objects. Those Hasse diagrams scale bad for large concepts lattices. Kuznetsov et al. \cite{Kuznetsov20072}  describe this resulting visualization: "Representing concept lattices constructed from large contexts often results in heavy, complex diagrams that can be impractical to handle and, eventually, to make sense of." Especially the high connectivity of the graph results in enormous edge crossing. The image \ref{figure:firstVisualizaion} shows the first results from data in the digital humanities project. The software XX was used. \\
 
 \begin{figure*}[!ht]
 	\centering
 	\includegraphics[width=\linewidth]{./images/firstVisualization}
-\caption{First visualization of digital humanist data with traditional FCA software}
+\caption{First visualization of digital humanist data with traditional \acrshort{fca} software}
 \label{figure:firstVisualizaion}
 \end{figure*}
 
@@ -296,9 +313,9 @@ The visualization is useless. What can be done to improve the situation? The Has
 
 One way to reduce the number of vertices is to compute the \textit{iceberg lattices} as described by Stumme et al.\cite{Stumme2002}. They result after the application of a data mining technique "frequent item-set mining" from Agrawal et al.\cite{Agrawal1993}. Only formal concepts are selected which are considered 'frequent'. A formal concept is frequent if its intent, the set of attributes, is frequent. Let $B$ be the intent and $minSupport \in [0, 1]$, then $B$ is frequent if $ |B'|/|G| \geq minSupport$. This means the attribute set has to specify a high portion of objects; at least $minSupport$. \\
 
- This approach has some drawbacks as Kuznetsov et al. \cite{Kuznetsov20072} point out: "One should be careful not to overlook small but interesting groups, for example, “exotic” or 'emergent' groups not yet represented by a large number of objects, or, groups that contain objects who are not members of any other group." They propose to only select 'stable' concepts and write "A concept is stable if its intent does not depend much on each particular object of the extent." \cite{Kuznetsov20072}. It is also possible to apply traditional cluster techniques like fuzzy K-Means clustering to FCA \cite{AswaniKumar2010}. \\
+ This approach has some drawbacks as Kuznetsov et al. \cite{Kuznetsov20072} point out: "One should be careful not to overlook small but interesting groups, for example, “exotic” or 'emergent' groups not yet represented by a large number of objects, or, groups that contain objects who are not members of any other group." They propose to only select 'stable' concepts and write "A concept is stable if its intent does not depend much on each particular object of the extent." \cite{Kuznetsov20072}. It is also possible to apply traditional cluster techniques like fuzzy K-Means clustering to \acrshort{fca} \cite{AswaniKumar2010}. \\
 
-	While all these techniques undoubtable reduces the number of formal concepts, it is to question if the results are any helpful. In our case of information retrieval, we apply FCA to explore the data and get insights about the lattice structure. When pruning the nodes, you are losing many data relationships, many formal concepts and, consequently, the "power" of FCA as exploratory technique is significantly reduced. When we deal with large concepts lattices, the number of nodes has to be very low if we want to represent them with Hasse diagrams. In the year 2015, the question is not how can I visualize and analyze 16 formal concepts as in figure \ref{figure:example} - it is more how can I analyze 160000 formal concepts. For this tasks, this approach is not appropriate. \\
+	While all these techniques undoubtable reduces the number of formal concepts, it is to question if the results are any helpful. In our case of \acrshort{ir}, we apply \acrshort{fca} to explore the data and get insights about the lattice structure. When pruning the nodes, you are losing many data relationships, many formal concepts and, consequently, the "power" of \acrshort{fca} as exploratory technique is significantly reduced. When we deal with large concepts lattices, the number of nodes has to be very low if we want to represent them with Hasse diagrams. In the year 2015, the question is not how can I visualize and analyze 16 formal concepts as in figure \ref{figure:example} - it is more how can I analyze 160000 formal concepts. For this tasks, this approach is not appropriate. \\
 	
 	But this reduction techniques can be useful to reduce the clutter in the lattice. They can be used in combination with our visualizing techniques as described in the upcoming section \ref{Local View}. \\
 	
@@ -313,7 +330,7 @@ Another idea are \textit{nested line diagrams} - line diagrams are another name 
 \label{figure:nested}
 \end{figure*}
 	
-But how to partition the attributes? You have to select them manually. If you have an taxonomy of the attributes you can make use of them. In the case of text mining we do not have an taxonomy and thereby cannot make use of it. Furthermore: FCA is good at building relationships with arbitrary attributes. If you have a taxonomy, there are way better techniques one will be presented in section \ref{dyafs}: "Dynamic Taxonomies and Faceted Search". \\
+But how to partition the attributes? You have to select them manually. If you have an taxonomy of the attributes you can make use of them. In the case of text mining we do not have an taxonomy and thereby cannot make use of it. Furthermore: \acrshort{fca} is good at building relationships with arbitrary attributes. If you have a taxonomy, there are way better techniques one will be presented in section \ref{dyafs}: "Dynamic Taxonomies and Faceted Search". \\
 
 \section{Local View}
 \label{Local View}
@@ -333,7 +350,7 @@ Let us review other, more successful approaches. \\
 
 \subsection{Introduction}
 
-There exist a lot of different names for a similar approach. Eklund et al. name it \textit{conceptual neighborhood}\cite{Eklund2009,Eklund2012} and Carpineto and Romano name it \textit{hybrid navigation} \cite{Carpineto1996}. But there share the same ideas: the interface is always focused on exactly \textit{one} formal concept. The user can navigate through the lattice by going up (becoming more general) or going down (becoming more special). In the context of information retrieval this means removing terms or adding terms. They also offer the possibility to query the system with a search. In most cases, the user would start with a search and if there exist a corresponding formal concept it focuses on it. Then the user can fine-tune the search. The idea originated from the information retrieval field and was first proposed by Godin et al. \cite{Godin1989}. \\
+There exist a lot of different names for a similar approach. Eklund et al. name it \textit{conceptual neighborhood}\cite{Eklund2009,Eklund2012} and Carpineto and Romano name it \textit{hybrid navigation} \cite{Carpineto1996}. But there share the same ideas: the interface is always focused on exactly \textit{one} formal concept. The user can navigate through the lattice by going up (becoming more general) or going down (becoming more special). In the context of \acrshort{ir} this means removing terms or adding terms. They also offer the possibility to query the system with a search. In most cases, the user would start with a search and if there exist a corresponding formal concept it focuses on it. Then the user can fine-tune the search. The idea originated from the \acrshort{ir} field and was first proposed by Godin et al. \cite{Godin1989}. \\
 
 Two underlying information seeking models stand behind his approach. First, user tend to start with a short query and then refine their needs. Hearst \cite{Hearst2009} write  while referring to \cite{Marchionini2006,Bates1990}:
 \begin{quote}
@@ -351,7 +368,7 @@ Godin et al. \cite{Godin1993} evaluated their work in comparison to boolean retr
 
 \subsection{Applications}
 
-Carpineto and Romano picked up the idea from Godin et al. and developed a FCA search engines ULYSSES \cite{Carpineto1995,Carpineto1996}. The user can fine-tune what neighboring vertices are displayed by bounding the information seeking space. They are not only showing directly adjacent vertices but also vertices that do not exceed a given distance. It is also possible to restrict the space to vertices which are above, below, left or right of the focus. In figure \ref{figure:ulysses} is a screenshot of the system. \\
+Carpineto and Romano picked up the idea from Godin et al. and developed a \acrshort{fca} search engines ULYSSES \cite{Carpineto1995,Carpineto1996}. The user can fine-tune what neighboring vertices are displayed by bounding the information seeking space. They are not only showing directly adjacent vertices but also vertices that do not exceed a given distance. It is also possible to restrict the space to vertices which are above, below, left or right of the focus. In figure \ref{figure:ulysses} is a screenshot of the system. \\
 
 \begin{figure*}[!ht]
 	\centering
@@ -360,7 +377,7 @@ Carpineto and Romano picked up the idea from Godin et al. and developed a FCA se
 \label{figure:ulysses}
 \end{figure*}
 
-In their following work, CREDO \cite{Carpineto2004}, Carpineto and Romano followed the look of ordinary search engines. The presentation of the concept lattice is not oriented at the Hasse Diagram. It looks more like a folder structure. Shown in \ref{figure:credo}. Work that is similar comes from Koester \cite{Koester2006}, Dau et al.\cite{Dau2008}, Nauer and Yannik \cite{Nauer2009} and Cigarran et al. \cite{Cigarran2004}. In all this cases, the concept lattice is built on the fly from the result list of search engines. This come with special interest like performance which is not inserting to us. And it is - again like many FCA application - restricted to relatively small number of formal concepts. Let us move on to some application of FCA to document collections. \\
+In their following work, CREDO \cite{Carpineto2004}, Carpineto and Romano followed the look of ordinary search engines. The presentation of the concept lattice is not oriented at the Hasse Diagram. It looks more like a folder structure. Shown in \ref{figure:credo}. Work that is similar comes from Koester \cite{Koester2006}, Dau et al.\cite{Dau2008}, Nauer and Yannik \cite{Nauer2009} and Cigarran et al. \cite{Cigarran2004}. In all this cases, the concept lattice is built on the fly from the result list of search engines. This come with special interest like performance which is not inserting to us. And it is - again like many \acrshort{fca} application - restricted to relatively small number of formal concepts. Let us move on to some application of \acrshort{fca} to document collections. \\
 
 \begin{figure*}[!ht]
 	\centering
@@ -369,7 +386,7 @@ In their following work, CREDO \cite{Carpineto2004}, Carpineto and Romano follow
 \label{figure:credo}
 \end{figure*}
 
-Eklund et al. applied FCA to email organization\cite{Eklund2004}, image browsing \cite{Ducrou2006,Ducrou2008} and a later work is the 'Virtual Museum of the Pacific' \cite{Eklund2009,Eklund2012}. Let us review this museum because: it visualizes a static documents collection as we do and it is a rare example of FCA outside academia. It is also web-based like our desired interface. It was created after doing a lot of research into his field. It was built in 2000 - so it is fairly recent. They conducted a usability study with museum experts and non-experts. \cite{Eklund2012}
+Eklund et al. applied \acrshort{fca} to email organization\cite{Eklund2004}, image browsing \cite{Ducrou2006,Ducrou2008} and a later work is the 'Virtual Museum of the Pacific' \cite{Eklund2009,Eklund2012}. Let us review this museum because: it visualizes a static documents collection as we do and it is a rare example of \acrshort{fca} outside academia. It is also web-based like our desired interface. It was created after doing a lot of research into his field. It was built in 2000 - so it is fairly recent. They conducted a usability study with museum experts and non-experts. \cite{Eklund2012}
 
 \subsection{Virtual Museum of the Pacific}
  
@@ -386,30 +403,30 @@ After the login it is not clear where to start. If you are completely new to the
  
  The interface sets the objects in he focus of the interface. This is, in my opinion, a good decision. The user is probably more interest in the object than on the structure which was built around the objects (the lattice). \\
  
- Above the objects is the current intent of the formal concept shown. It is possible to remove terms from the current selection to generalize. Below the objects are terms suggested to specify the information needs. When the user clicks on the term the view changes with the newly added item. The sidebar categorizes the attributes/terms and it possible to filter out uninteresting concepts. This categorization contradicts the whole purpose of FCA but might help the users. \\
+ Above the objects is the current intent of the formal concept shown. It is possible to remove terms from the current selection to generalize. Below the objects are terms suggested to specify the information needs. When the user clicks on the term the view changes with the newly added item. The sidebar categorizes the attributes/terms and it possible to filter out uninteresting concepts. This categorization contradicts the whole purpose of \acrshort{fca} but might help the users. \\
  
  To get details on demand, you have to click on an item. From there you can also find related items. \\
  
  It is possible to search but this search is very rudimentary. It is very easy to implement a type ahead (autocomplete/suggestion/autofill) for static data set. This is a real problem and there is no excuse not to stick to well-proven user search interface principles as described by Hearst \cite{Hearst2009}. \\
  
- The biggest problem with the his interface is the missing home/reset button and the absence of any form of history. As Shneiderman \cite{Shneiderman1996} pointed out "Information exploration is inherently a process with many steps, so keeping the history of actions and allowing users to retrace their steps is important." FCA is a exploratory technique. Not implementing \textit{any} possible to go back is a utter failure. You can this in the evaluation as they point out \cite{Eklund2012}: "Users also had difficulty understanding the notion of conceptual navigation as a way of navigating an information space, rather than a fixed hierarchy with a well defined ‘home’ state." and "[..] many users felt ‘lost’ within [the FCA-based] style of navigation. A recommendation was put forward so that users could at least back track through the navigation sequences (in the form of a ‘Back’ button) or that users could easily go back to a ‘home’ or ‘reset’ state." They are not going to discuss this problems - even thought the navigation is \textit{the} important problem with FCA. They defend their failure with unfamiliarity of the users \cite{Eklund2012}: "there were a number of common issues, mostly relating to the unfamiliarity of the interface". This is not a real argument because the users are always unfamiliar with new interfaces. \\
+ The biggest problem with the his interface is the missing home/reset button and the absence of any form of history. As Shneiderman \cite{Shneiderman1996} pointed out "Information exploration is inherently a process with many steps, so keeping the history of actions and allowing users to retrace their steps is important." \acrshort{fca} is a exploratory technique. Not implementing \textit{any} possible to go back is a utter failure. You can this in the evaluation as they point out \cite{Eklund2012}: "Users also had difficulty understanding the notion of conceptual navigation as a way of navigating an information space, rather than a fixed hierarchy with a well defined ‘home’ state." and "[..] many users felt ‘lost’ within [the FCA-based] style of navigation. A recommendation was put forward so that users could at least back track through the navigation sequences (in the form of a ‘Back’ button) or that users could easily go back to a ‘home’ or ‘reset’ state." They are not going to discuss this problems - even thought the navigation is \textit{the} important problem with FCA. They defend their failure with unfamiliarity of the users \cite{Eklund2012}: "there were a number of common issues, mostly relating to the unfamiliarity of the interface". This is not a real argument because the users are always unfamiliar with new interfaces. \\
  
   Combined with meaningless quotes from participants \cite{Eklund2012} : "There should be more of this kind of thing, but there’s room for improvement" or "I think it’s really good—it gives specialized information." and a weak summary \cite{Eklund2012}:
   \begin{quote}
-  "Overall, the study concludes that conceptual based browsing can offer significant merit for browsing Pacific collections, and that by resolving the identified issues, the core functionality of searching and browsing via FCA can be considerably easier for users to learn and engage with." 
+  "Overall, the study concludes that conceptual based browsing can offer significant merit for browsing Pacific collections, and that by resolving the identified issues, the core functionality of searching and browsing via \acrshort{fca} can be considerably easier for users to learn and engage with." 
   \end{quote}
   (Easier than what? There was NO comparison with other IR techniques in the whole study) this paper leaves a bitter aftertaste. It started with a good idea but the implementation - in my opinion - is a complete failure. Instead of blaming the stupidity of the users, they should have looked at their own mistakes and learned from them.\\
  
 \subsection{Conclusion}
 
-While FCA is famos in the academic stuff it does not really help the world at all. There exist only a few useful examples and most of them were conducted on small lattices. Focusing on formal concept on only showing neighboring nodes is the way to built interfaces. Before describing the idea of my interface in detail, let us review some related techniques which is similar to FCA and go into the industry. Feel free to skip this section and go straight to section XX.
+While \acrshort{fca} is famos in the academic stuff it does not really help the world at all. There exist only a few useful examples and most of them were conducted on small lattices. Focusing on formal concept on only showing neighboring nodes is the way to built interfaces. Before describing the idea of my interface in detail, let us review some related techniques which is similar to \acrshort{fca} and go into the industry. Feel free to skip this section and go straight to section XX.
 
-\section{Dynamic Taxonomies and Faceted Search}
+\section{\acrlong{dt} and Faceted Search}
 \label{dyafs}
 
-"Although FCA and dynamic taxonomies are apparently two distinct approaches to information modeling and access, and they use a different terminology, they are closely related." write Sacco and Tzitzikas \cite{Sacco2009}. Completely introducing dynamic taxonomies would exceed this thesis. The interested reader is guided to study the work from Sacco and Tzitzikas \cite{Sacco2009}. \\
+Sacco and Tzitzikas \cite{Sacco2009} write: "Although \acrshort{fca} and \acrlong{dt} are apparently two distinct approaches to information modeling and access, and they use a different terminology, they are closely related". Completely introducing  \acrlong{dt} (\acrshort{dt}) would exceed this thesis. The interested reader is guided to study the work from Sacco and Tzitzikas \cite{Sacco2009}. \\
 
- The whole point of this section is to deconstruct a techniques which is called \textit{conceptual scaling}\cite{carpineto2004concept}. The technique is applied to many-valued data sets to change them into single-valued data sets. FCA only knows single-valued data sets. Let us take a look at table \ref{table:manyvalued}. \\
+ The whole point of this section is to deconstruct a techniques which is called \textit{conceptual scaling}\cite{carpineto2004concept}. The technique is applied to many-valued data sets to change them into single-valued data sets. \acrshort{fca} only knows single-valued data sets. Let us take a look at table \ref{table:manyvalued}. \\
 
 \begin{table}[h]
 \caption{many-valued data set}
@@ -428,7 +445,7 @@ Peter & 47 & Magdeburg \\
 \end{tabular}
 \end{table}
 
-The objects are human beings and they are categorized by the attributes name, age and hometown. With conceptual scaling  the attributes for the object Johannes are: "Name\_Johannes", "Age\_24", "Hometown\_Schwerin" and correspondingly for the other people. Now we have only a single-valued data-set which is needed for FCA. \\
+The objects are human beings and they are categorized by the attributes name, age and hometown. With conceptual scaling  the attributes for the object Johannes are: "Name\_Johannes", "Age\_24", "Hometown\_Schwerin" and correspondingly for the other people. Now we have only a single-valued data-set which is needed for \acrshort{fca}. \\
 
 But this method, albeit it is widespread, is, at least for IR, problematic. From a user-centered perspective, complexity reduction is the key point. How do we break massive, complex data set down to make them understandable for the users? So this transformation sounds like a contradiction - and it is. Zobel describes this kind of research as follows:
 
@@ -436,7 +453,7 @@ But this method, albeit it is widespread, is, at least for IR, problematic. From
 Much research — far too much — is just misguided. People investigate problems that are already solved and well understood, or solve problems that technology has made irrelevant, or don’t realize that the proposed improvement actually makes the method worse.
 \end{quote}
 
-So for many-valued data, FCA is not a appropriate technique. The use of facet search is shown in figure \ref{figure:flamenco}. \\
+So for many-valued data, \acrshort{fca} is not a appropriate technique. The use of facet search is shown in figure \ref{figure:flamenco}. \\
 
 \begin{figure*}[!ht]
 	\centering
@@ -445,99 +462,95 @@ So for many-valued data, FCA is not a appropriate technique. The use of facet se
 \label{figure:flamenco}
 \end{figure*}
 
-You can see that the search is currently narrowed down be restricting location to 'Asia' and Shapes etc. to 'fabrics'. It is possible to continue becoming more specific by choosing attributes and value from the sidebar on the left. Or becoming more general by removing current choices. It is very similar to the local view of FCA. Sacco and Tzitzikas \cite{Sacco2009} write in comparision to FCA:
+You can see that the search is currently narrowed down be restricting location to 'Asia' and Shapes etc. to 'fabrics'. It is possible to continue becoming more specific by choosing attributes and value from the sidebar on the left. Or becoming more general by removing current choices. It is very similar to the local view of \acrshort{fca} described in section \ref{Local View}. Sacco and Tzitzikas \cite{Sacco2009} compare \acrshort{dt} to \acrshort{fca}:
 \begin{quote}
-DT is less informative, but it ensures the results displayed to users is manageable because they are expressed in terms of the original taxonomy. This reduces the cognitive effort of users and is a simpler and more intuitive representation than the line diagrams generally used in FCA.
+DT is less informative, but it ensures the results displayed to users is manageable because they are expressed in terms of the original taxonomy. This reduces the cognitive effort of users and is a simpler and more intuitive representation than the line diagrams generally used in \acrshort{fca}.
 \end{quote}
 
-To summarize the use for IR: Use DT if you have many-value datasets and FCA for single-valued datasets. Let us continues the design of the application of the system.
+To summarize the use for IR: Use \acrshort{dt} if you have many-value datasets and \acrshort{fca} for single-valued datasets. Let us continues the design of the application of the system.
 
-\chapter{Fancy FCA 1.0}
+\chapter{Fancy \acrshort{fca} 1.0}
+\label{Fancy 1.0}
 
-We describe the design of frontend and backend for the first verson.
+We describe the idea inferred from discussing related work in section \ref{Related Work}. Then we describe the implementation of the frontend followed by the backend.
 
 \section{Idea}
 
-The general idea comes from the pacific museum but we identified the weaknesses and make it better.
-First, the search interfaces sucks. We stick to user search interfaces principles to make it better. The proposed interfaces looks like a modern search engines. Search bar on top - vertical result list. results which a title and a link and a short snippet.
-Second, there was a lack of histroy/ orientation. To counters this, there is breadcrumb naviation and the possoilbites to look for the hisory.
-The schema can be seen here/ \\
+The general idea comes from the digital museum but we identified the weaknesses and make it better. \\
 
-The people wanted logs to evaluate the results.
+\begin{figure*}[!ht]
+	\centering
+	\includegraphics[width=\linewidth]{images/schema}
+\caption{The Interface}
+\label{figure:schema}
+\end{figure*}
 
-Now let us talk about implementing the frontend.
+First, the search interfaces did not followed any design principles. The interface should remind users of modern search engines: Search bar on top vertical result list bottom. Each result has a title withs links to the original page of the map. A snippet is shown with highlighted words from the query. We could not provide thumbnails of the maps because we did not had access to the pictures itself. It was planned to add this feature in later iterations. \\
+
+Second, there was a lack of history of actions or at least orientation. For this we have two functionalities: Breadcrumbs and Navigation History. Breadcrumbs save the current path of search and allow it to go easily pack. The navigational history allows more possibilities to backtrack. If the user is logged in, it save the history forever. If she is not logged in, it only saves the session history. \\
+
+Third, the user can save documents which she found interesting. \\
+
+Fourth, if the user is logged in, all actions are logged and send to the server. This was to evaluate the user behavior. \\
+
+Fifth, the neighboring concepts ( the 'suggestions') are shown right next to the results as a word cloud. The words are presented in a bubble. The font size and bubble radius depend on the documents which are presented in there.
+
+\begin{figure*}[!ht]
+	\centering
+	\includegraphics[width=\linewidth]{images/usecase}
+\caption{The Interface}
+\label{figure:usecase}
+\end{figure*}
 
 \section{Frontend}
 
-The interface was implemented with web techniques. So HTML, CSS, Javascript. Instead of writing pure HTML, we use a Jade libray. Instead of writing direclty Javascript, we use Coffeescript. It compiles down to Javascript but offes sematnic sugar. For the suggestions the JS librayr d3 was used. The libraryr bootstrap was used to efficnelty create an userinterface. Furthermure the jquery framework was used. To create the typeahead we used the framwork Xx.
+The interface was implemented with web techniques. So HTML, CSS, Javascript. Instead of writing pure HTML, we use the Jade templating engine \footnote{\url{http://jade-lang.com}}. Instead of writing Javascript, we use CoffeeScript \footnote{\url{http://coffeescript.org}} which compiles to Javascript but offers semantic sugar. For the the word cloud I use D3\footnote{\url{http://d3js.org}} \cite{Bostock2011} as background. D3 utilized SVG to draw elements which are also accessible via the DOM API. The word cloud is a customized graph force-directed layout based on the work from Vallandingham \cite{Vallandingham}. Bootstrap\footnote{\url{http://getbootstrap.com}} gives the overall good look to the site.
 
 \section{Backend}
 
-Node.JS was choosen for the backend. Reasons for this: I can write Javascript (Coffeescript), is is good with handleing multiple request for logging, it is easy to deploy because it comes with its own webserver. (This is important because I did not had access to an won server). 
+For the backend, Node.JS with the Express Framework \footnote{\url{http://expressjs.com}} was chosen. Reason one, it is good at handling multiple request in parallel. Reason two, I can use the same programming language for frontend and backend: Javascript (CoffeeScript). For data we use MySQl as database because it was already installed on the server. But we use an ORM, Sequelize \footnote{\url{http://sequelizejs.com}},  so you can easily change the database.
 
-For data, mysql is used. but this is not really relevant because we used an ORM to create abstractoin.
+\section{Disccusion}
 
-compress data, it is a static json-file.
+The whole implementation has one problem: The data is provided as a JSON file. The clients loads the whole file in the beginning. All the navigation happens in the front end. While it a good thing, that during the navigation the client does not have to talk with the server, it is a problem that the client has to deal with over 80 megabytes of data. The server compress the JSON file to eight megabytes to make the time to download it okay. But it may only run on powerful computers with sufficient RAM because the browser will consume a lot of it. The design decision was taken before it was clear that the JSON file would be so huge. In the beginning it was under ten megabytes. \\
 
-The good from the bubbles comes from and was adjusted to my needs.
+That the thumbnails of the maps are not presented is a problem. Albeit all the analysis was done on the metadata, a visual representation would be very useful.
 
 \chapter{Evaluation}
+\label{Evaluation}
 
-The design of an interface is highly subjective. User studies can help to evaluate an interface but computer scientists are not experts in human studies and Zobel \cite{Zobel2004} proclaims: "Far too many human studies in computer science are amateurish and invalid." Nevertheless, I tried to be as scientific as possible to conduct human studies even with strict resource limitations. \\
+The design of an interface is highly subjective. User studies can help to evaluate an interface but computer scientists are not experts in human studies. For this, a brief review of different techniques for human studies is given first. Then we describe the setup of the study, describe the results and finally conclude. \\
 
-We will present fundamentals of user studies first and then describe our experiments.
+\section{Background}
 
-\section{Fundamentals}
+We will only scratch the surface here. A comprehensive introduction into "Methods for Evaluating Interactive Information Retrieval Systems with User" gives Kelly \cite{Kelly2007}. A shorter introduction gives Hearst in her book on "User Search Interfaces" in Chapter 2. \cite{Hearst2009}.\\
 
-A small introduction into this field from the computer science perspective gives Hearst in his book on User Search Interfaces in Chapter 2. \cite{Hearst2009}. A comprehensive guide into the "Methods for Evaluating Interactive Information Retrieval Systems with User" gives Kelly \cite{Kelly2007} . The interested reader is advised read those papers because we will only scratch the surface. \\ 
-
-
-I will describe the idea of the experiment first and refer to literature to illustrate my choices, I will describe the process of the experiment, and after that explain and evaluate the outcome of the results.
 
 \subsection{Introduction}
-  If we walk about an evaluation, it is important to make clear what what aspects are evaluated. Hearst writes \cite{Hearst2009}:
-  \begin{quote}
-  Search interfaces are usually evaluated in terms of three main aspects of usability: effectiveness, efficiency, and satisfaction, which are defined by ISO 9241-11, 1998 \cite{ISO} as:
+
+So we want to measure usability, but how is it defined? The ISO 9241-11, 1998 \cite{ISO} defines three aspects of usability:
 \begin{itemize}
 	\item Effectiveness: Accuracy and completeness with which users achieve specified goals.
 	\item Efficiency: Resources expended in relation to the accuracy and completeness with which users achieve goals.
 	\item Satisfaction: Freedom from discomfort, and positive attitudes towards the use of the product.
 \end{itemize}
-These are the criteria that ideally should be measured when evaluating a search user interface."
-\end{quote}
 
-It is important to distinguish between the terms 'experiment' and an 'evaluation'. Kelly \cite{Kelly2007} writes: "Evaluations are conducted to assess the goodness of a system, interface or interaction technique and can take many forms [..]. Experiments have historically been the main method for interactive system evaluation, but experiments can also be conducted to understand behavior" and she continues: "Two important characteristics of experiments are that there are at least two things being compared (e.g., system type) and that some manipulation takes place." She further writes:
+\subsection{Experiment vs. Evaluation}
+
+It is important to distinguish between the terms 'experiment' and an 'evaluation'. Kelly \cite{Kelly2007} writes:
 \begin{quote}
-"In some types of [interactive information retrieval] studies only a single system is evaluated. This is a weaker form of evaluation since it is not possible to demonstrate how much better users perform or how different their behaviors and inter actions are since there is no point of comparison. Traditional usability tests are examples of this type of evaluation. Traditional usability tests are usually conducted with a single version of a system, with the goal of identifying potential usability problems."	
+"Evaluations are conducted to assess the goodness of a system, interface or interaction technique and can take many forms [..] Experiments have historically been the main method for interactive system evaluation, but experiments can also be conducted to understand behavior [..] Two important characteristics of experiments are that there are at least two things being compared (e.g., system type) and that some manipulation takes place [..] In some types of [interactive information retrieval] studies only a single system is evaluated. This is a weaker form of evaluation since it is not possible to demonstrate how much better users perform or how different their behaviors and inter actions are since there is no point of comparison. Traditional usability tests are examples of this type of evaluation. Traditional usability tests are usually conducted with a single version of a system, with the goal of identifying potential usability problems."	
 \end{quote}
 
-In this thesis, only the usability of the system is evaluated to find usability problems - we do not conduct an experiment. Experiments would be helpful to further investigate the impact of this work but exceed this thesis.
+In this thesis, the system is evaluated to find usability problems. No comparison among other systems are conducted but should be done in further investigations.
 
-\subsection{Categories of User Studies}
-Hearst \cite{Hearst2009} categorizes user studies as follows.
+\subsection{Informal Usability Testing}
 
-\subsubsection{Informal Usability Testing}
-Hearst \cite{Hearst2009} describes the process shortly as "Showing designs to participants and recording their responses". It is often used in short iterative cycles to quickly evaluate a design.
+Hearst \cite{Hearst2009} describes in her book several kinds of studies. We conduct informal usability studies because the research has no experience in studies and we do not have any professional equipment. \\
 
-\subsubsection{Formal Studies and Controlled Experiments}
-Hearst \cite{Hearst2009} says that it is a "form of controlled experiments aim to advance the field's understanding of how people use interfaces, to determine which design concepts work well under what circumstances, and why."  In contrast to informal studies, it is important to isolate factors and not threat the whole system as a black box. Using eye tracker in a laboratory with 2-way windows is one example.
-	
-\subsubsection{Longitudinal Studies}
-"A longitudinal study tracks participant behavior while using a system over an extended period of time, as opposed to first-time usages which are what are typically assessed in formal and informal studies"
+Hearst \cite{Hearst2009} describes the this shortly as "Showing designs to participants and recording their responses". It is often used in short iterative cycles to quickly evaluate a design.
 
-\subsubsection{Log Analysis}
-In contrast to the studies above, this focus only on logs of real user interaction. Drawing conclusions from the analysis of Google Search Queries is an example.
-
-\subsubsection{Bucket testing (A/B Testing)}
-The traffic to a particular website is split and alternative view. It is evaluated how the users of the alternative website reacts to he new site. For example: Amazon changes its search filters and evaluates if the users buy more.
-
-As you can see, this is only a small categorization and Kelly describes in her work the different approaches more in detail. Because a complete coverage of this topic would exceed this thesis, only some parts are covered here. 
-
-\subsection{Data Collection Techniques}
-
-There exists several techniques to collect data from participants besides from interaction logs. We will describe two more here which are inexpsenvie and do not requier special, expensive euipment or are heavily time-consuming..
-
-\subsubsection{Questionnaires}
+\subsection{Questionnaires}
 
 A questionnaire comprises a set of questions and is cheap and fast way to gather information from people. Kelly et al. \cite{Kelly2008} describe two types of questions as follows:
 
@@ -545,57 +558,89 @@ A questionnaire comprises a set of questions and is cheap and fast way to gather
 	Questionnaires can be comprised of closed questions, open questions or a mixture of both. \textit{Closed questions} are questions that provide a fixed set of responses with which subjects must respond. It is common practice for usability questionnaires to include closed questions in the form of statements such as, the system was easy to learn to use. Subjects are typically provided with 5–7-point Likert-type scales for responding, where one scale end-point represents strong agreement and the other represents strong disagreement. [..] \textit{Open questions}, on the other hand, do not provide a response set and subjects are able to provide any type of response they feel is appropriate. 
 	\end{quote}
 
-Questionnaires can be done with pen-and-paper, online and in an interview session. Kelly et al. \cite{Kelly2008} conducted research on different ways to elicit responses from the participants. Their results suggest that "the post-system questionnaire takes the form of an interview for closed questions, followed by pen-and-paper or electronic mode for open questions." \cite{Kelly2008} \\ 
 
-Hornbæk and Law did a well respected meta-analysis of usability studies and as one of their conclusions they "recommend that standard questionnaires be used when possible, given their higher reliability, and that the more complex effectiveness measures be used when feasible (as they are more likely to give information that cannot be obtained by measures in the other categories)." \cite{Hornb2007} 
+\subsection{Thinking Aloud}
 
-\subsubsection{Thinking Aloud}
+Kelly \cite{Kelly2007} writes by referring to Ericsson and Simon \cite{Ericsson1993}: "The think-aloud method asks subjects to articulate their thinking and decision-making as they engage in [interactive information retrieval]". The comments from the participants have to be collected. Either by recording the session or by taking notes. It is hoped that the conductors can learn from the thinking process of the participant. There exist variations of this techniques. Because it can be exhausting, challenging and awkward to talk to yourself all the time, participants are encouraged to report either at some fixed times or when the feel the need.
 
-Kelly \cite{Kelly2007} writes by referring to Ericsson and Simon \cite{Ericsson1993}: "The think-aloud method asks subjects to articulate their thinking and decision-making as they engage in [interactive information retrieval]". The comments from the participants have to be collected. Either by recording the session or by taking notes. It is hoped that the conductors can learn from the thinking process of the participant. There exist variations like that the participant should not always report because it can be exausting, challening and akwards to report all the time. Called "Spontaneous and Prompted Self-Report" the participant is encourges to report a some points or when he wants to do it.
+\section{Setup}
 
-\subsection{Tasks}
+The evaluation was done with five people with a background in humanities. First, an introductory presentation was given in Spanish. Then they were split into two groups. Each group interacted with the interface. The people in the group rotated. There were three tasks they should do. The participants were encouraged to talk out loud. Some times the instructions asked them what they are doing or what they feel. The one group was recored with an iPhone 6 Plus\footnote{\url{https://www.apple.com/iphone-6}}. The session of the other group was not recored and could not be evaluated at all. They had to fill they task what they are feeling. After they session they had to fill in an questionnaire. We use ten closed questions from the USE questionnaire \cite{lund2001measuring} and four common as asked by Kelly \cite{Kelly2008}. The participants gave the results in Spanish which was translated afterwards.
 
-The particpants can specific instructions what to do in the experiment. They can be very concrept or vage formulated. There exists studies which show that there is a correlatin betwwen number of different task and found design errors.
-
-\subsection{Participants}
-
-It is important to reduce a structural bias of an experiment. Zobel \cite{Zobel2004} mentions that "the sample of human subjects should be representative (a class of computer science students may not be typical of users of mobile devices)". We tried to vary the users or at least focus on human scholars because that is the user group that is important for our stuff.
-
-
-\section{1. Test}
-
-We stick to their advice and use the USE questionnaire \cite{lund2001measuring} which was (partly) used in the investigation from Kelly et all. \cite{Kelly2008}.
-
-
-\subsection{Hypothesis}
-
-The interface is useful for the human scholars and they like the interface. It offers rich possibilities for the users to navigate along the different documents. Because of the similarity to popular search engines, they know how to use it. But there some stuff that is not implemented yet that they would like to see.
-
-\subsection{Evaluation Design}
-
-Because of our restricted resources, an informal usability study is the most attractive choice for us. The logs of the system are recored and can evaluated in future, but because of the long-term duration, they cannot be evaluated in this thesis.
 \section{Results}
+
+We group thinking aloud, remarks and open questions together because they all allowed comments on the interface. In praxis the evaluatuon should be done seperatly but because of the bad experiment setup their 
+
+\subsection{Thinking Aloud, Remarks and Open Questions}
+It turned out, that the evaluation was also a evaluation of the whole research project. All participants mentioned that the interface does not suite their needs. All wanted to refine the search by location and time range and map creators. \acrshort{fca} cannot provide this kind of functionality.\\
+
+Several participants gave advise how to improve the result list. First, shorten the snippets so that they could read more titles. This could be done by restricting the text length and offering a "show more" button. Second, they mentioned that the thumbnail should be added. \\
+
+Overall, they give positive comments regarding the interface. They found the navigation with the breadcrumb helpful. \\
+
+They were not interested in the "Bookmark" feature. Maybe it was because it was an artificial meeting and not a real work environment. They found it a good idea to link to the original site. \\
+
+There were some problems. They were irritated that they could not search for arbitrary terms. Word for instance like "Valencia" were not in the collection and so also not in the lattice. It was for them not clear that the terms has to be decided before. They suggested that this should get fixed. \\
+
+They search interface was not used very often. They used the bubble cloud to navigate through the lattice. \\
+
+One participant mentions that he wanted the see related field to a given field. This would be helpful for his research. \acrshort{fca} can easily provide this method and it is a fail in the interface that it was not included.\\
+
+\subsection{Closed Questions}
+
+Out of the five participants only three filled out the questionnaire. The results are in the annex \ref{app:closed}. The results correspond to the comments made by participants. The weakest results got the sentences "It meets my needs" and "It does everything I would expect it to do". The best result got the sentence "It is easy to use".
+
+\section{Accessibility Analysis}
+
+In addition to the the evaluation with users, there was a evaluation regarding accessibility features. It was conducted by people from the UNED: Miguel Angel Marqueta and  Covadonga Rodrigo San Juan. It can be found in appendix \ref{app:access}. They comments were overall positive buy they highlighted some problems with the interface: It is possible to zoom in the bubble cloud, but there are no buttons on the screen for it. The zooming has to be done with a mouse or a touchpad.
 
 \section{Conclusions}
 
-\chapter{Fancy FCA 2.0}
-
-\blindtext
-
-\chapter{Discussions}
+ Zobel \cite{Zobel2004} proclaims: "Far too many human studies in computer science are amateurish and invalid." and with this study we proved him true. They overall setup was improvised all instructions had no idea about user studies. Even though it cannot stand scientific standards, it is useful as informal evaluation. We can conclude the used method for this collection is in regard to the human experts useless. \\
+ 
+ For the interface itself, it looks like they liked it. Even though there are some problems like the result list which should be addressed. As a response to this fail, the tool will go away from the fixation onto this one dataset and will visualize arbitrary concept lattice. This leads to the development of Fancy 2.0 which will also address the problems that were found here. The next section described the changes which had be done to the interface.
+ 
+\chapter{Fancy \acrshort{fca} 2.0}
+\label{Fancy 2.0}
 
 \blindtext
 
 \chapter{Conclusions}
+\label{Conclusions}
 
-\blindtext
+Starting from the concept lattices built from metadata from digitized histroical maps, I built and interactive application for exploring the concept lattices. The navigtional 
 
 \newpage
-
 \bibliographystyle{plain}
 \bibliography{biblography}
 
 \listoffigures
 \listoftables 
+
+
+\newpage
+\appendix
+\chapter{Appendix: Accessibility Report}
+\label{app:access}
+
+\includepdf[pages={-}]{appendix/report.pdf}
+
+\chapter{Appendix: Closed Questions}
+\label{app:closed}
+
+\includepdf[pages={-}]{appendix/closed.pdf}
+
+\chapter{Appendix: Open Questions}
+\label{app:open}
+
+\begin{itemize}
+	\item What were the most positive things about using this system and why?
+	\item What were the most negative things about using this system and why?
+	\item How would you improve this system and why?
+	\item Is there anything else that you would like to tell us about this system and your experiences using it?
+	\item In comparison with other systems (Interface of Catálogo Colectivo de las colecciones de Mapas and previous work of this research group).
+Do you think it is more useful? If yes, which part of the system is more useful.
+\end{itemize}
+
 
 \end{document}
