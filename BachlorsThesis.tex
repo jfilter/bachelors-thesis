@@ -26,6 +26,11 @@
 % to remove the number from the equations.
 \usepackage{amsmath}
 
+% fix quotes
+\usepackage [english]{babel}
+\usepackage [autostyle, english = american]{csquotes}
+\MakeOuterQuote{"}
+
 %Removes the Chapter from each chapter headline
 \titleformat{\chapter}[block]
   {\normalfont\huge\bfseries}{\thechapter.}{1em}{\Huge}
@@ -35,6 +40,7 @@
 \newacronym{dt}{DT}{Dynamic Taxonomy}
 \newacronym{ir}{IR}{Information Retrieval}
 \newacronym{dom}{DOM}{Document Object Model}
+\newacronym{hci}{HCI}{Human-Computer Interaction}
 
 \begin{document}
 
@@ -53,7 +59,7 @@
 \thispagestyle{empty}
 \mbox{}
 
-\chapter*{Inhaltsangabe}
+\chapter*{Zusammenfassung}
 \blindtext
 
 \newpage
@@ -84,42 +90,37 @@
 
 The digital revolution is affecting every part of our life. Also the humanities scholars witness a change in their work life when analog collections are digitized. They have to apply computer science methods to organize and analyze huge amount of data. The area "digital humanities" evolved during the last ten years and it can be defined as an "intersection between the humanities and information technology" \cite{Svensson2010}.\\
 
- The computer science department of the Universidad Nacional de Educación a Distancia (UNED) in Madrid (Spain) cooperates with human scholars to conduct research in the digital humanities. In this project\footnote{\url{http://linhd.uned.es/p/proyecto-dimh}}, there are historical maps which have been digitized and annotated. To extract knowledge from the collection, the research group advocates for the use of \acrlong{fca} (\acrshort{fca}) for topic organization \cite{Castellanos,Cigarran}. With this method, the maps are organized on their annotation.\\
+ The computer science department of the Universidad Nacional de Educación a Distancia (UNED) in Madrid (Spain) cooperates with human scholars to conduct research in the digital humanities. In this project\footnote{\url{http://linhd.uned.es/p/proyecto-dimh}}, there are historical maps which have been digitized and annotated. To extract knowledge from the collection, the research group advocates for the use of \acrlong{fca} (\acrshort{fca}) for topic organization \cite{Castellanos,Cigarran}. They successfully implemented a \acrshort{fca} algorithm but lack an interactive user interface which will be developed in this thesis. The interface will be evaluated with an user study. \\
  
- They successfully implemented a \acrshort{fca} algorithm but lack an interactive user interface which will be developed in this thesis. The interface will be evaluated with an user study. \\
+ 
+ % \\With this method, the maps are organized on their annotation.\\
+
    
- While \acrshort{fca} is a mathematically well-funded principle, the resulting visualization of large concept lattices are a problem. Large concept lattices arose when you apply \acrshort{fca} to large amount of entities (details will be explained in section \ref{Formal Concept Analysis}). When applying \acrshort{fca} to a document collection, you are likely to encounter huge amount of entities. That is why alternative visualization techniques are needed. \\
+ While \acrshort{fca} is a mathematically well-founded principle, the resulting visualization of large concept lattices is a problem. Large concept lattices arose when you apply \acrshort{fca} to large amount of entities (details will be explained in Section~\ref{Formal Concept Analysis}). When applying \acrshort{fca} to a document collection, you are likely to encounter huge amount of entities. That is why alternative visualization techniques are needed. \\
  
   This thesis focuses on concept lattices that were built from document collection. In this scenario, \acrshort{fca} is especially valuable when the user does not know anything about the collection and wants to browse and explore the data. \\
   
  This user interface will run in modern web browser to avoid dealing with a heterogeneous operating systems environment. Because of the fast-changing environment of the web, it is important to keep with the latest technologies and techniques to not fall apart. The software utilizes a large amount of frameworks to efficiently create a pleasant user interface. \\
     
- The remainder of this thesis is structured as follows: The background of Formal Concept Analysis and Interface Design are presented in section \ref{Background}. The discussion of related work takes place in section \ref{Related Work}. Inferring from the related work, I will present my work including idea and implementation in section \ref{Fancy 1.0}. In section \ref{Evaluation} the evaluation takes place. Built upon the results of the evaluation, a new version is presented in section \ref{Fancy 2.0). Eventually concluding in section \ref{Conclusions}.
- 
- 
- In Chapter 4 I will present my (first) approach and the implementation, which will be evaluated in Chapter 5. Built on the Evaluation, I will adjust my work and present an updated version of my work in Chapter 6. I conclude in Chapter 7 and give ideas for future work.
+ The remainder of this thesis is structured as follows: The background of Formal Concept Analysis and Interface Design are presented in Section~\ref{Background}. The discussion of related work takes place in Section~\ref{Related Work}. Inferring from the related work, I will present my work including idea and implementation in Section~\ref{Fancy 1.0}. In Section~\ref{Evaluation}, the evaluation takes place. Built upon the results of the evaluation, a new version is presented in Section~\ref{Fancy 2.0}. Eventually concluding in Section~\ref{Conclusions}.
  
 \chapter{Background}
-\label{Background
+\label{Background}
 
-Before we can analyze already existing work in this area, draw our conclusions and develop our own system, we have give background information. This chapter gives an introduction into formal concept analysis, followed by an introduction into user interface design principles.
+This sections gives background knowledge before we can discuss related work in the following section. First, it gives an introduction into formal concept analysis taken from the work from Ganter and Wille \cite{Ganter2012}. Second, it introduces some user interface design principles.
 
 \section{Formal Concept Analysis}
 \label{Formal Concept Analysis}
 
-\acrlong{fca} (\acrshort{fca}) is a mathematically well-funded technique to analyze data. \acrshort{fca} creates relationships among objects specified by attributes. It derives from old philosophical ideas and was formalized by Rudolf Wille \cite{Ganter2012}. \\
-
-First, we describe the formal definitions and explain them with examples. Second, we give examples for the use of \acrshort{fca} in \acrlong{ir} (\acrshort{ir}). \\
+\acrlong{fca} (\acrshort{fca}) is a mathematically well-founded technique to analyze data. \acrshort{fca} creates relationships among objects specified by attributes. It derives from old philosophical ideas and was formalized by Rudolf Wille. First, we describe the formal definitions and explain them with examples. Second, we give examples for the use of \acrshort{fca} in \acrlong{ir} (\acrshort{ir}).
 
 \subsection{Definition}
 
-\acrshort{fca} is constructed from a formal context. A \textit{formal context} is defined as as a tripple $K = (G, M, I)$ where $G$ is a set of objects, $M$ is a set of attributes and $I$ is a binary relation $I \subseteq G \times M$. $I$ specifies whether an object has an attribute or not. ($G$ and $M$ come from the German words 'Gegenstand' and 'Merkmal'.) \\
-
-Table \ref{table:example} illustrates an example (from David Eppstein \cite{fcaexample}) where $G$ comprises the integers from 1 to 10 and $M$ comprises the attributes composite, even, odd, prime and square. \\
+\acrshort{fca} \cite{Ganter2012} is constructed on a formal context. A \textit{formal context} is defined as a tripple $K = (G, M, I)$ where $G$ is a set of objects\footnote{$G$ derives from German "Gegenstände".}, $M$ is a set of attributes\footnote{$M$ derives from German "Merkmale".} and $I$ is a binary relation $I \subseteq G \times M$. $I$ specifies whether an object has an attribute or not\footnote{$I$ derives from German "Inzidenzrelation".}. Table~\ref{table:example} illustrates an example from David Eppstein \cite{fcaexample} where $G$ comprises the integers from 1 to 10 and $M$ comprises the attributes composite, even, odd, prime and square. \\
 
 
 \begin{table}[h]
-\caption{Formal context, integers 1 to 10 as objects and attributes}
+\caption{Formal context, integers 1 to 10 as objects with attributes}
 \label{table:example}
 \centering
 
@@ -160,14 +161,14 @@ $B'$ is the set of objects that have at least the attributes given in $B$. \\
 
 If for $A \subseteq G$ such that $A = A''$, then $A$ is called \textit{closed}. The same is true for $B \subseteq M$ and $B = B''$. \\
 
-For example, let a set of objects be defined as $A_1 = \{1,4\} \subseteq G$. This results into: $A_1' = \{square\}$ and $A_1'' = \{1,4,9\}$. $A_1$ is not closed but $A_2 = \{1,4,9\} \subseteq G$ is called close because $A_2 = A_2''$. \\   
+For example, let a set of objects be defined as $A_1 = \{1,4\} \subseteq G$. This results into: $A_1' = \{square\}$ and $A_1'' = \{1,4,9\}$. $A_1$ is not closed but $A_2 = \{1,4,9\} \subseteq G$ is called closed because $A_2 = A_2''$. \\   
 
-A \textit{formal concept} is a pair of $(A, B)$ where $A \subseteq G$ and $B \subseteq M$ and $A = B' \wedge B = A' $. Informally, all objects in $A$ share exactly the same attributes in $B$. $A$ is a set of objects called the \textit{extent} of a formal concept. $B$ a set of attributes called the \textit{intent} of a formal concept. The extent and the intent of all formal concepts are always closed.\\
+A \textit{formal concept} is a pair of $(A, B)$ where $A \subseteq G$ and $B \subseteq M$ and $A = B' \wedge B = A' $. Informally, all objects in $A$ share exactly the same attributes in $B$. $A$ is a set of objects called the \textit{extent} of a formal concept. $B$ is a set of attributes called the \textit{intent} of a formal concept. The extent and the intent of all formal concepts are always closed.\\
 
-From the example in \ref{table:example}, we can derive several formal concepts. Three randomly chosen concepts are shown in table \ref{table:exampleConcepts}. \\
+From the example in Table~\ref{table:example}, we can derive several formal concepts. Three randomly chosen concepts are shown in Table~\ref{table:exampleConcepts}. \\
 
 \begin{table}[h]
-\caption{Three formal concepts from the formal context in table \ref{table:example}}
+\caption{Three formal concepts from the formal context in Table~\ref{table:example}}
 \label{table:exampleConcepts}
 \centering
 
@@ -189,53 +190,88 @@ It is always possible to define an order relation on the formal concepts. Let us
 \begin{align*} (A_i,B_i) \le (A_j, B_j) \Longleftrightarrow	A_i \subseteq A_j
 \end{align*}
 
-With the help of $\le$, we  can derive relationships from the the concepts in table \ref{table:exampleConcepts}. We see that $C_1 \le C_2$. This means that $C_1$ is more specific than $C_2$ and $C_2$ is more general than $C_1$. We can also see that $C_3$ is unrelated to $C_1$, and that $C_3$ is unrelated to $C_2$. \\
+With the help of $\le$, we  can derive relationships from the concepts in Table~\ref{table:exampleConcepts}. We see that $C_1 \le C_2$. This means that $C_1$ is more specific than $C_2$ and $C_2$ is more general than $C_1$. We can also see that $C_3$ is unrelated to $C_1$, and that $C_3$ is unrelated to $C_2$. \\
 
-A formal context with $\le$ is called a \textit{concept lattice} of the context. It can be shown, that for two formal concepts $C_i$ and $C_j$, there always exists a formal concept $C_x$ such that $C_i \le C_x \wedge C_j \le C_x$. That means that there is always a formal concept wich is 'above' in the hierarchy and also related to the two formal concepts $C_i$ and $C_j$. \\ 
-
-The interested reader is advices to read "The Basic Theorem on Concept Lattices" for instance in \cite{carpineto2004concept} for an formal explanation. \\
+A formal context with $\le$ is called a \textit{concept lattice} of the context. It can be shown, that for two formal concepts $C_i$ and $C_j$, there always exists a formal concept $C_x$ such that $C_i \le C_x \wedge C_j \le C_x$. That means that there is always a formal concept wich is 'above' in the hierarchy and also related to the two formal concepts $C_i$ and $C_j$. A formal definition would exceed this section. The interested reader is advices to read "The Basic Theorem on Concept Lattices" as described by Carpineto and Romano on page 13 in their work \cite{carpineto2004concept}.\\
 
 In the next section we will take a look at the static visualization of concept lattices.
 
 \subsection{Static Visualization}
 
-It is often said that a picture is worth a thousand words. To convey the abstract insights of a concept lattice, it can be visually represented in a \textit{Hasse diagram}. Figure \ref{figure:example} shows the Hasse diagram of the concept lattice derived from the formal context described in table \ref{table:example}. \\
+It is often said that a picture is worth a thousand words. To convey the abstract insights of a concept lattice, it can be visually represented in a \textit{Hasse diagram} \cite{Ganter2012}. Figure~\ref{figure:example} shows the Hasse diagram of the concept lattice derived from the formal context described in Table~\ref{table:example}. \\
 
 \begin{figure*}[!ht]
 	\centering
 	\includegraphics[width=\linewidth]{./images/fcaExample}
-\caption{Hasse diagram, with the integers 1 to 10 as objects and attributes square (s), prime (p), composite (c), even (e), and odd (o)}
+\caption{Hasse diagram, with the integers 1 to 10 as objects and attributes square (s), prime (p), composite (c), even (e), and odd (o). Drawn by Eppstein \cite{fcaexample}}
 \label{figure:example}
 \end{figure*}
 
-A Hasse diagram is a graph where the vertices represent formal concepts and edges represent the relation $\le$ among the formal concepts. An edge between formal concepts $C_i$ and $C_j$ is drawn, when $C_i \le C_j$ and there does not exist a formal concept $C_x$ such as $C_i \le C_x \le C_j$. To increase the readability, the nodes are ordered in layers. The concepts in top are more general, the concepts in the bottom are the more specific. There are two special concepts: supremum and infimum. The supremum is vertex node in the top and the attributes in its intent are those which are present in all objects. In most cases its intent is empty. The infimum is the vertex in the bottom and the objects in its extent are those which have all attributes. In most cases its extent is empty.\\
+A Hasse diagram is a graph where the vertices represent formal concepts and edges represent the relation $\le$ among the formal concepts. An edge between formal concepts $C_i$ and $C_j$ is drawn, when $C_i \le C_j$ and there does not exist a formal concept $C_x$ such as $C_i \le C_x \le C_j$. To increase the readability, the nodes are ordered in layers. The concepts in top are more general, the concepts in the bottom are the more specific ones.\\
+
+There are two special concepts: \textit{supremum} and \textit{infimum}. The supremum is vertex node in the top and the attributes in its intent are those which are present in all objects. In most cases its intent is empty. The infimum is the vertex in the bottom and the objects in its extent are those which have all attributes. In most cases its extent is empty.\\
 
 After this general introduction, we will describe in the next section how we can apply \acrshort{fca} to \acrshort{ir}.
 
 \subsection{Application of \acrshort{fca} in \acrshort{ir}}
 
-The examples depicted in table \ref{table:example} and figure \ref{figure:example} are only exemplary. How did \acrshort{fca} affected the real world? According to Poelmans et al. has been \acrshort{fca} "applied in many disciplines such as software engineering, knowledge discovery and \acrshort{ir}" \cite{Poelmans2013} and they did two comprehensive surveys on the application of \acrshort{fca} \cite{Poelmans2013, Poelmans2013b}. \\
+Up to now, we only showed primitive examples to illustrate the basics of \acrshort{fca}. So where was it applied? According to Poelmans et al. \acrshort{fca} has been "applied in many disciplines such as software engineering, knowledge discovery and \acrshort{ir}" \cite{Poelmans2013}. They did two comprehensive surveys on the application of \acrshort{fca} \cite{Poelmans2013, Poelmans2013b}. \\
 
-Carpineto et al.\cite{Carpineto2005} describe the start of \acrshort{fca} in \acrshort{ir}:
+In the case of IR on a document collection, the objects are the documents. These documents are described by index terms. These index terms are the attributes of the objects. In Table~\ref{table:fcair} are documents described by index terms take from Godin et al. \cite{Godin1993}. The concept lattice is visualized in Figure~\ref{figure:fcair}.
 
-\begin{quote}
-In the 80's, basic ideas were put forth - essentially that a concept can be seen as a query (the intent) with a set of retrieved documents (the extent) and that neighbor concepts can be seen as minimal query changes."
-\end{quote}
+\begin{table}[h]
+\caption{Documents described by Index Terms, from Godin et al. \cite{Godin1993}}
+\label{table:fcair}
+\centering
 
-This means that the objects are documents and the documents are treated as a set of words. An attribute means that a word occur in this documents. In this simple form, this has a major drawback because it is not possible to we weight terms or for instance to rank among documents with same attributes.\\
+\def\arraystretch{1.2}% 
+\begin{tabular}{ | l | l | }
+\hline
+ Document & Index Terms \\
+\hline
 
-The different algorithms to create concept lattes or an in-depth analysis of \acrshort{fca} for text mining are not covered in this thesis. The interested reader is guided to study the work from Carpineto and Romano \cite{carpineto2004concept} for a detailed investigation. \\
+1 & \{animal, bear, canada, child, cow-boy, dream, fantasy,\\
+  & immigration, indian, magic\} \\
+2 & \{animal, cat, child, fantasy, magic, tale\} \\
+3 & \{animal, child, dog, fair, fantasy, love, parade\} \\
+4 & \{child, fantasy, friendship, game, rope\} \\
+5 & \{creativity, child, fantasy, game, music, sound\} \\
+6 & \{animal, child, dream, fair, fantasy, friendship, octupus\} \\
 
-The visual representation of of those \acrshort{ir} systems is discussed in the related work section \ref{Related Work}. Before we do this, let us get to know some principles of interface design. \\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{figure*}[!ht]
+	\centering
+	\includegraphics[width=\linewidth]{./images/fcair}
+\caption{Hasse diagram from concept lattice derived from \ref{table:fcair}, from Godin et al. \cite{Godin1993}}
+\label{figure:fcair}
+\end{figure*}
+
+Carpineto and Romano \cite{Carpineto2005} describe that a concept can be seen as a query (intent) with a set of retrieved documents (extent) and that neighboring concepts can be seen as minimal query changes. When the user queries a FCA-based system, the intents of the formal concepts are checked for a match (or a partial match if there is no match in the first place). So for instance with the query "child fantasy friendship" the document 4 and 6 wold be retrieved. You find the concept in the middle of the Hasse diagram. The neighboring concepts are connected with an edge. \\
+
+
+Sacco and Tzitzikas \cite{Sacco2009} describe two information access modes: \textit{focalized search} and\textit{exploratory search}. In focalized search, the user is interested to find relevant information to a given query. In opposite to exploratory, where the user explores relationships among items in a data collection. While FCA provides the user with the ability to do focalized search, it offers sophisticated exploratory capabilities. When the user queries the system (as described above), not only the documents of the formal concepts are retrieved, but she can also see the position in the lattice. Is the concept in the upper half and thereby more general? Or is it in the bottom half and thereby more specific? What are the related formal concepts? How do they differ? Would there be a lot more documents if I would remove a term from the query? All this questions can be answered and because the whole lattice is already computed, relatively fast. Without going into detail, a major problem of FCA is the time-consuming creation of a lattice. But this focus of this thesis is the visualization of concept lattices and not the creation of concept lattices. This section should give a slight introduction and the interested reader is advised to study the work from Carpineto and Romano \cite{carpineto2004concept} for a detailed investigation. \\
+
+This work develops an interface for one specific datasets. That is why it is important the lattice structure of this dataset how it was created. The next section described the dataset.
+
+\subsection{The Data}
+In the following, I will described how the research group created the data on which this thesis is based. \\
+
+The research group asked human scholars for a list of 100 interested words. This list is the dictionary. The index terms of a documents specify if this index terms is present in the document. They were 7492 documents with 100 possible attributes, the index terms. They result into a concept lattice with 131379 formal concepts.\\
+
+Because this thesis focuses on the user interface, let us review user interface design principles before we discussed related work in Section~\ref{Related Work}. \\
 
 \section{Interface Design}
 \label{id}
 
-The interaction from the user with the system is what exactly matters to the user. The interaction of humans with computers has its own research area, human-computer interaction, and one of its pioneers is Ben Shneiderman. In the following, two principles from him will be presented: The "Eight Golden Rules of Interface Design" and the "Visual Information Seeking Mantra".
+The user interface is responsible for the interaction with users. The interaction of humans with computers has its own research area, \acrlong{hci} (\acrshort{hci}), and one of its pioneers is Ben Shneiderman. In the following, two principles from him are presented: The "Eight Golden Rules of Interface Design" \cite{Shneiderman2010} and the "Visual Information Seeking Mantra" \cite{Shneiderman1996}.
 
 \subsection{Eight Golden Rules of Interface Design}
+\label{Golden}
 
-This rules are genreal advices for user interface designers which should apply to all interfaces. Ben Shneiderman et al. present this rules in their book \cite{Shneiderman2010}. The rules are names and explained with my own remarks. \\
+These rules \cite{Shneiderman2010} are genreal advices for user interface designers which should apply to all interfaces. The rules are named and explained with my own remarks. \\
 
 \begin{itemize}
 	\item Strive for consistency: Use similar actions in similar situations. Use identical terminology, colors, fonts etc. throughout the system.	
@@ -248,16 +284,15 @@ This rules are genreal advices for user interface designers which should apply t
 	\item Reduce short-term memory load: Reduce the number of things the user has to keep in mind while using the system.
 \end{itemize}
 
-As you can see, the rules are open to interpretation. There exits alternative principles for instance: Donald Norman's Design Principles \cite{Norman2013} or Jakob Nielsen's "10 Usability Heuristics for User Interface Design" \cite{Nielsen1995}. \\
+There exits alternative principles for instance: Donald Norman's Design Principles \cite{Norman2013} or Jakob Nielsen's "10 Usability Heuristics for User Interface Design" \cite{Nielsen1995}. They are very similar and only differ points not worth mentioning. \\
 
-This principles can be applied to all user interfaces. In the next section, design principles will be presented where the user views a large collection of items.
+These principles can be applied to all user interfaces. In the next section, design principles will be presented which are more related to this work.
 
 \subsection{Visual Information Seeking Mantra}
 
-The visual information seeking mantra (the Mantra) was introduced by Ben Shneiderman \cite{Shneiderman1996} and are based on his experience with past projects. Albeit the Mantra was intended to be a "descriptive and explanatory" \cite{Card1999}, "in effect, the Mantra has become a prescriptive principle for many information visualization designers", write Craft and Cairns \cite{Craft2005}. \\
+The visual information seeking mantra (the Mantra) was introduced by Ben Shneiderman \cite{Shneiderman1996} and is based on his experience with past projects. Albeit the Mantra was intended to be a "descriptive and explanatory" \cite{Card1999}, "in effect, the Mantra has become a prescriptive principle for many information visualization designers" write Craft and Cairns \cite{Craft2005}. \\
 
-The Mantra describes user interface design principles for systems when the "users are viewing collections of items, where items have multiple attributes" \cite{Shneiderman1996}. The starting principles are: overview first, zoom and filter, and then details on demand. They will be explained below and added by three other principles. \\
-
+The Mantra describes design principles for interfaces when user view collection of items. This items are described by multiple attributes. The starting principles are: overview first, zoom and filter, and then details on demand. These four principles will be explained below and extended by three other principles.
 \begin{itemize}
 	\item Overview: Gain an overview of the entire collection.
 	\item Zoom: Zoom in on items of interest.
@@ -268,7 +303,7 @@ The Mantra describes user interface design principles for systems when the "user
 	\item Extract: Allow extraction of sub-collections and of the query parameters.
 \end{itemize}
 
-Some task needs more explanation which I will give in the following with help from related literature.
+Some tasks need more explanation.
 
 \subsubsection{Zoom and Filter}
 
@@ -284,19 +319,20 @@ Once interesting objects are found, the user should have the possibility to extr
 
 \subsection{Final Remarks}
 
-The presented ideas are based mostly on the experience of one person: Ben Shneiderman. The huge number of citations show that his work is influential for a lot of people. But this is not real science. Craft and Cairns \cite{Craft2005} are calling for empirical justification of the Mantra. This is an indication that human-computer interaction is only at the start point - there is a still a lot of research to do. \\
+The presented ideas are based mostly on the experience of one person: Ben Shneiderman. The huge number of citations show that his work is influential but Craft and Cairns \cite{Craft2005} call for empirical justification of the Mantra. \acrshort{hci} is a young research area and they will come better and more polished guidelines the future. Until then, the work from Ben Shneiderman seems to be valid starting point. \\
 
-In addition, you have to interpret this rules and adapt them to the current situation. Furthermore, there overall humans are involved, a very complex system which is hardly explored.
+Those principles are up to interpretation and adaption. Every system is different and has its different needs. For this reason, let us review what other people did and how they designed their interface for \acrshort{fca}-based systems.
 
-\chapter{Related Work} \label{Related Work}
+\chapter{Related Work}
+\label{Related Work}
 
-After introducing formal concept analysis in section \ref{Formal Concept Analysis}, let us review and discuss related work. In the first three sections, we go over a lot of different \acrshort{fca}-based approaches. Eventually, we evaluate one \acrshort{fca}-based real world application in detail in regard to the interface design principles described in section \ref{id}. In section \ref{dyafs}, a non-\acrshort{fca} based approach is shown which is very related to \acrshort{fca}: \acrshort{dt} and Faceted Search. \\
+After introducing formal concept analysis in Section~\ref{Formal Concept Analysis}, let us review and discuss related work. In the first three sections, we go over different \acrshort{fca}-based approaches. Eventually, we evaluate one \acrshort{fca}-based approach in detail: The Virtual Museum of the Pacific. In Section~\ref{dyafs}, a non-\acrshort{fca} based approach is shown which is related to \acrshort{fca}: \acrshort{dt} and Faceted Search. \\
 
 \section{Full Hasse Diagrams}
 
-The traditional, static visualization of concept lattices are Hasse diagrams as describes in section \ref{Formal Concept Analysis}. They are also named \textit{line diagrams}. Eklund et al. \cite{Eklund2004} conducted user studies and proclaim that non-FCA-experts can read Hasse Diagrams if you fine-tune the Hasse diagram. For instance by choosing appropriate colors, making us of symbols and carefully positioning the vertices in layer. \\
+The traditional, static visualization of concept lattices are Hasse diagrams as describes in Section~\ref{Formal Concept Analysis}. Eklund et al. \cite{Eklund2004} conducted user studies and proclaim that non-\acrshort{fca}-experts can read Hasse Diagrams if you fine-tune the Hasse diagram. For instance by choosing appropriate colors, using symbols and carefully positioning the vertices in layer. \\
 
-But in the domain of \acrshort{ir} on documents you get formal contexts with a lot of objects. Those Hasse diagrams scale bad for large concepts lattices. Kuznetsov et al. \cite{Kuznetsov20072}  describe this resulting visualization: "Representing concept lattices constructed from large contexts often results in heavy, complex diagrams that can be impractical to handle and, eventually, to make sense of." Especially the high connectivity of the graph results in enormous edge crossing. The image \ref{figure:firstVisualizaion} shows the first results from data in the digital humanities project. The software XX was used. \\
+But in the domain of \acrshort{ir} you get formal contexts with a lot of objects. Those Hasse diagrams scale bad for large concepts lattices. Kuznetsov et al. \cite{Kuznetsov20072}  describe this resulting visualization: "Representing concept lattices constructed from large contexts often results in heavy, complex diagrams that can be impractical to handle and, eventually, to make sense of." Especially the high connectivity of the graph results in enormous edge crossing. The Figure~\ref{figure:firstVisualizaion} shows the first results from data in the digital humanities project. The software [HAS TO BE DETERMINED] was used. \\
 
 \begin{figure*}[!ht]
 	\centering
@@ -305,70 +341,66 @@ But in the domain of \acrshort{ir} on documents you get formal contexts with a l
 \label{figure:firstVisualizaion}
 \end{figure*}
 
-The visualization is useless. What can be done to improve the situation? The Hasse can be pruned by reducing the number of vertices. The different techniques are discussed in the next section.
+The visualization is useless because it is not even possible to see all the labels. In the next section we describe techniques to improve the situation.
 
 \section{Pruned Hasse Diagrams}
 
+The Hasse diagrams can be pruned by reducing the number of vertices. The different techniques are discussed in the next section.
+
 \subsection{Reduce Number of Formal Concepts}
 
-One way to reduce the number of vertices is to compute the \textit{iceberg lattices} as described by Stumme et al.\cite{Stumme2002}. They result after the application of a data mining technique "frequent item-set mining" from Agrawal et al.\cite{Agrawal1993}. Only formal concepts are selected which are considered 'frequent'. A formal concept is frequent if its intent, the set of attributes, is frequent. Let $B$ be the intent and $minSupport \in [0, 1]$, then $B$ is frequent if $ |B'|/|G| \geq minSupport$. This means the attribute set has to specify a high portion of objects; at least $minSupport$. \\
+One way to reduce the number of vertices is to compute the \textit{iceberg lattices} as described by Stumme et al. \cite{Stumme2002}. They result after the application of a data mining technique "frequent item-set mining" from Agrawal et al. \cite{Agrawal1993}. Only formal concepts are selected which are considered "frequent". A formal concept is frequent if its intent, the set of attributes, is frequent. Let $B$ be the intent and $minSupport \in [0, 1]$, then $B$ is frequent if $ |B'|/|G| \geq minSupport$. This means the attribute set has to specify a high portion of objects; at least $minSupport$. This approach has some drawbacks as Kuznetsov et al. \cite{Kuznetsov20072} point out that "exotic" or "emergent" concepts that are not represented by a large number of objects can be interesting too and should not been overlooked. They propose to only select "stable" concepts \cite{Kuznetsov20072}. The intent of stable concepts does not depend much on each object of the extent. It is also possible to apply traditional cluster techniques like fuzzy K-Means clustering to \acrshort{fca} \cite{AswaniKumar2010}. \\
 
- This approach has some drawbacks as Kuznetsov et al. \cite{Kuznetsov20072} point out: "One should be careful not to overlook small but interesting groups, for example, “exotic” or 'emergent' groups not yet represented by a large number of objects, or, groups that contain objects who are not members of any other group." They propose to only select 'stable' concepts and write "A concept is stable if its intent does not depend much on each particular object of the extent." \cite{Kuznetsov20072}. It is also possible to apply traditional cluster techniques like fuzzy K-Means clustering to \acrshort{fca} \cite{AswaniKumar2010}. \\
-
-	While all these techniques undoubtable reduces the number of formal concepts, it is to question if the results are any helpful. In our case of \acrshort{ir}, we apply \acrshort{fca} to explore the data and get insights about the lattice structure. When pruning the nodes, you are losing many data relationships, many formal concepts and, consequently, the "power" of \acrshort{fca} as exploratory technique is significantly reduced. When we deal with large concepts lattices, the number of nodes has to be very low if we want to represent them with Hasse diagrams. In the year 2015, the question is not how can I visualize and analyze 16 formal concepts as in figure \ref{figure:example} - it is more how can I analyze 160000 formal concepts. For this tasks, this approach is not appropriate. \\
+	While all these techniques undoubtable reduce the number of formal concepts, it is to question if the results are any helpful. In our case of \acrshort{ir}, we apply \acrshort{fca} to explore the data and get insights about the lattice structure. When pruning the nodes, you are losing many data relationships, many formal concepts and, consequently, the "power" of \acrshort{fca} as exploratory technique is significantly reduced. When we deal with large concept lattices, the number of nodes has to be very low if we want to represent them with Hasse diagrams. Nowadays, the question is not how do I visualize 16 formal concepts as in Figure~\ref{figure:example} - it is more how can I analyze 160.000 formal concepts.\\
 	
-	But this reduction techniques can be useful to reduce the clutter in the lattice. They can be used in combination with our visualizing techniques as described in the upcoming section \ref{Local View}. \\
+	Pruning alone is not a proper way to handle large concept lattice. But it can be useful to reduce the clutter. It can be useful in combination with techniques that are presented in Section~\ref{Local View}.
 	
 \subsection{Nest Formal Concepts}	
 
-Another idea are \textit{nested line diagrams} - line diagrams are another name for Hasse diagrams. All attributes of a formal context are partitioned into layers. For instance if you just have two layers. For the first layer: built up the Hasse diagram with the attributes of the first layer. For each vertex in the resulting Hasse diagram, built up a Hasse diagrams \textit{inside} the vertex. This secondary Hasse diagrams are built from the objects in each vertex (extent of the formal concept). This can be done for an arbitrary number of layers. An example from Carpineto and Romano \cite{carpineto2004concept} is shown in figure \ref{figure:nested}. The general idea should be clear without explaining the context - if not Carpineto and Romano \cite{carpineto2004concept} describe it more in detail. \\
+Another approach are \textit{nested line diagrams} - line diagrams are another name for Hasse diagrams. For this, all attributes are partitioned into layers. For example, if you just have two layers, an attribute is either in layer one or two. For the first layer: You built up a Hasse diagram with the attributes \textit{solely} of the first layer. For each vertex in the resulting Hasse diagram, you built up a Hasse diagrams \textit{inside} the vertex. This secondary Hasse diagrams are built from the concept lattice derived from the objects in the vertex (the objects that are the extent of the formal concept). This can be done for an arbitrary number of layers. An example from Carpineto and Romano \cite{carpineto2004concept} is shown in Figure~\ref{figure:nested}. The general idea should be clear without explaining the context - if not Carpineto and Romano \cite{carpineto2004concept} describe it more in detail. \\
 
 \begin{figure*}[!ht]
 	\centering
-	\includegraphics[width=0.5\linewidth]{./images/nested}
-\caption{Nested line diagram}
+	\includegraphics[width=\linewidth]{./images/nested}
+\caption{Nested line diagram with two layers. \cite{carpineto2004concept}}
 \label{figure:nested}
 \end{figure*}
 	
-But how to partition the attributes? You have to select them manually. If you have an taxonomy of the attributes you can make use of them. In the case of text mining we do not have an taxonomy and thereby cannot make use of it. Furthermore: \acrshort{fca} is good at building relationships with arbitrary attributes. If you have a taxonomy, there are way better techniques one will be presented in section \ref{dyafs}: "Dynamic Taxonomies and Faceted Search". \\
+But how to partition the attributes? You have to select the partitions manually. The manual selection might be good idea of small concept larges but in our case it is not feasible.
 
 \section{Local View}
 \label{Local View}
 
-Instead of showing the full Hasse diagram, the user can see a local view on the lattice. We will give an overview about the basic idea and applications before we review one real-world application in detail. \\
-
-One could argue that you just have to visualize everything and then allow to zoom on nodes. This techniques is common among network visualizations \cite{Herman2000}. But because of the high connectivity of the graph, this is not helpful to Hasse diagrams. You can see this at the tool 'FCART' presented by Neznanov and Parinov \cite{Neznanov2014}. In figure \ref{figure:fcart} they visualize a concept lattices comprising more than 20000 concepts. Without going into detail and without arguing the general appearance of the user interface we can see, that this kind of approach is doomed to fail. Furthermore, this procedure takes a lot of computation power. \\
-
-\begin{figure*}[!ht]
-	\centering
-	\includegraphics[width=\linewidth]{./images/fcart}
-\caption{FCART visualizing concept lattice with over 20000 concepts.}
-\label{figure:fcart}
-\end{figure*}
-
-Let us review other, more successful approaches. \\
+Instead of showing the full Hasse diagram, the user can have a local view on the lattice. We will give an overview about the basic idea and applications before we review one real-world application in detail. \\
 
 \subsection{Introduction}
 
-There exist a lot of different names for a similar approach. Eklund et al. name it \textit{conceptual neighborhood}\cite{Eklund2009,Eklund2012} and Carpineto and Romano name it \textit{hybrid navigation} \cite{Carpineto1996}. But there share the same ideas: the interface is always focused on exactly \textit{one} formal concept. The user can navigate through the lattice by going up (becoming more general) or going down (becoming more special). In the context of \acrshort{ir} this means removing terms or adding terms. They also offer the possibility to query the system with a search. In most cases, the user would start with a search and if there exist a corresponding formal concept it focuses on it. Then the user can fine-tune the search. The idea originated from the \acrshort{ir} field and was first proposed by Godin et al. \cite{Godin1989}. \\
+One could argue that you just have to visualize everything and then allow to zoom on nodes. This techniques is common among network visualizations \cite{Herman2000}. But because of the high connectivity of the graph, this is not helpful to Hasse diagrams. You can see this at the tool 'FCART' presented by Neznanov and Parinov \cite{Neznanov2014}. In Figure~\ref{figure:fcart} they visualize a concept lattices comprising more than 20000 concepts. \\
 
-Two underlying information seeking models stand behind his approach. First, user tend to start with a short query and then refine their needs. Hearst \cite{Hearst2009} write  while referring to \cite{Marchionini2006,Bates1990}:
+\begin{figure*}[!ht]
+	\centering
+	\includegraphics[width=0.5\linewidth]{./images/fcart}
+\caption{FCART, Hasse diagram visualization with over 20000 formal concepts, focus on node with blue borders \cite{Neznanov2014}}
+\label{figure:fcart}
+\end{figure*}
+
+Even though they chose a grey color for the edges, the screen is almost filled only with the grey. In addition, they labels of the nodes in the top and bottom are overlapping which makes it hard to read them. Let us review some other approaches in the next section which completely break with the Hasse diagram.
+
+The local view on a Hasse diagram is called \textit{conceptual neighborhood} by Eklund et al. \cite{Eklund2009,Eklund2012} or \textit{hybrid navigation} by Carpineto and Romano \cite{Carpineto1996}. The basic idea is always the same: The interface is always focused on exactly \textit{one} formal concept. The user can navigate through the lattice by going up (becoming more general) or going down (becoming more special). Which means removing terms or adding terms. They also offer the possibility to query the system. In most cases, the user would start with a search and focuses on the corresponding formal concept if it exists. From there, the user can fine-tune the search. The idea originated from the \acrshort{ir} field and was first proposed by Godin et al. \cite{Godin1989}. \\
+
+At least three ideas underly this approach. First, users tend to start with a short query and then refine their needs. Hearst \cite{Hearst2009} write  while referring to \cite{Marchionini2006,Bates1990}:
 \begin{quote}
-	A commonly-observed search strategy is one in which the information seeker issues a quick, imprecise query in the hopes of getting into approximately the right part of the information space, and then doing a series of local navigation operations to get closer to the information of interest
+	"A commonly-observed search strategy is one in which the information seeker issues a quick, imprecise query in the hopes of getting into approximately the right part of the information space, and then doing a series of local navigation operations to get closer to the information of interest."
 \end{quote}
 
-Second, it easier for the user to choose from suggestions than to formulate a query. Aula writes \cite{Aula2005}:
-\begin{quote}
-	Considered in cognitive terms, searching is a more analytical and demanding method for locating information than browsing, as it involves several phases, such as planning and executing queries, evaluating the results, and refining the queries, whereas browsing only requires the user to recognize promising-looking links.
-\end{quote}
+Second, it easier for the users to choose from suggestions than to formulate a query. Aula \cite{Aula2005} writes that searching is more demanding method for locating information than browsing, as it involves several phases, such as planning and executing queries, evaluating the results, and refining the queries, whereas browsing only requires the user to recognize promising-looking links. \\
 
-Third, the incremental navigation prevents the user from getting empty result lists. This is related to the design principle from Shneiderman: Prevent the user from making mistakes. But they can still fail when they then search. \\
+Third, after the initial search, the neighboring concepts are basically suggestions to the users. This prevents them from getting empty results. This is related to the design principle: "Prevent errors" presented in Section~\ref{Golden}. Zero results are not really errors, but they can be seen as a failure in a search process.\\
 
-Godin et al. \cite{Godin1993} evaluated their work in comparison to boolean retrieval and hierarchical retrieval and proclaim that "[their experiment] suggests that retrieval using a Galois lattice structure may be an attractive alternative since it combines a good performance for subject searching along with browsing potential." Galois lattice is a synonym for concept lattice.\\
-
+Godin et al. \cite{Godin1993} evaluated their \acrshort{fca}-based approach in comparison to boolean retrieval and hierarchical retrieval and proclaim that "[their experiment] suggests that retrieval using a Galois lattice structure may be an attractive alternative since it combines a good performance for subject searching along with browsing potential." Galois lattice is a synonym for concept lattice.
 \subsection{Applications}
 
-Carpineto and Romano picked up the idea from Godin et al. and developed a \acrshort{fca} search engines ULYSSES \cite{Carpineto1995,Carpineto1996}. The user can fine-tune what neighboring vertices are displayed by bounding the information seeking space. They are not only showing directly adjacent vertices but also vertices that do not exceed a given distance. It is also possible to restrict the space to vertices which are above, below, left or right of the focus. In figure \ref{figure:ulysses} is a screenshot of the system. \\
+Carpineto and Romano picked up the idea from Godin et al. and developed a \acrshort{fca} search engines ULYSSES \cite{Carpineto1995,Carpineto1996}. The user can fine-tune what neighboring vertices are displayed by bounding the information seeking space. They are not only showing directly adjacent vertices but also vertices that do not exceed a given distance. It is also possible to restrict the space to vertices which are above, below, left or right of the focus. The system is shown in Figure~\ref{figure:ulysses}. \\
 
 \begin{figure*}[!ht]
 	\centering
@@ -377,8 +409,6 @@ Carpineto and Romano picked up the idea from Godin et al. and developed a \acrsh
 \label{figure:ulysses}
 \end{figure*}
 
-In their following work, CREDO \cite{Carpineto2004}, Carpineto and Romano followed the look of ordinary search engines. The presentation of the concept lattice is not oriented at the Hasse Diagram. It looks more like a folder structure. Shown in \ref{figure:credo}. Work that is similar comes from Koester \cite{Koester2006}, Dau et al.\cite{Dau2008}, Nauer and Yannik \cite{Nauer2009} and Cigarran et al. \cite{Cigarran2004}. In all this cases, the concept lattice is built on the fly from the result list of search engines. This come with special interest like performance which is not inserting to us. And it is - again like many \acrshort{fca} application - restricted to relatively small number of formal concepts. Let us move on to some application of \acrshort{fca} to document collections. \\
-
 \begin{figure*}[!ht]
 	\centering
 	\includegraphics[width=\linewidth]{images/credo}
@@ -386,11 +416,14 @@ In their following work, CREDO \cite{Carpineto2004}, Carpineto and Romano follow
 \label{figure:credo}
 \end{figure*}
 
-Eklund et al. applied \acrshort{fca} to email organization\cite{Eklund2004}, image browsing \cite{Ducrou2006,Ducrou2008} and a later work is the 'Virtual Museum of the Pacific' \cite{Eklund2009,Eklund2012}. Let us review this museum because: it visualizes a static documents collection as we do and it is a rare example of \acrshort{fca} outside academia. It is also web-based like our desired interface. It was created after doing a lot of research into his field. It was built in 2000 - so it is fairly recent. They conducted a usability study with museum experts and non-experts. \cite{Eklund2012}
+In their work, CREDO \cite{Carpineto2004}, Carpineto and Romano followed the look of ordinary search engines. The presentation of the concept lattice is not oriented at the Hasse Diagram. It looks more like a folder structure. It is shown in \ref{figure:credo}. Work that is similar comes from Koester \cite{Koester2006}, Dau et al. \cite{Dau2008}, Nauer and Yannik \cite{Nauer2009} and Cigarran et al. \cite{Cigarran2004}. In all these cases, \acrshort{fca} is applied in slightly different manner. The search is done with ordinary search engines in the background (e.g. Yahoo!) and the concept lattice is built from the results of the search. So for every new search, there is a new concept lattice. This is different from our approach, where there is just one static concept lattice. \\
+
+Let us now review work of \acrshort{fca} on document collections. Eklund et al. applied \acrshort{fca} to email organization \cite{Eklund2004}, image browsing \cite{Ducrou2006,Ducrou2008} and a later work is the 'Virtual Museum of the Pacific' \cite{Eklund2009,Eklund2012}. We will focus on the museum because it does exactly what we are trying to do: Visualize a concept lattice built from image metadata. Furthermore it is a rare example of \acrshort{fca} outside of the academic community. It also runs in the browser and it was built in 2009 - so it is fairly recent. In addition, they conducted a usability study with museum experts and non-experts \cite{Eklund2012}.
 
 \subsection{Virtual Museum of the Pacific}
+\label{Museum}
  
-The museum was created to give user the possibility to browse images of museum objects. It is available on the web \footnote{\url{http://epoc.cs.uow.edu.au/vmp/} - Credentials are required. Use username: filter and password: 45755} and it is advised to take a look at it before continue reading. \\
+The museum was created to give user the possibility to browse images of museum objects. It is available on the web\footnote{\url{http://epoc.cs.uow.edu.au/vmp/} - Credentials are required. Use username: filter and password: 45755} and it is advised to take a look at it before continue reading. \\
 
 \begin{figure*}[!ht]
 	\centering
@@ -399,37 +432,53 @@ The museum was created to give user the possibility to browse images of museum o
 \label{figure:pacific}
 \end{figure*}
 
-After the login it is not clear where to start. If you are completely new to the topic, it is a good idea to start with the word cloud. Here comes the Mantra into play: Overview first - details on demand. No real overview is given, this might confuse user. \\
+After the login, for a first-time visiter it is not easy to figure out where to start. It would be a great idea to let then start with the 'word cloud' to start at a point. The designers contradicted the first part of the Mantra: Overview first. This can be a problem because potential users do not know where start. \\
  
- The interface sets the objects in he focus of the interface. This is, in my opinion, a good decision. The user is probably more interest in the object than on the structure which was built around the objects (the lattice). \\
+The interface sets the objects, the images, in the focus of the interface. This is, in my opinion, a good decision. The user is probably more interested in the objects than in the concept lattice. The lattice is just an artificial structure that was built around the objects. \\
  
- Above the objects is the current intent of the formal concept shown. It is possible to remove terms from the current selection to generalize. Below the objects are terms suggested to specify the information needs. When the user clicks on the term the view changes with the newly added item. The sidebar categorizes the attributes/terms and it possible to filter out uninteresting concepts. This categorization contradicts the whole purpose of \acrshort{fca} but might help the users. \\
+ Above the objects is the intent of the focused formal concept. It is possible to remove terms from the current selection to generalize (go up in the lattice). Below the objects are terms suggested to specify the information needs (go down in the lattice). The view changes when the users decide to add or remove terms. The sidebar categorizes the attributes into topics. It looks like they have created a taxonomy for their attributes. This allows the users to filter out interesting terms. But the manual selection is time-intensive and it does not scale very well. It is also to question if FCA should be applied to datasets with a taxonomy. More information will follow in section~\ref{dyafs}. \\
  
- To get details on demand, you have to click on an item. From there you can also find related items. \\
+ To get details on demand, you have to click on an item. From there you can also find related items. This views offers a good view.\\
  
- It is possible to search but this search is very rudimentary. It is very easy to implement a type ahead (autocomplete/suggestion/autofill) for static data set. This is a real problem and there is no excuse not to stick to well-proven user search interface principles as described by Hearst \cite{Hearst2009}. \\
+ It is possible to search but this search is very rudimentary. They should have stick to well-proven user search interface principles as described by Hearst \cite{Hearst2009}. \\
  
- The biggest problem with the his interface is the missing home/reset button and the absence of any form of history. As Shneiderman \cite{Shneiderman1996} pointed out "Information exploration is inherently a process with many steps, so keeping the history of actions and allowing users to retrace their steps is important." \acrshort{fca} is a exploratory technique. Not implementing \textit{any} possible to go back is a utter failure. You can this in the evaluation as they point out \cite{Eklund2012}: "Users also had difficulty understanding the notion of conceptual navigation as a way of navigating an information space, rather than a fixed hierarchy with a well defined ‘home’ state." and "[..] many users felt ‘lost’ within [the FCA-based] style of navigation. A recommendation was put forward so that users could at least back track through the navigation sequences (in the form of a ‘Back’ button) or that users could easily go back to a ‘home’ or ‘reset’ state." They are not going to discuss this problems - even thought the navigation is \textit{the} important problem with FCA. They defend their failure with unfamiliarity of the users \cite{Eklund2012}: "there were a number of common issues, mostly relating to the unfamiliarity of the interface". This is not a real argument because the users are always unfamiliar with new interfaces. \\
+ The biggest problem is the missing 'home' or 'reset' button and the absence of any form of history. As Shneiderman \cite{Shneiderman1996} point out "Information exploration is inherently a process with many steps, so keeping the history of actions and allowing users to retrace their steps is important." \acrshort{fca} is a exploratory technique. Not implementing \textit{any} possible to go back is a huge problem. You can see in the evaluation that users were confused. Eklund et al. write \cite{Eklund2012}:
+ \begin{quote}
+ "Users also had difficulty understanding the notion of conceptual navigation as a way of navigating an information space, rather than a fixed hierarchy with a well defined ‘home’ state. [..] Many users felt ‘lost’ within [the \acrshort{fca}-based] style of navigation. A recommendation was put forward so that users could at least back track through the navigation sequences (in the form of a ‘Back’ button) or that users could easily go back to a ‘home’ or ‘reset’ state."
+ \end{quote}
+  They are not addressing this problems - even thought the navigation is \textit{the} problem with \acrshort{fca}. It feels like, they blame the problems on the unfamiliarity of the users \cite{Eklund2012}: "there were a number of common issues, mostly relating to the unfamiliarity of the interface". This is a weak argument because the users are always unfamiliar with new interfaces. \\
  
-  Combined with meaningless quotes from participants \cite{Eklund2012} : "There should be more of this kind of thing, but there’s room for improvement" or "I think it’s really good—it gives specialized information." and a weak summary \cite{Eklund2012}:
+  Combined with meaningless quotes from participants \cite{Eklund2012}: "There should be more of this kind of thing, but there’s room for improvement" or "I think it’s really good—it gives specialized information." and a weak summary \cite{Eklund2012}:
   \begin{quote}
   "Overall, the study concludes that conceptual based browsing can offer significant merit for browsing Pacific collections, and that by resolving the identified issues, the core functionality of searching and browsing via \acrshort{fca} can be considerably easier for users to learn and engage with." 
   \end{quote}
-  (Easier than what? There was NO comparison with other IR techniques in the whole study) this paper leaves a bitter aftertaste. It started with a good idea but the implementation - in my opinion - is a complete failure. Instead of blaming the stupidity of the users, they should have looked at their own mistakes and learned from them.\\
+  (Easier than what? There was NO comparison among other IR techniques) this paper leaves a bitter aftertaste. It started with a good idea but the implementation - in my opinion - has huge deficits. Sadly, they did draw the right conclusions and did not work out the problems of the implemenation.\\
  
 \subsection{Conclusion}
 
-While \acrshort{fca} is famos in the academic stuff it does not really help the world at all. There exist only a few useful examples and most of them were conducted on small lattices. Focusing on formal concept on only showing neighboring nodes is the way to built interfaces. Before describing the idea of my interface in detail, let us review some related techniques which is similar to \acrshort{fca} and go into the industry. Feel free to skip this section and go straight to section XX.
+The Virtual Museum of the Pacific is one of the view examples of \acrshort{fca} who breach out of traditional static visualizations. They idea to show only the directly related formal concepts is promising because this scales better than Hasse diagrams. My idea is based upon the work from the museum but addresses critical problems: the missing orientation, the missing history and rudimentary search implementation. The idea is described in section~\ref{Fancy 1.0}. Before that, let us review a related non-\acrshort{fca}-based technique, but feel free to skip it. \\
 
 \section{\acrlong{dt} and Faceted Search}
 \label{dyafs}
 
-Sacco and Tzitzikas \cite{Sacco2009} write: "Although \acrshort{fca} and \acrlong{dt} are apparently two distinct approaches to information modeling and access, and they use a different terminology, they are closely related". Completely introducing  \acrlong{dt} (\acrshort{dt}) would exceed this thesis. The interested reader is guided to study the work from Sacco and Tzitzikas \cite{Sacco2009}. \\
+\acrlong{dt} (\acrshort{dt}) are used for faceted search. This section should only give a small overview about this technique. Completely introducing it is beyond the scope of the technique. Excessive information can be found in the work from Sacco and Tzitzikas \cite{Sacco2009}. To keep things short, this technique is explained with an example. Figure~\ref{figure:flamenco} shows a screenshot of Flamenco as described by Yee et al. \cite{Yee2003}. \\
 
- The whole point of this section is to deconstruct a techniques which is called \textit{conceptual scaling}\cite{carpineto2004concept}. The technique is applied to many-valued data sets to change them into single-valued data sets. \acrshort{fca} only knows single-valued data sets. Let us take a look at table \ref{table:manyvalued}. \\
+\begin{figure*}[!ht]
+	\centering
+	\includegraphics[width=\linewidth]{images/flamenco}
+\caption{Flamenco with ongoing focus}
+\label{figure:flamenco}
+\end{figure*}
+
+This interface is similar to the 'local view' on Hasse diagrams presented in Section~\ref{Local View}. The main idea: The dataset comprises several dimensions. Incrementally restrict those dimension to narrow down items of interest. In this picture you see the location restricted to 'Asia' and shapes etc. restricted to 'fabrics'. On the left are possible further restrictions suggested. In the center/right are the collections. \\
+
+Sacco and Tzitzikas \cite{Sacco2009} state: "Although \acrshort{fca} and \acrshort{dt} are apparently two distinct approaches to information modeling and access, and they use a different terminology, they are closely related." Sacco and Tzitzikas \cite{Sacco2009} compare \acrshort{dt} to \acrshort{fca}:
+\begin{quote}
+\acrshort{dt} is less informative, but it ensures the results displayed to users is manageable because they are expressed in terms of the original taxonomy. This reduces the cognitive effort of users and is a simpler and more intuitive representation than the line diagrams generally used in \acrshort{fca}.
+\end{quote}
 
 \begin{table}[h]
-\caption{many-valued data set}
+\caption{People with attributes}
 \label{table:manyvalued}
 \centering
 
@@ -440,81 +489,74 @@ Sacco and Tzitzikas \cite{Sacco2009} write: "Although \acrshort{fca} and \acrlon
 \hline
 Johannes & 24 & Schwerin \\
 Ana & 35 & Madrid \\
-Peter & 47 & Magdeburg \\
+Andreas & 47 & Magdeburg \\
 \hline
 \end{tabular}
 \end{table}
 
-The objects are human beings and they are categorized by the attributes name, age and hometown. With conceptual scaling  the attributes for the object Johannes are: "Name\_Johannes", "Age\_24", "Hometown\_Schwerin" and correspondingly for the other people. Now we have only a single-valued data-set which is needed for \acrshort{fca}. \\
+\acrshort{dt} are widely used in eCommerce application. But they can only be applied to dataset with several dimensions. \acrshort{fca} can offer the same possibility to find relationships among arbitrary attributes. This is strength of \acrshort{fca} but it looks like that often people try to create taxonomies around the attributes. In this context I want to introduce a technique called \textit{conceptual scaling}\cite{carpineto2004concept}. It is applied to dataset with many dimensions to reduce it into a single dimension. For example take a look at Table~\ref{table:manyvalued}. \\
 
-But this method, albeit it is widespread, is, at least for IR, problematic. From a user-centered perspective, complexity reduction is the key point. How do we break massive, complex data set down to make them understandable for the users? So this transformation sounds like a contradiction - and it is. Zobel describes this kind of research as follows:
+The objects are human beings and they are categorized by the attributes name, age and hometown. With conceptual scaling  the attributes for the object Johannes are: "Name\_Johannes", "Age\_24", "Hometown\_Schwerin" and correspondingly for the other people. Now we have only a single dimension which is needed for \acrshort{fca}. \\
+
+But this method, albeit it is widespread, is, at least for \acrshort{ir}, problematic. From a user-centered perspective, complexity reduction is the key point. How do we break massive, complex data set down to make them understandable for the users? So this transformation sounds like a contradiction - and it is. Zobel describes this kind of research as follows:
 
 \begin{quote}
 Much research — far too much — is just misguided. People investigate problems that are already solved and well understood, or solve problems that technology has made irrelevant, or don’t realize that the proposed improvement actually makes the method worse.
 \end{quote}
 
-So for many-valued data, \acrshort{fca} is not a appropriate technique. The use of facet search is shown in figure \ref{figure:flamenco}. \\
+So for this reason, if you build up taxonomies upon your attributes or you are working on multidimensional data, it is better to drop \acrshort{fca} at all and use \acrshort{dt} and faceted search.
 
-\begin{figure*}[!ht]
-	\centering
-	\includegraphics[width=\linewidth]{images/flamenco}
-\caption{Flamenco with ongoing focus}
-\label{figure:flamenco}
-\end{figure*}
-
-You can see that the search is currently narrowed down be restricting location to 'Asia' and Shapes etc. to 'fabrics'. It is possible to continue becoming more specific by choosing attributes and value from the sidebar on the left. Or becoming more general by removing current choices. It is very similar to the local view of \acrshort{fca} described in section \ref{Local View}. Sacco and Tzitzikas \cite{Sacco2009} compare \acrshort{dt} to \acrshort{fca}:
-\begin{quote}
-DT is less informative, but it ensures the results displayed to users is manageable because they are expressed in terms of the original taxonomy. This reduces the cognitive effort of users and is a simpler and more intuitive representation than the line diagrams generally used in \acrshort{fca}.
-\end{quote}
-
-To summarize the use for IR: Use \acrshort{dt} if you have many-value datasets and \acrshort{fca} for single-valued datasets. Let us continues the design of the application of the system.
 
 \chapter{Fancy \acrshort{fca} 1.0}
 \label{Fancy 1.0}
 
-We describe the idea inferred from discussing related work in section \ref{Related Work}. Then we describe the implementation of the frontend followed by the backend.
+I start by describing my concept inferred from discussing related work in Section~\ref{Related Work}. Followed by the description of the implementation which can be split into frontend development, responsible for the visual interface in the browser, and backend development, mostly responsible for handling data on the server.
 
-\section{Idea}
+\section{Concept}
 
-The general idea comes from the digital museum but we identified the weaknesses and make it better. \\
+The general idea comes from the Virtual Museum of the Pacific discussed in Section~\ref{Museum}. But it had some problem: Missing orientation, missing history of actions and only a rudimentary implemented search interface. I try to address this problems and a schema of the proposed interface can be seen in Figure~\ref{figure:schema}.
 
 \begin{figure*}[!ht]
 	\centering
 	\includegraphics[width=\linewidth]{images/schema}
-\caption{The Interface}
+\caption{Schema of the interface of Fancy FCA 1.0}
 \label{figure:schema}
 \end{figure*}
 
-First, the search interfaces did not followed any design principles. The interface should remind users of modern search engines: Search bar on top vertical result list bottom. Each result has a title withs links to the original page of the map. A snippet is shown with highlighted words from the query. We could not provide thumbnails of the maps because we did not had access to the pictures itself. It was planned to add this feature in later iterations. \\
+First, he interface should remind users of modern search engines: Search bar on top, vertical result list below. Each result has a title with a hyperlinks to a webpage where all the maps are shown in high-quality. Each results has a snippet of the description. The word of the current focus are highlighted. We could not provide thumbnails of the maps because we did not had access to the pictures itself. It was planned to add this feature in later iterations. \\
 
-Second, there was a lack of history of actions or at least orientation. For this we have two functionalities: Breadcrumbs and Navigation History. Breadcrumbs save the current path of search and allow it to go easily pack. The navigational history allows more possibilities to backtrack. If the user is logged in, it save the history forever. If she is not logged in, it only saves the session history. \\
+Second, there was a lack of history of actions or at least orientation. For this we have two functionalities: Breadcrumbs and Navigation History. Breadcrumbs save the current path of search and allow it to easily backtrack. The navigational history tracks the whole session history. The can create an account and login. If he does this, history will be saved even over several sessions. \\
 
 Third, the user can save documents which she found interesting. \\
 
-Fourth, if the user is logged in, all actions are logged and send to the server. This was to evaluate the user behavior. \\
+Fourth, if the user is logged in, all actions, like searches or which linked she clicked on, are logged. They will be saved on the server. This feature was wished by people from the research group to evaluate user behavior. \\
 
-Fifth, the neighboring concepts ( the 'suggestions') are shown right next to the results as a word cloud. The words are presented in a bubble. The font size and bubble radius depend on the documents which are presented in there.
+Fifth, the neighboring concepts (the 'suggestions') are shown right next to the results as a word cloud. The words are presented in a bubble. The font size and bubble radius depend on the number of documents a formal concept comprises.\\
+
+The UML use case diagram is depicted in Figure~\ref{figure:usecase}.
 
 \begin{figure*}[!ht]
 	\centering
 	\includegraphics[width=\linewidth]{images/usecase}
-\caption{The Interface}
+\caption{UML use case of Fancy FCA 1.0}
 \label{figure:usecase}
 \end{figure*}
 
 \section{Frontend}
 
-The interface was implemented with web techniques. So HTML, CSS, Javascript. Instead of writing pure HTML, we use the Jade templating engine \footnote{\url{http://jade-lang.com}}. Instead of writing Javascript, we use CoffeeScript \footnote{\url{http://coffeescript.org}} which compiles to Javascript but offers semantic sugar. For the the word cloud I use D3\footnote{\url{http://d3js.org}} \cite{Bostock2011} as background. D3 utilized SVG to draw elements which are also accessible via the DOM API. The word cloud is a customized graph force-directed layout based on the work from Vallandingham \cite{Vallandingham}. Bootstrap\footnote{\url{http://getbootstrap.com}} gives the overall good look to the site.
+The interface was implemented with web techniques. So HTML, CSS, Javascript. Instead of writing pure HTML, we use the Jade templating engine \footnote{\url{http://jade-lang.com}}. Instead of writing Javascript, we use CoffeeScript \footnote{\url{http://coffeescript.org}} which compiles to Javascript but offers semantic sugar. For the the word cloud I use D3\footnote{\url{http://d3js.org}} \cite{Bostock2011} as background. D3 utilized SVG to draw elements which are also accessible via the DOM API. The word cloud is a customized graph force-directed layout based on the work from Vallandingham \cite{Vallandingham}. Bootstrap\footnote{\url{http://getbootstrap.com}} adds an overall good look to the site.
 
 \section{Backend}
 
-For the backend, Node.JS with the Express Framework \footnote{\url{http://expressjs.com}} was chosen. Reason one, it is good at handling multiple request in parallel. Reason two, I can use the same programming language for frontend and backend: Javascript (CoffeeScript). For data we use MySQl as database because it was already installed on the server. But we use an ORM, Sequelize \footnote{\url{http://sequelizejs.com}},  so you can easily change the database.
+For the backend, Node.JS with the Express Framework \footnote{\url{http://expressjs.com}} was chosen. Reason one, it is good at handling multiple request in parallel. This is important to handle all the log data. Reason two, I can use the same programming language for frontend and backend: Javascript (CoffeeScript). To save data I use MySQL as database because it was already installed on the server. Because of the use of an Object-relational mapping (ORM) framework, Sequelize \footnote{\url{http://sequelizejs.com}}, it is easily possible to change the database.
 
-\section{Disccusion}
+\section{Discussion}
 
-The whole implementation has one problem: The data is provided as a JSON file. The clients loads the whole file in the beginning. All the navigation happens in the front end. While it a good thing, that during the navigation the client does not have to talk with the server, it is a problem that the client has to deal with over 80 megabytes of data. The server compress the JSON file to eight megabytes to make the time to download it okay. But it may only run on powerful computers with sufficient RAM because the browser will consume a lot of it. The design decision was taken before it was clear that the JSON file would be so huge. In the beginning it was under ten megabytes. \\
+The whole implementation has one problem: The data is provided as a JSON file. The clients loads the whole file when he starts the session. All the navigation happens in the frontend. While it is positive, that during the navigation the client does not have to communicate with the server, it is a problem that the client has to deal with over 80 megabytes of data. The server compresses the JSON file to eight megabytes. Downloading this file is acceptable especially in an university environment. But it takes up a lot of memory. The design decision was taken before it was clear that the JSON file would be so huge. This should be addressed in further iterations. \\
 
-That the thumbnails of the maps are not presented is a problem. Albeit all the analysis was done on the metadata, a visual representation would be very useful.
+That the thumbnails of the maps are not presented is a problem. Albeit all the analysis was done on the metadata, a visual representation would be very useful. \\
+
+The representation of word cloud is relatively arbitrary. This form was chosen to create an interesting interface. It is to question if it is better than a simple table. The table entries decreasingly ordered after the number of documents the formal concept comprises.
 
 \chapter{Evaluation}
 \label{Evaluation}
@@ -523,8 +565,7 @@ The design of an interface is highly subjective. User studies can help to evalua
 
 \section{Background}
 
-We will only scratch the surface here. A comprehensive introduction into "Methods for Evaluating Interactive Information Retrieval Systems with User" gives Kelly \cite{Kelly2007}. A shorter introduction gives Hearst in her book on "User Search Interfaces" in Chapter 2. \cite{Hearst2009}.\\
-
+We will only scratch the surface here. A comprehensive introduction into "Methods for Evaluating Interactive Information Retrieval Systems with User" gives Kelly \cite{Kelly2007}. A shorter introduction gives Hearst in Chapter 2 in her book "User Search Interfaces" . \cite{Hearst2009}.\\
 
 \subsection{Introduction}
 
@@ -542,13 +583,13 @@ It is important to distinguish between the terms 'experiment' and an 'evaluation
 "Evaluations are conducted to assess the goodness of a system, interface or interaction technique and can take many forms [..] Experiments have historically been the main method for interactive system evaluation, but experiments can also be conducted to understand behavior [..] Two important characteristics of experiments are that there are at least two things being compared (e.g., system type) and that some manipulation takes place [..] In some types of [interactive information retrieval] studies only a single system is evaluated. This is a weaker form of evaluation since it is not possible to demonstrate how much better users perform or how different their behaviors and inter actions are since there is no point of comparison. Traditional usability tests are examples of this type of evaluation. Traditional usability tests are usually conducted with a single version of a system, with the goal of identifying potential usability problems."	
 \end{quote}
 
-In this thesis, the system is evaluated to find usability problems. No comparison among other systems are conducted but should be done in further investigations.
+In this thesis, the system is only evaluated to find usability problems. No comparison among other systems are conducted but should be done in further investigations.
 
 \subsection{Informal Usability Testing}
 
-Hearst \cite{Hearst2009} describes in her book several kinds of studies. We conduct informal usability studies because the research has no experience in studies and we do not have any professional equipment. \\
+Hearst \cite{Hearst2009} describes Informal Usability Testing as "Showing designs to participants and recording their responses". It is often used in short iterative cycles to quickly evaluate a design. \\
 
-Hearst \cite{Hearst2009} describes the this shortly as "Showing designs to participants and recording their responses". It is often used in short iterative cycles to quickly evaluate a design.
+ We conduct informal usability studies because we do not have proper equipment nor any experience with user studies.
 
 \subsection{Questionnaires}
 
@@ -565,11 +606,11 @@ Kelly \cite{Kelly2007} writes by referring to Ericsson and Simon \cite{Ericsson1
 
 \section{Setup}
 
-The evaluation was done with five people with a background in humanities. First, an introductory presentation was given in Spanish. Then they were split into two groups. Each group interacted with the interface. The people in the group rotated. There were three tasks they should do. The participants were encouraged to talk out loud. Some times the instructions asked them what they are doing or what they feel. The one group was recored with an iPhone 6 Plus\footnote{\url{https://www.apple.com/iphone-6}}. The session of the other group was not recored and could not be evaluated at all. They had to fill they task what they are feeling. After they session they had to fill in an questionnaire. We use ten closed questions from the USE questionnaire \cite{lund2001measuring} and four common as asked by Kelly \cite{Kelly2008}. The participants gave the results in Spanish which was translated afterwards.
+The evaluation was done with five people with a background in humanities. First, an introductory presentation was given in Spanish. Then they were split into two groups. Each group interacted with the interface. The people in the group rotated. There were three tasks they should do. The participants were encouraged to talk aloud. Sometimes the instructions asked them what they are doing or what they feel. The one group was recored with an iPhone 6 Plus\footnote{\url{https://www.apple.com/iphone-6}}. The session of the other group was not recored and could not be evaluated at all. After they session they had to fill in a pen-and-paper questionnaire. We use ten closed questions from the USE questionnaire \cite{lund2001measuring} and four commonly asked open questions as asked by Kelly \cite{Kelly2008}. They can found in appendix \ref{app:open} and \ref{app:closed}. The participants wrote in Spanish which was translated afterwards.
 
 \section{Results}
 
-We group thinking aloud, remarks and open questions together because they all allowed comments on the interface. In praxis the evaluatuon should be done seperatly but because of the bad experiment setup their 
+We group thinking aloud, remarks and open questions together because the comments were very similar. After that, we present the results of the closed questions.
 
 \subsection{Thinking Aloud, Remarks and Open Questions}
 It turned out, that the evaluation was also a evaluation of the whole research project. All participants mentioned that the interface does not suite their needs. All wanted to refine the search by location and time range and map creators. \acrshort{fca} cannot provide this kind of functionality.\\
@@ -592,13 +633,19 @@ Out of the five participants only three filled out the questionnaire. The result
 
 \section{Accessibility Analysis}
 
-In addition to the the evaluation with users, there was a evaluation regarding accessibility features. It was conducted by people from the UNED: Miguel Angel Marqueta and  Covadonga Rodrigo San Juan. It can be found in appendix \ref{app:access}. They comments were overall positive buy they highlighted some problems with the interface: It is possible to zoom in the bubble cloud, but there are no buttons on the screen for it. The zooming has to be done with a mouse or a touchpad.
+In addition to the the evaluation with users, there was a evaluation regarding accessibility features. It was conducted by people from the UNED: Miguel Angel Marqueta and Covadonga Rodrigo San Juan. It can be found in appendix \ref{app:access}. They comments were overall positive buy they highlighted some problems with the interface: It is possible to zoom in the bubble cloud, but there are no buttons on the screen for it. In the current state, the zooming can only be done with a mouse or a touchpad. 
 
 \section{Conclusions}
 
- Zobel \cite{Zobel2004} proclaims: "Far too many human studies in computer science are amateurish and invalid." and with this study we proved him true. They overall setup was improvised all instructions had no idea about user studies. Even though it cannot stand scientific standards, it is useful as informal evaluation. We can conclude the used method for this collection is in regard to the human experts useless. \\
+ Zobel \cite{Zobel2004} proclaims: "Far too many human studies in computer science are amateurish and invalid" and with this study we proved him true. They overall setup was improvised and all instructors had no experience with user studies. Even though it cannot stand scientific standards, it is useful as informal evaluation. \\
  
- For the interface itself, it looks like they liked it. Even though there are some problems like the result list which should be addressed. As a response to this fail, the tool will go away from the fixation onto this one dataset and will visualize arbitrary concept lattice. This leads to the development of Fancy 2.0 which will also address the problems that were found here. The next section described the changes which had be done to the interface.
+ We can conclude that \acrshort{fca} for this collection in the current implementation is useless. It cannot over the separation between location or time ranges. It looks like that for faceted search as described in Section~\ref{dyafs} promises better results. \\
+ 
+ It also suffers from the fact, that only a limited number of terms was selected to built up the concept lattice. If the users searched for terms wich were presented in the documents, they could not explain it why they got no results back. It is impossible to create a concept lattice from all words uses in the documents. It could be promising to combine searching with FCA liked it was done in other systems as described in \ref{Local View}. Implement and ordinary search and built up a concept lattice from the results. \\
+ 
+ For the interface itself, it looks like they liked it. Even though there are some problems like the result list which should be addressed. \\
+ 
+ After this demolishing results, it was decided not to pursue the idea of FCA for the collection of maps. But the tool itself looks promising that why I transform the tool to visualize arbritary concept lattices. The changes are described in the following section.
  
 \chapter{Fancy \acrshort{fca} 2.0}
 \label{Fancy 2.0}
@@ -608,7 +655,7 @@ In addition to the the evaluation with users, there was a evaluation regarding a
 \chapter{Conclusions}
 \label{Conclusions}
 
-Starting from the concept lattices built from metadata from digitized histroical maps, I built and interactive application for exploring the concept lattices. The navigtional 
+\blindtext
 
 \newpage
 \bibliographystyle{plain}
