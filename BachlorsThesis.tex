@@ -124,7 +124,7 @@ A Hasse diagram can also visual concept lattices. The research group already com
 \label{figure:firstVisualizaion}
 \end{figure*}
 
-It is my task to create an interactive visualization of their concept lattice. The visualization should convey the information of a concept lattice even if the concept lattice is large. \\
+It is my task to create an interactive visualization of their concept lattice. The visualization should convey the information of a concept lattice even if the concept lattice is large. I will develop a concept for visualizing large concept lattice and also implement it for this particular dataset. It should be mentioned, that I am just a part in a big system. It was not my decisoin to apply FCA to this dataset. The evualion will unweigerlich auch zeigen, ob der Gewählte anstaz für diesen datenstz gut is. Regardlich of the outcome of the rightness is my work because it is abstract enouht\\
 
  The remainder of this thesis is structured as follows: The background of Formal Concept Analysis and Interface Design are presented in Section~\ref{Background}. The discussion of related work takes place in Section~\ref{Related Work}. Inferring from the related work, I will present my work including idea and implementation in Section~\ref{Fancy 1.0}. In Section~\ref{Evaluation}, the evaluation takes place. Built upon the results of the evaluation, a new version is presented in Section~\ref{Fancy 2.0}. Eventually concluding in Section~\ref{Conclusions}.
  
@@ -216,7 +216,7 @@ It is always possible to define an order relation on the formal concepts. Let us
 
 With the help of $\le$, we  can derive relationships from the concepts in Table~\ref{table:exampleConcepts}. We see that $C_1 \le C_2$. This means that $C_1$ is more specific than $C_2$ and $C_2$ is more general than $C_1$. We can also see that $C_3$ is unrelated to $C_1$, and that $C_3$ is unrelated to $C_2$. \\
 
-A formal context with $\le$ is called a \textit{concept lattice} of the context. It can be shown, that for two formal concepts $C_i$ and $C_j$, there always exists a formal concept $C_x$ such that $C_i \le C_x \wedge C_j \le C_x$. That means that there is always a formal concept wich is 'above' in the hierarchy and also related to the two formal concepts $C_i$ and $C_j$. A formal definition would exceed this section. The interested reader is advices to read "The Basic Theorem on Concept Lattices" as described by Carpineto and Romano on page 13 in their work \cite{carpineto2004concept}.\\
+A formal context with $\le$ is called a \textit{concept lattice} of the context. It can be shown, that for two formal concepts $C_i$ and $C_j$, there always exists a formal concept $C_x$ such that $C_i \le C_x \wedge C_j \le C_x$. That means that there is always a formal concept wich is ``above'' in the hierarchy and also related to the two formal concepts $C_i$ and $C_j$. A formal definition would exceed this section. The interested reader is advices to read "The Basic Theorem on Concept Lattices" as described by Carpineto and Romano on page 13 in their work \cite{carpineto2004concept}.\\
 
 In the next section we will take a look at the static visualization of concept lattices.
 
@@ -400,7 +400,7 @@ One could argue that you just have to visualize everything and then allow to zoo
 \label{figure:fcart}
 \end{figure*}
 
-Even though they chose a grey color for the edges, the screen is almost filled only with the grey. In addition, they labels of the nodes in the top and bottom are overlapping which makes it hard to read them. Let us review some other approaches in the next section which completely break with the Hasse diagram.
+Even though they chose a grey color for the edges, the screen is almost filled only with the grey. In addition, they labels of the nodes in the top and bottom are overlapping which makes it hard to read them. Let us review some other approaches in the next section which completely break with the Hasse diagram. \\
 
 The local view on a Hasse diagram is called \textit{conceptual neighborhood} by Eklund et al. \cite{Eklund2009,Eklund2012} or \textit{hybrid navigation} by Carpineto and Romano \cite{Carpineto1996}. The basic idea is always the same: The interface is always focused on exactly \textit{one} formal concept. The user can navigate through the lattice by going up (becoming more general) or going down (becoming more special). Which means removing terms or adding terms. They also offer the possibility to query the system. In most cases, the user would start with a search and focuses on the corresponding formal concept if it exists. From there, the user can fine-tune the search. The idea originated from the \acrshort{ir} field and was first proposed by Godin et al. \cite{Godin1989}. \\
 
@@ -481,29 +481,53 @@ Sacco and Tzitzikas \cite{Sacco2009} say that although \acrshort{fca} and Facete
 \chapter{Fancy \acrshort{fca} 1.0}
 \label{Fancy 1.0}
 
-I start by describing my concept inferred from discussing related work in Section~\ref{Related Work}. Followed by the description of the implementation which can be split into frontend development, responsible for the visual interface in the browser, and backend development, mostly responsible for handling data on the server.
+At first the initial concept of the system called \textit{Fancy FCA} is described. The concept is implemented for the data described in XX. The description the of the frontend and backend implementation.
+
+First, a concept is described to visual large concept lattices. Second, this concept is implemented as an interactive webpage. The concept lattice for this implementation comes from the research group and how the data was created is described in XX. Third, the concept and the implemeantion are discussed.
 
 \section{Concept}
 
-The general idea comes from the Virtual Museum of the Pacific discussed in Section~\ref{Museum}. But it had some problem: Missing orientation, missing history of actions and only a rudimentary implemented search interface. I try to address this problems and a schema of the proposed interface can be seen in Figure~\ref{figure:schema}.
+The concept of the interface is inferred form the discussing related work in Section~\ref{Related Work}. It is mainly influenced by the Virtual Museum of the Pacific discussed in Section~\ref{Museum}. They follow the idea to only give a local view on the Hasse diagram. This is done because the concept lattices of most formal contexts are too large to visualize them in a Hasse diagram. In this form, the interface always focuses on one formal concept called \textit{the Focus}. Only directly related children of the Focus are shown. The initial state of the Focus lies on the supremum. The supremum is the most general formal concept. The user has to possibilities to change the Focus:
+\begin{enumerate}
+	\item She can select a child of the Focus as new Focus.
+	\item She can ``jump'' to a completely new Focus by using a search on the lattice.
+\end{enumerate}
+Let us demonstrate this with an example shown in Figure~\ref{figure:conceptExample}. After searching on the lattice after the attribute ``e'', the Focus is set to the formal concept surrounded with a dashed circle. Now, only the nodes surrounded with a black circle are visible to the user. This two formal concepts are called \textit{the Suggestions}, because they suggest the users which attributes to add to the current selection of the Focus. In this case, there is one suggestion to add ``c'' to the focus and refine the selection from 5 objects (2,4,6,8,10) to 4 objects (4,6,8,10). And the suggestion to add ``p'' to the focus and refine the selection to one objects (2). They are the children of the Focus and therefor per definition more specific than the Focus. \\
+
+\begin{figure*}[!ht]
+	\centering
+	\includegraphics[width=\linewidth]{images/focus}
+\caption{After searching for ``e'' lies the Focus on the formal concept with a dashed circle. Only his children (black circles) are visible to the user. }
+\label{figure:conceptExample}
+\end{figure*}
+
+\subsection{Interface Components}
+After describing the general navigation, we can identify already two important components of the interface: A \textit{Search Bar} and the \textit{Suggestions}. The users are probably also interested in the \textit{Results}. The Results are those objects from the Focus. We discussed the problems of the Museum earlier an and realized that the users need origination. Therefore we add \textit{Breadcrumbs}. And they want a history of actions we call this component just \textit{History}. The components of the interface are completed with a \textit{Menu} and you can see the general layout in Figure~\ref{figure:schema}. Each component is described in detail now. \\
 
 \begin{figure*}[!ht]
 	\centering
 	\includegraphics[width=\linewidth]{images/schema}
-\caption{Schema of the interface of Fancy FCA 1.0}
+\caption{Wireframe of the interface of Fancy FCA 1.0}
 \label{figure:schema}
 \end{figure*}
 
-First, he interface should remind users of modern search engines: Search bar on top, vertical result list below. Each result has a title with a hyperlinks to a webpage where all the maps are shown in high-quality. Each results has a snippet of the description. The word of the current focus are highlighted. We could not provide thumbnails of the maps because we did not had access to the pictures itself. It was planned to add this feature in later iterations. \\
+\subsubsection{Search Bar and Results}
 
-Second, there was a lack of history of actions or at least orientation. For this we have two functionalities: Breadcrumbs and Navigation History. Breadcrumbs save the current path of search and allow it to easily backtrack. The navigational history tracks the whole session history. The can create an account and login. If he does this, history will be saved even over several sessions. \\
+All users know web search engines. In my opinion, it easy for users to work with a new system if it looks similar to system they already know. That is why the overall look of the interface should remind users of a search engines. The general advices to design user search interfaces by Hearst \cite{Hearst2009} should be followed. Results should be ordered in a vertical list. Each list item consists of a title and body. The title describes the items in short and the snippet goes more into detail. The can review the result in detail by clicking on the title. The title links to a web page where the user can investigate the result in detail. The user should have the possibility to bookmark the result. She can do it, if she is logged into the side. But it is also possible to use the site without being logged in.
 
-Third, the user can save documents which she found interesting. \\
+\subsubsection{Suggestions}
 
-Fourth, if the user is logged in, all actions, like searches or which linked she clicked on, are logged. They will be saved on the server. This feature was wished by people from the research group to evaluate user behavior. \\
+The different suggestions are shown as a bubble cloud. Each bubble stand for one formal concepts and it is only label with terms that should be added. The size of the bubble corresponds to the number of the document the concept has. The exact number is shown as tooltip when the user hovers over the bubble.
 
-Fifth, the neighboring concepts (the "suggestions") are shown right next to the results as a word cloud. The words are presented in a bubble. The font size and bubble radius depend on the number of documents a formal concept comprises.\\
+\subsubsection{Breadcrumb}
 
+Breadcrumbs are included to give the user orientation. The Breadcrumbs indicate how the user got to the current focus. Of a given Focus, it shows the previous formal concepts of the Focus. It is really hard to describe it abstract. So let us take a look at an example. The user starts with the initial Focus. From there he searched for ``x''. Then he clicked on the suggestion ``y''. The breadcrumbs show ``Home / x / y''. The current Focus has the terms ``x y''. Each part of the breadcrumbs links back the previous focus. If you click on ``x'', the Focus changes back to the Focus with ``x''. If you click on ``Home'', you end up in the initial Focus. 
+
+\subsubsection{History}
+
+With the history, the user can look back is navigational history. It exceeds to possibility of the Breadcrumbs because it gives more information. The breadcrumb only go back in a current navigation process. The users can always see the complete history of the current session. If she is logged in, the history of all time is shown.
+
+\subsection{Usecases}
 The UML use case diagram is depicted in Figure~\ref{figure:usecase}.
 
 \begin{figure*}[!ht]
@@ -513,13 +537,25 @@ The UML use case diagram is depicted in Figure~\ref{figure:usecase}.
 \label{figure:usecase}
 \end{figure*}
 
-\section{Frontend}
+\section{Implementation}
+
+The implementation was done with data provided from the research group. So they gave the already computed lattice and all the information of the documents. You can find the system running here and 30-seconds video of it here. It was done as a website because there is no setup requierd by potentail user because all users have a web browser isntalled on their system.
+
+The research also wanted to collect data from the users that is why user actions should be logged.
+
+
+\subsection{Backend}
+
+For the backend, Node.JS with the Express Framework \footnote{\url{http://expressjs.com}} was chosen. Reason one, it is good at handling multiple request in parallel. This is important to handle all the log data. Reason two, I can use the same programming language for frontend and backend: Javascript (CoffeeScript). To save data I use MySQL as database because it was already installed on the server. Because of the use of an Object-relational mapping (ORM) framework, Sequelize \footnote{\url{http://sequelizejs.com}}, it is easily possible to change the database.
+
+
+\subsection{Frontend}
+
+Because the interface is a webpage, the used technologies were HTML, CSS and Javascript. HTML is the markup language to create webpages and the backbone of the web. CSS is
+
 
 The interface was implemented with web techniques. So HTML, CSS, Javascript. Instead of writing pure HTML, we use the Jade templating engine \footnote{\url{http://jade-lang.com}}. Instead of writing Javascript, we use CoffeeScript \footnote{\url{http://coffeescript.org}} which compiles to Javascript but offers semantic sugar. For the the word cloud I use D3\footnote{\url{http://d3js.org}} \cite{Bostock2011} as background. D3 utilized SVG to draw elements which are also accessible via the DOM API. The word cloud is a customized graph force-directed layout based on the work from Vallandingham \cite{Vallandingham}. Bootstrap\footnote{\url{http://getbootstrap.com}} adds an overall good look to the site.
 
-\section{Backend}
-
-For the backend, Node.JS with the Express Framework \footnote{\url{http://expressjs.com}} was chosen. Reason one, it is good at handling multiple request in parallel. This is important to handle all the log data. Reason two, I can use the same programming language for frontend and backend: Javascript (CoffeeScript). To save data I use MySQL as database because it was already installed on the server. Because of the use of an Object-relational mapping (ORM) framework, Sequelize \footnote{\url{http://sequelizejs.com}}, it is easily possible to change the database.
 
 \section{Discussion}
 
@@ -527,7 +563,9 @@ The whole implementation has one problem: The data is provided as a JSON file. T
 
 That the thumbnails of the maps are not presented is a problem. Albeit all the analysis was done on the metadata, a visual representation would be very useful. \\
 
-The representation of word cloud is relatively arbitrary. This form was chosen to create an interesting interface. It is to question if it is better than a simple table. The table entries decreasingly ordered after the number of documents the formal concept comprises.
+The representation of word cloud is relatively arbitrary. This form was chosen to create an interesting interface. It is to question if it is better than a simple table. The table entries decreasingly ordered after the number of documents the formal concept comprises. \\
+
+In this concept, only the children are shown. It would probberly bee a good idea to also show the parents. It was no consinderd here, because onlt
 
 \chapter{Evaluation}
 \label{Evaluation}
