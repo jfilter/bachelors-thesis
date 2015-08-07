@@ -20,11 +20,17 @@
 %can use blind text
 \usepackage{blindtext}
 
+% to place figures side aside
+\usepackage{mwe}
+
 %improves the caption
 \usepackage[font=it]{caption}
 
 % to remove the number from the equations.
 \usepackage{amsmath}
+
+\setlength\parindent{0pt}
+
 
 % fix quotes
 \usepackage [english]{babel}
@@ -33,7 +39,7 @@
 
 %Removes the Chapter from each chapter headline
 \titleformat{\chapter}[block]
-  {\normalfont\huge\bfseries}{\thechapter.}{1em}{\Huge}
+  {\normalfont\huge\bfseries\centering}{\thechapter.}{1em}{\Huge}
 
 \makeglossaries
 \newacronym{fca}{FCA}{Formal Concept Analysis}
@@ -67,7 +73,14 @@
 \mbox{}
 
 \chapter*{Acknowledgements}
-\blindtext
+I thank Ana and Angel for their support in Madrid and Tatjana for her support in Magdeburg.
+
+Rosario and Ricarda for they support to read this.
+
+All who made my study possible,
+my family: Daniela Filter, Matthias Filter, Sigrid Filter, Doris Barthel, Christine Kühn, Margarethe Leffler.
+The scholarships: Deutschlandstipendium financed by the German State and RegioCom, Leonardo-Scholarship finanzed by the EU. Studienstiftung des Deutschen Volkes fianced mainly by the German state. 
+All people who fought the struggle for free public education.
 
 \newpage
 \thispagestyle{empty}
@@ -75,6 +88,8 @@
 
 \tableofcontents
 \newpage
+
+\listoffigures
 
 \printglossary[type=\acronymtype]
 
@@ -90,7 +105,7 @@
 
 The digital revolution is affecting every part of our life. Also the humanities scholars witness a change in their work life when analog collections are digitized. They have to apply computer science methods to organize and analyze huge amount of data. The area "digital humanities" evolved during the last ten years and it can be defined as an "intersection between the humanities and information technology" \cite{Svensson2010}.\\
 
- The computer science department of the Universidad Nacional de Educación a Distancia (UNED) in Madrid cooperates with human scholars to conduct research in the digital humanities. In this project\footnote{\url{http://linhd.uned.es/p/proyecto-dimh}}, there work on historical maps. The maps were drawn between 1503 and 1805, digitized and are available on the web\footnote{\url{http://www.mcu.es/ccbae/es/consulta/resultados_busqueda.cmd?busq_codsecc=MCAGS}} for search. The maps have been annotated by human scholars. A example of a map is shown in Figure~\ref{figure:map} with its annotation in Figure~\ref{figure:metadata}. \\
+ The computer science department of the Universidad Nacional de Educación a Distancia (UNED) in Madrid cooperates with human scholars to conduct research in the digital humanities. In this project\footnote{\url{http://linhd.uned.es/p/proyecto-dimh}}, they work on historical maps. The maps were drawn between 1503 and 1805, digitized and are available on the web\footnote{\url{http://www.mcu.es/ccbae/es/consulta/resultados_busqueda.cmd?busq_codsecc=MCAGS}} for search. The maps have been annotated by human scholars. A example of a map is shown in Figure~\ref{figure:map} with its annotation in Figure~\ref{figure:metadata}. \\
  
 \begin{figure*}[!ht]
 	\centering
@@ -111,7 +126,7 @@ To extract knowledge from the collection, the research group advocates for the u
 \begin{figure*}[!ht]
 	\centering
 	\includegraphics[width=\linewidth]{./images/hasse}
-\caption{Annotation of a digitized map}
+\caption{Hasse diagram, powerset of $\{x,y,z\}$ ordered by inclusion. Source: Anonymous Person\cite{hassediagramfig}}
 \label{figure:hasse}
 \end{figure*}
 
@@ -124,7 +139,12 @@ A Hasse diagram can also visual concept lattices. The research group already com
 \label{figure:firstVisualizaion}
 \end{figure*}
 
+
+I did an intenship at the research group of the UNED, in fute just called \textit{the reserach group}. which worked on XXx this stuff.
+
+
 It is my task to create an interactive visualization of their concept lattice. The visualization should convey the information of a concept lattice even if the concept lattice is large. I will develop a concept for visualizing large concept lattice and also implement it for this particular dataset. It should be mentioned, that I am just a part in a big system. It was not my decisoin to apply FCA to this dataset. The evualion will unweigerlich auch zeigen, ob der Gewählte anstaz für diesen datenstz gut is. Regardlich of the outcome of the rightness is my work because it is abstract enouht\\
+
 
  The remainder of this thesis is structured as follows: The background of Formal Concept Analysis and Interface Design are presented in Section~\ref{Background}. The discussion of related work takes place in Section~\ref{Related Work}. Inferring from the related work, I will present my work including idea and implementation in Section~\ref{Fancy 1.0}. In Section~\ref{Evaluation}, the evaluation takes place. Built upon the results of the evaluation, a new version is presented in Section~\ref{Fancy 2.0}. Eventually concluding in Section~\ref{Conclusions}.
  
@@ -282,9 +302,10 @@ Sacco and Tzitzikas \cite{Sacco2009} describe two information access modes: \tex
 This work develops an interface for one specific datasets. That is why it is important the lattice structure of this dataset how it was created. The next section described the dataset.
 
 \subsection{The Data}
+\label{thedata}
 In the following, I will described how the research group created the data on which this thesis is based. \\
 
-The research group asked human scholars for a list of 100 interested words. This list is the dictionary. The index terms of a documents specify if this index terms is present in the document. They were 7492 documents with 100 possible attributes, the index terms. They result into a concept lattice with 131379 formal concepts.\\
+The research group asked human scholars for a list of 100 words. The list should contain words that they are interested in. From this list, the index terms of the documents were computed. A document was described by an index term, if it occurs at leaste once in the document. From the index terms, they computed the concept lattice. There were 7492 documents with 100 possible attributes (the index terms). The lattice consisted of 131379 formal concepts.\\
 
 Because this thesis focuses on the user interface, let us review user interface design principles before we discussed related work in Section~\ref{Related Work}.
 
@@ -481,16 +502,14 @@ Sacco and Tzitzikas \cite{Sacco2009} say that although \acrshort{fca} and Facete
 \chapter{Fancy \acrshort{fca} 1.0}
 \label{Fancy 1.0}
 
-At first the initial concept of the system called \textit{Fancy FCA} is described. The concept is implemented for the data described in XX. The description the of the frontend and backend implementation.
-
-First, a concept is described to visual large concept lattices. Second, this concept is implemented as an interactive webpage. The concept lattice for this implementation comes from the research group and how the data was created is described in XX. Third, the concept and the implemeantion are discussed.
+First, a concept is described to visual large concept lattices. Second, this concept is implemented as an interactive web application. The data (in form of a concept lattice) for this implementation comes from the research group and how the data was created is described in XX. Third, the concept and the implementation are discussed.
 
 \section{Concept}
 
 The concept of the interface is inferred form the discussing related work in Section~\ref{Related Work}. It is mainly influenced by the Virtual Museum of the Pacific discussed in Section~\ref{Museum}. They follow the idea to only give a local view on the Hasse diagram. This is done because the concept lattices of most formal contexts are too large to visualize them in a Hasse diagram. In this form, the interface always focuses on one formal concept called \textit{the Focus}. Only directly related children of the Focus are shown. The initial state of the Focus lies on the supremum. The supremum is the most general formal concept. The user has to possibilities to change the Focus:
 \begin{enumerate}
 	\item She can select a child of the Focus as new Focus.
-	\item She can ``jump'' to a completely new Focus by using a search on the lattice.
+	\item She can ``jump'' to a completely new Focus by using a search on the lattice\footnote{It is very important to realize, that the search is NOT done on the documents. It is only done on the attributes of the objects of the formal context. Informally, the search is only done on the index terms of the documents. If the users search for terms that are not the index terms of any documents, it will result in an error.}
 \end{enumerate}
 Let us demonstrate this with an example shown in Figure~\ref{figure:conceptExample}. After searching on the lattice after the attribute ``e'', the Focus is set to the formal concept surrounded with a dashed circle. Now, only the nodes surrounded with a black circle are visible to the user. This two formal concepts are called \textit{the Suggestions}, because they suggest the users which attributes to add to the current selection of the Focus. In this case, there is one suggestion to add ``c'' to the focus and refine the selection from 5 objects (2,4,6,8,10) to 4 objects (4,6,8,10). And the suggestion to add ``p'' to the focus and refine the selection to one objects (2). They are the children of the Focus and therefor per definition more specific than the Focus. \\
 
@@ -539,42 +558,60 @@ The UML use case diagram is depicted in Figure~\ref{figure:usecase}.
 
 \section{Implementation}
 
-The implementation was done with data provided from the research group. So they gave the already computed lattice and all the information of the documents. You can find the system running here and 30-seconds video of it here. It was done as a website because there is no setup requierd by potentail user because all users have a web browser isntalled on their system.
+The implementation was done with data provided from the research group. So they gave the already computed lattice and all the information of the documents. You can find the system running here and 30-seconds video of it here. \\
 
-The research also wanted to collect data from the users that is why user actions should be logged.
-
+The implementation is done as a web application because all users have already a web browser installed. There is no setup necessary. The implementation of a web application can be split up into backend and frontend development. The backend is responsible for the programming code that runs on the server. The frontend is responsible for the code that runs in the browser. Let us start with the backend.
 
 \subsection{Backend}
 
-For the backend, Node.JS with the Express Framework \footnote{\url{http://expressjs.com}} was chosen. Reason one, it is good at handling multiple request in parallel. This is important to handle all the log data. Reason two, I can use the same programming language for frontend and backend: Javascript (CoffeeScript). To save data I use MySQL as database because it was already installed on the server. Because of the use of an Object-relational mapping (ORM) framework, Sequelize \footnote{\url{http://sequelizejs.com}}, it is easily possible to change the database.
+It has to be decided first, which programming language and framework to use for the web application. I chose Express.JS \footnote{\url{http://expressjs.com}} of the runtime environment Node.JS\footnote{\url{https://nodejs.org}} because it uses the programming language Javascript. Javascript is also used for the frontend. So we only need to stick to one programming language. But instead of writing Javascript we use CoffeeScript\footnote{\url{http://coffeescript.org}} which adds semantic sugar to Javascript and compiles to Javascript.\\
 
+We need a database to store data. The research group wanted to store logs\footnote{The logs were never evaluated because the tool was never used in production.} of the user interaction. In addition, we have to save the history of users and their bookmarked documents on the server. For this, I use MySQL as database because it was already installed on the server where the software should run. Because of the use of an Object-relational mapping (ORM) framework, Sequelize \footnote{\url{http://sequelizejs.com}}, it is easily possible to change the database. The ORM creates an abstraction and it allows the programmer to interact with the database without writing raw SQL queries.
 
 \subsection{Frontend}
 
-Because the interface is a webpage, the used technologies were HTML, CSS and Javascript. HTML is the markup language to create webpages and the backbone of the web. CSS is
+Because the interface is a webpage, the used technologies were HTML, CSS and Javascript. HTML is the markup language to create webpages and the backbone of the web. CSS adds style to the webpages. Javascript add interactivity to the webpages. But like in the backend, instead of writing pure Javascript I programmed in CoffeeScript which was compiled into Javascript. I used the framework Bootstrap\footnote{\url{http://getbootstrap.com}} because it allows me to quickly create appealing webpages. Bootstrap has templates for all kind of components like forms, buttons, navigational elements, a grid system, icons etc.. Instead of reinventing the wheel, I use Bootstrap to use basic components.\\
 
+Now let us take a look a some screenshots of the system to demonstrate the implementation. In Figure~\ref{figure:fancy1}, you can the initial state of the interface. The bubble cloud on the right shows the Suggestions. It is a little bit unorganized, but the initial state has to show the most Suggestions. This is because this state is the most general formal concept. For the layout of the bubbles, I use the Javascript framework D3\footnote{\url{http://d3js.org}} \cite{Bostock2011}. D3 utilized SVG to draw elements which are also accessible via the DOM API, which means I can catch events like ``mouse over an item'' or ``click on an item''. The word cloud is a customized graph force-directed layout based on the work from Vallandingham \cite{Vallandingham}. \\
 
-The interface was implemented with web techniques. So HTML, CSS, Javascript. Instead of writing pure HTML, we use the Jade templating engine \footnote{\url{http://jade-lang.com}}. Instead of writing Javascript, we use CoffeeScript \footnote{\url{http://coffeescript.org}} which compiles to Javascript but offers semantic sugar. For the the word cloud I use D3\footnote{\url{http://d3js.org}} \cite{Bostock2011} as background. D3 utilized SVG to draw elements which are also accessible via the DOM API. The word cloud is a customized graph force-directed layout based on the work from Vallandingham \cite{Vallandingham}. Bootstrap\footnote{\url{http://getbootstrap.com}} adds an overall good look to the site.
+\begin{figure*}[!ht]
+	\centering
+	\includegraphics[width=\linewidth]{images/fancy1}
+\caption{Initial State}
+\label{figure:fancy1}
+\end{figure*}
 
+ You can see in Figure~\ref{figure:fancy2} the use of a ``typeahead'' which can also be called ``auto-complete''. For this, I use the Javascript library Twitter typeahead.JS\footnote{\url{https://twitter.github.io/typeahead.js}}. In Figure~\ref{figure:fancy3}}, we can see two screenshots which both focus on the left part of the interface. Let us start with the left one. In there, we can see various components. Starting with the search bar, we can see the terms of the Focus. We are looking for documents which the index terms ``papel tinta fabrica''. Below the search bar, you can see the breadcrumbs. They allow, for instance, to backtrack to just the Focus ``papel tinta'', if the user clicks on ``tinta''. Below the breadcrumbs, you can see the label ``Navigational History''. But first, let us take a look at the ``Results''. The number after ``Results'' show how many results are there. In this case 227. Let us take a look how the result items are presented. First, there is a title. If you click on the title, you will get to an external webpage, with further information. Below the title is a snippet of the result. The terms of the Focus are highlighted. In the bottom right corner, you see the icon to bookmark this item. Now imagine to to click on the ``Navigational History'' label. You would end up in the view right. You can see that the ``Navigational History'' is uncollapsed. It shows a list of History. If you click on a item, the Focus changes. \\
+\begin{figure*}[!ht]
+	\centering
+	\includegraphics[width=\linewidth]{images/fancy2}
+\caption{Search interfaces offering Typeahead}
+\label{figure:fancy2}
+\end{figure*}
+
+\begin{figure}[!ht]
+\includegraphics[width=.48\linewidth]{images/fancy4}\hfill
+\includegraphics[width=.48\linewidth]{images/fancy3}
+\caption{The Focus is ``papel tinta fabrica''. In the left picture you see the Results. On the right picture, you see the Navigational History.}
+\label{figure:fancy3}
+\end{figure}
+
+When the user starts browsing, a JSON file with all the data is downloaded to his client. The file contains the information of the lattice and also about the documents. The programming logic which controls the interface, is done in the frontend. This reduces the communication between the client (the browser) and the server to a minimum.
 
 \section{Discussion}
 
-The whole implementation has one problem: The data is provided as a JSON file. The clients loads the whole file when he starts the session. All the navigation happens in the frontend. While it is positive, that during the navigation the client does not have to communicate with the server, it is a problem that the client has to deal with over 80 megabytes of data. The server compresses the JSON file to eight megabytes. Downloading this file is acceptable especially in an university environment. But it takes up a lot of memory. The design decision was taken before it was clear that the JSON file would be so huge. This should be addressed in further iterations. \\
+For the concept, it is to question, if the word cloud is an appropriate technique to show the Suggestions. The Suggestion consists of terms and a number of documents. This information can also be shown in a table. A table is a structured to present information. But the word cloud avoid a clear order in the data. In a table, probably only the top suggestions would be considered. This is dangerous, because the number of documents a suggestions represents, should not guide the users. What is also to question, is that only children of the Focus are currently presented. For now, the parents of the Focus are ignored. They should be added. Maybe in a next iteration.\\
 
-That the thumbnails of the maps are not presented is a problem. Albeit all the analysis was done on the metadata, a visual representation would be very useful. \\
-
-The representation of word cloud is relatively arbitrary. This form was chosen to create an interesting interface. It is to question if it is better than a simple table. The table entries decreasingly ordered after the number of documents the formal concept comprises. \\
-
-In this concept, only the children are shown. It would probberly bee a good idea to also show the parents. It was no consinderd here, because onlt
+The whole has a problem because the JSON file with all the data is huge. The user has to download over eight megabytes before he can start using the interface. This can be fixed by porting the logic from the frontend into the backend. By doing this, only the data that is currently need would be send to the client. It would also be a good idea to include thumbnails of the the maps to the result. This could not be done, because it was not possible to get thumbnails of the maps.
 
 \chapter{Evaluation}
 \label{Evaluation}
 
-The design of an interface is highly subjective. User studies can help to evaluate an interface but computer scientists are not experts in human studies. For this, a brief review of different techniques for human studies is given first. Then we describe the setup of the study, describe the results and finally conclude. \\
+The design of an interface is highly subjective. User studies can help to evaluate an interface. For this, a brief review of different techniques for human studies is given first. Then we describe the setup of the study, describe the results and finally discuss and conclude. \\
 
 \section{Background}
 
-We will only scratch the surface here. A comprehensive introduction into "Methods for Evaluating Interactive Information Retrieval Systems with User" gives Kelly \cite{Kelly2007}. A shorter introduction gives Hearst in Chapter 2 in her book "User Search Interfaces" . \cite{Hearst2009}.\\
+We will only scratch the surface here. A comprehensive introduction into "Methods for Evaluating Interactive Information Retrieval Systems with User" gives Kelly \cite{Kelly2007}. A shorter introduction gives Hearst in Chapter 2 in her book "User Search Interfaces" \cite{Hearst2009}.\\
 
 \subsection{Introduction}
 
@@ -592,13 +629,11 @@ It is important to distinguish between the terms 'experiment' and an 'evaluation
 Evaluations are conducted to assess the goodness of a system, interface or interaction technique and can take many forms [..] Experiments have historically been the main method for interactive system evaluation, but experiments can also be conducted to understand behavior [..] Two important characteristics of experiments are that there are at least two things being compared (e.g., system type) and that some manipulation takes place [..] In some types of [interactive information retrieval] studies only a single system is evaluated. This is a weaker form of evaluation since it is not possible to demonstrate how much better users perform or how different their behaviors and inter actions are since there is no point of comparison. Traditional usability tests are examples of this type of evaluation. Traditional usability tests are usually conducted with a single version of a system, with the goal of identifying potential usability problems.	
 \end{quote}
 
-In this thesis, the system is only evaluated to find usability problems. No comparison among other systems are conducted but should be done in further investigations.
+In this thesis, the system is only evaluated to find usability problems. No comparisons among other systems are conducted but should be done in further investigations.
 
 \subsection{Informal Usability Testing}
 
-Hearst \cite{Hearst2009} describes Informal Usability Testing as "Showing designs to participants and recording their responses". It is often used in short iterative cycles to quickly evaluate a design. \\
-
- We conduct informal usability studies because we do not have proper equipment nor any experience with user studies.
+Hearst \cite{Hearst2009} describes Informal Usability Testing as "Showing designs to participants and recording their responses". It is often used in short iterative cycles to quickly evaluate a design. In this thesis, only informal usability studies are conducted because the conductors do not have proper equipment nor any experience with user studies.
 
 \subsection{Questionnaires}
 
@@ -611,51 +646,74 @@ A questionnaire comprises a set of questions and is cheap and fast way to gather
 
 \subsection{Thinking Aloud}
 
-Kelly \cite{Kelly2007} writes by referring to Ericsson and Simon \cite{Ericsson1993}: "The think-aloud method asks subjects to articulate their thinking and decision-making as they engage in [interactive information retrieval]". The comments from the participants have to be collected. Either by recording the session or by taking notes. It is hoped that the conductors can learn from the thinking process of the participant. There exist variations of this techniques. Because it can be exhausting, challenging and awkward to talk to yourself all the time, participants are encouraged to report either at some fixed times or when the feel the need.
+Kelly \cite{Kelly2007} writes by referring to Ericsson and Simon \cite{Ericsson1993}: "The think-aloud method asks subjects to articulate their thinking and decision-making as they engage in [interactive information retrieval]". The comments from the participants have to be collected. Either by recording the session or by taking notes. It is hoped that the conductors can learn from the thinking process of the participant. There exist variations of this technique. Because it can be exhausting, challenging and awkward to talk to yourself all the time, participants are encouraged to report either at some fixed times or when the feel the need.
 
 \section{Setup}
 
-The evaluation was done with five people with a background in humanities. First, an introductory presentation was given in Spanish. Then they were split into two groups. Each group interacted with the interface. The people in the group rotated. There were three tasks they should do. The participants were encouraged to talk aloud. Sometimes the instructions asked them what they are doing or what they feel. The one group was recored with an iPhone 6 Plus\footnote{\url{https://www.apple.com/iphone-6}}. The session of the other group was not recored and could not be evaluated at all. After they session they had to fill in a pen-and-paper questionnaire. We use ten closed questions from the USE questionnaire \cite{lund2001measuring} and four commonly asked open questions as asked by Kelly \cite{Kelly2008}. They can found in appendix \ref{app:open} and \ref{app:closed}. The participants wrote in Spanish which was translated afterwards.
+Sadly, I only had minor influence on the setup of this study because I was not allowed to set it up. The conductors in charge where amateurs and did not had any experience with human studies. The evaluation was done with five people with a background in humanities. Only from three participants were the demographic collected: Female 60 years old, female 49 years old, male 44 years old. All participant listed to an introductory presentation which was given in Spanish. I do not know what was that to them because my Spanish is not good enough. The participants were split into two groups: One with three participants and one with two participants. There were split because there was not enough time to do individual session.\footnote{But to be honest, I am not really sure why it was decided to do this.} All members of the group sat in front of the interface and the participants rotated in front of the interface. I was responsible for the group with three participants. From the group with two people, it was not possible collect any data during data study. All participants filled in a questionnaire afterwards. So just I describe the procedure of the group I was responsible of. After the introductory lecture, all participant got a handout. The handout consists of four parts:
+\begin{enumerate}
+	\item A description of the interface. But this was an academic text and not meant to be a manual. I doubt that anybody read it.
+	\item Four Tasks the participants should do. They are included in the Appendix~\ref{app:tasks}. These tasks were ridiculous long and the third task was not even doable!
+	\item A questionnaire witch ten closed questions from USE questionnaire \cite{lund2001measuring}. \ref{app:closed}
+	\item Fourth open questions as asked by Kelly  \cite{Kelly2008}. \ref{app:open}
+\end{enumerate}
+
+So from the other group, we had no data while there were using the interface and I cannot tell how they did it. In my group, I encouraged the participants to talk to me while they were using the interface. I did not force them to speak to all the time, but I asked them time to time. The session was recored with an iPhone 6 Plus\footnote{\url{https://www.apple.com/iphone-6}} and analyzed afterwards. The instructor wanted the participants to do the tasks, but I knew that the task were complete nonsense and persuaded the participants to just use the interface. But after some time, I had no excuse left to not do the tasks and I finally surrendered and let them do the tasks. But this was okay, because I already collected enough data. After around 55 mins the session was done and the participants filled in the pen-and-paper questionnaires - in Spanish. The instructor allowed the participants to fill out the questionnaire in Spanish\footnote{Spanish people believe that their English is very bad. Which is not totality true but you believe anything if you repeat it often enough.}. This made the open questions nearly worthless because the translation process was not carefully done\footnote{Why? Because they did not fucking care}.
 
 \section{Results}
 
-We group thinking aloud, remarks and open questions together because the comments were very similar. After that, we present the results of the closed questions.
+It was hard to extract knowledge from this chaotic evaluation setup. I group the results into two categories: closed questions and everything else as \textit{comments} to keep things short. There were not any major differences among the comments so we can group it togethter. It is also worth mentioning, that this evaluation study was the first time for the participants, that they were confronted with a FCA-based approach. This lead to some comments on the approach itself.
 
-\subsection{Thinking Aloud, Remarks and Open Questions}
-It turned out, that the evaluation was also a evaluation of the whole research project. All participants mentioned that the interface does not suite their needs. All wanted to refine the search by location and time range and map creators. \acrshort{fca} cannot provide this kind of functionality.\\
+\subsection{Comments}
+All participants wrote down and said, that they were missing the possible to refine the search by a time range, location and author of the map. They said, that this is the very important for their work. One participant could not believe, why the search was not working when she search ``Valencia''. The term was not included in the word list and thereby not in the lattice. She mentioned, that this should get fixed immediately. Two results gave suggestions to improve the result list. Both said, that the thumbnails should definitely be included and that they were not interested in the text snippet. By removing the text snippets and thereby reducing the height of a result item, they could see more results at once. They were very interested to see as much titles as possible. No participant used the possibility to save documents. One participant highlighted, that he wanted to see related \\
 
-Several participants gave advise how to improve the result list. First, shorten the snippets so that they could read more titles. This could be done by restricting the text length and offering a "show more" button. Second, they mentioned that the thumbnail should be added. \\
-
-Overall, they give positive comments regarding the interface. They found the navigation with the breadcrumb helpful. \\
-
-They were not interested in the "Bookmark" feature. Maybe it was because it was an artificial meeting and not a real work environment. They found it a good idea to link to the original site. \\
-
-There were some problems. They were irritated that they could not search for arbitrary terms. Word for instance like "Valencia" were not in the collection and so also not in the lattice. It was for them not clear that the terms has to be decided before. They suggested that this should get fixed. \\
-
-They search interface was not used very often. They used the bubble cloud to navigate through the lattice. \\
-
-One participant mentions that he wanted the see related field to a given field. This would be helpful for his research. \acrshort{fca} can easily provide this method and it is a fail in the interface that it was not included.\\
+In regard to the interface in general, the comments were positiv. The participants liked the clean design. One participant wrote that using the system was funny. Two participants said, that they liked the interface but not the content. Two participants wrote it easy to use. I observed, that the users did not used the search very often. They were interested in the skimming over the bubble cloud.
 
 \subsection{Closed Questions}
 
-Out of the five participants only three filled out the questionnaire. The results are in the annex \ref{app:closed}. The results correspond to the comments made by participants. The weakest results got the sentences "It meets my needs" and "It does everything I would expect it to do". The best result got the sentence "It is easy to use".
+\begin{table}[h]
+\caption{Responses from closed questions. Participants (n=3) had to choose between 0 (disagree) and 7 (agree). }
+\label{table:closed}
+\centering
 
+\def\arraystretch{1.2}% 
+\begin{tabular}{ | l | c |}
+\hline
+& Average Response\\
+\hline
+\large{Usefulness}&\\
+It is useful.&$6.\bar{6}$\\
+It meets my needs.&$4.\bar{3}$\\
+It does everything I would expect it to do.&$4.\bar{3}$\\
+&\\
+\large{Ease of Use}&\\
+It is easy to use.&$7$\\
+It requires the fewest steps possible to&$5.\bar{6}$\\
+accomplish what I want to do with it.&\\
+I don't notice any inconsistencies as I use it.&$5$\\
+&\\
+\large{Ease of Learning}&\\
+I learned to use it quickly.&$6.\bar{6}$\\
+I easily remember how to use it.&$6.\bar{6}$\\
+&\\
+\large{Satisfaction}&\\
+I am satisfied with it.&$5.\bar{6}$\\
+It is fun to use&$5.\bar{6}$\\
+
+\hline
+
+\end{tabular}
+\end{table}
+
+Out of the five participants only three filled out the questionnaire. All results are in the Appendix~\ref{app:closed}. The average responses are shown in Table~\ref{table:closed}. The results correspond to the comments made by participants. The weakest results got the sentences "It meets my needs" and "It does everything I would expect it to do". We elaborated on this, that the participants want to refine their information needs etc.. The best result got the sentence "It is easy to use". It looks like the participants liked the interface.
 \section{Accessibility Analysis}
 
-In addition to the the evaluation with users, there was a evaluation regarding accessibility features. It was conducted by people from the UNED: Miguel Angel Marqueta and Covadonga Rodrigo San Juan. It can be found in appendix \ref{app:access}. They comments were overall positive buy they highlighted some problems with the interface: It is possible to zoom in the bubble cloud, but there are no buttons on the screen for it. In the current state, the zooming can only be done with a mouse or a touchpad. 
+In addition to the evaluation session, there was an evaluation regarding accessibility\footnote{If people with disabilities can use the interface.}. It was conducted by people from the UNED: Miguel Angel Marqueta and Covadonga Rodrigo San Juan. The report can be found in Appendix~\ref{app:access}. Their comments were overall positive buy they highlighted some problems with the interface: It is possible to zoom in the bubble cloud, but there are no buttons on the screen for it. In the current state, the zooming can only be done with a mouse or a touchpad. They also pointed out, that it is hard to see if the result list updates. They updating process of the result list should be more visual.
 
-\section{Conclusions}
-
- Zobel \cite{Zobel2004} proclaims: "Far too many human studies in computer science are amateurish and invalid" and with this study we proved him true. They overall setup was improvised and all instructors had no experience with user studies. Even though it cannot stand scientific standards, it is useful as informal evaluation. \\
+\section{Conclusions} 
+It is hard to draw conclusions because of the low number of participants. But it can be said that FCA, in this implementation, does not suits the needs of the user. It is very confusing for the users that they cannot search for arbitrary terms on the lattice. It is also the a major problem, that the users cannot refine their informations needs along dimension. They want to specify time ranges or locations. FCA cannot offer this because it only works on one-dimensional data. For the future, techniques like faceted search as described in Section~\ref{dyafs} should be applied. This could result into an interface similar to \url{http://www.oldmapsonline.org/}\\
  
- We can conclude that \acrshort{fca} for this collection in the current implementation is useless. It cannot over the separation between location or time ranges. It looks like that for faceted search as described in Section~\ref{dyafs} promises better results. \\
- 
- It also suffers from the fact, that only a limited number of terms was selected to built up the concept lattice. If the users searched for terms wich were presented in the documents, they could not explain it why they got no results back. It is impossible to create a concept lattice from all words uses in the documents. It could be promising to combine searching with FCA liked it was done in other systems as described in \ref{Local View}. Implement and ordinary search and built up a concept lattice from the results. \\
- 
- For the interface itself, it looks like they liked it. Even though there are some problems like the result list which should be addressed. \\
- 
- After this demolishing results, it was decided not to pursue the idea of FCA for the collection of maps. But the tool itself looks promising that why I transform the tool to visualize arbritary concept lattices. The changes are described in the following section.
- 
+For the interface itself, it looks like that the users found it easy to use and easy to learn it. But there exist problems with the presentation of the result list. But also other problems were found. This problems should be addressed in future iterations of the software.
 \chapter{Fancy \acrshort{fca} 2.0}
 \label{Fancy 2.0}
 
@@ -664,15 +722,14 @@ In addition to the the evaluation with users, there was a evaluation regarding a
 \chapter{Conclusions}
 \label{Conclusions}
 
-\blindtext
+First, at described in the introduction, digital humanities is about building tools for human scholars. Building tools it NOT the primary focus of computer science research. Computer science research is mainly focused on finding new algorithms, refining algorithms, apply algorithms to new problems etc.. There are not famous for being the best software engineers. It is a very bad idea, to take computer science researchers and say to them: ``Now build some tools for human scholars.'' as this was done in this case. As this thesis showed, this approach was an utter failure. The researchers want to apply bleeding-edge methods as FCA when building this tools. But all the human scholars needed, was a very simple search interface with some custom query filters. But, at least of an ordinary information retrieval scientist, is not very interesting and so they are trying some fancy stuff. To do real research in digital humanities, people needed who live and breathe digital humanities. I think, this is the reason why wise people coined the term ``digital humanities'' to make clear that it is fundamentally different from computer science. \\
 
+Second, I proposed a method to visualize large concept lattice. It focuses only on small parts of the lattices and the user can incrementally explore the lattice. Thereby she feels confident to explore the lattice because she can always backtrack to earlier actions. I can say with slight confidence\footnote{The evaluation setup was very chaotic.}, that the user liked this approach. But further user studies with experiments are needed to judge if my proposal suits the needs of the users. \\
+
+Third, for the use of FCA in IR, the evaluation showed that it is difficult. If the concept lattice is build from word list of possible index terms, it can irritate the user why only a small portion is in the concept lattice. This does not look promising and should be dropped.
 \newpage
 \bibliographystyle{plain}
 \bibliography{biblography}
-
-\listoffigures
-\listoftables 
-
 
 \newpage
 \appendix
@@ -697,6 +754,16 @@ In addition to the the evaluation with users, there was a evaluation regarding a
 	\item In comparison with other systems (Interface of Catálogo Colectivo de las colecciones de Mapas and previous work of this research group).
 Do you think it is more useful? If yes, which part of the system is more useful.
 \end{itemize}
+
+\chapter{Appendix: Tasks}
+\label{app:tasks}
+\begin{enumerate}
+	\item The user is not looking for a particular topic. He/she starts with the general empty overview of the topic. He/she picks a word from the word cloud and navigates to new concepts. He/she repeats this procedure for several times. He/she is using the breadcrumbs to go up again and looks for some other words. He/she finally finds one interesting item and studies it on the original AGS website.
+	\item The user wants to find information about one term (``mapa'') that interests him. Before he/she starts browsing, he/she logs into his user account. After that, he/she typed in the search interface the term and makes use of the type-ahead. He/she finally gets to the desired concept and reviews the concepts. He/she decides to get more specific ones and refines the search by clicking on words in the cloud. He/she finds interesting documents and bookmarks them for later investigations. He/she goes back again by using the breadcrumbs and chooses another term. He/she finds other interesting items and bookmarks them.
+	\item A humanist expert is working in the DIMH project. He/she has an extensive knowledge about the historical scenario related to the project: the engineers in the service of the Spanish Monarchy in the XVI and XVII centuries. He/she is trying to draw some conclusions about the work conducted by these engineers and also about the different aspects related to their works (e.g., typology of their projects, technical details about their way to work, relationships between them and the monarchy, preferred locations for their projects...). To that end, he/she makes use of the AGS collection, which includes an extensive catalogue of draws, maps and plans about different projects conducted by those engineers.He/she is used to manually analyze this kind of collections; however, the size of the AGS dataset (almost 8000 files) makes the manual analysis difficult. Therefore, he/she takes advantage of the visualization tool showing the dataset modeling and organization to analyze its information.In particular, he/she is interested in the analysis of the projects carried out by Jose Patino. The user is aware that Jose Patino carried out some projects in the city of Sevilla, and he/she wants to have more information about these projects as well as to find some other projects with similar characteristics in other cities
+	\item The same humanist expert is now looking for information about projects made in the coast (e.g., fortifications in the coast). He/she knows that the engineers used different metrics (e.g., pies-reales, varas) to measure the distances. Moreover, he/she believes that it could be some relation between these metrics and the date of the projects. More in particular, he/she believes that ``varas'' was not used before the XVII century, while ``pies-reales'' was a common metric, even in the XVI century.Furthermore, he/she wants to explore if there is also another aspects (i.e., beside the temporal issue) related to each one this metrics.
+\end{enumerate}
+
 
 
 \end{document}
