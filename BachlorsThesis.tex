@@ -59,28 +59,30 @@
 \mbox{}
 
 \chapter*{Abstract}
-\blindtext
+Formal Concept Analysis is mathematically method to create hierarchical relationships among objects. These objects combined with the relationships result in a structure called concept lattice. When a concept lattice is large, it cannot be easily represented in a static visualization. Interactive visualizations try to convey the insights of large concept lattices. They restrict themselves to only show small portions of the lattice and let the user incrementally explore the lattice by browsing. In this thesis, I propose a interactive visualization concept for large concept lattices where users can additionally backtrack their browsing actions. I implement this concept into a web-based tool for a given concept lattice. This concept was created from annotations of digitized historical maps. The implementation was evaluated with a user study (n=5). The results show that the given concept lattice does not contain the information users are looking for but that the visualization concept itself looks promising because users found it easy to use.
 
 \newpage
 \thispagestyle{empty}
 \mbox{}
 
-\chapter*{Zusammenfassung}
-\blindtext
+\chapter*{Kurzfassung}
+
+Formalen Begriffsanalyse ist eine mathematisch Methode, um hierarchischen Beziehungen zwischen Objekten zu erstellen. Diese Objekte in Verbindung mit deren Beziehungen führen zu einer Struktur namens Begriffsverband. Wenn der Begriffsverband groß ist, kann er nicht so einfach in einer statischen Visualisierung dargestellt werden. Interaktive Visualisierungen versuchen die Erkenntnisse der großen Begriffsverbänden zu vermitteln. Sie beschränken sich darauf nur kleine Teile des Verbandes zu zeigen und lassen den Benutzer schrittweise den Verband durch ``durchstöbern'' erkunden. In dieser Arbeit schlage ich ein interaktives Visualisierungskonzept für große Begriffsverbände vor, in dem Benutzer zusätzlich die ``durchstöbern''-Aktionen rückgängig machen könne. Ich setze dieses Konzept in ein Programm für einen vorgegebenen Begriffsverband um, welches im weltweiten Netz läuft. Dieser Verband wurde von Anmerkungen über digitalisierte, historische Karten erstellt. Die Umsetzung wurde mit einem Benutzerstudie (n=5) evaluiert. Die Ergebnisse zeigen, dass der vorgegebenen Begriffsverband nicht die Informationen enthält, nach denen die Benutzer suchen, aber dass das Visualisierungskonzept selbst vielversprechend aussieht, da die Benutzer fanden, dass es einfach zu bedienen war.
 
 \newpage
 \thispagestyle{empty}
 \mbox{}
 
 \chapter*{Acknowledgements}
-I thank Ana and Angel for their support in Madrid and Tatjana for her support in Magdeburg.
+I thank Ángel Castellanos for his guidance in Madrid.\\
 
-Rosario and Ricarda for they support to read this.
+I thank all people who commented on drafts of this thesis: Ana García-Serrano, Ángel Castellanos, Tatjana Gossen and Rosario Raulin. \\
 
-All who made my study possible,
-my family: Daniela Filter, Matthias Filter, Sigrid Filter, Doris Barthel, Christine Kühn, Margarethe Leffler.
-The scholarships: Deutschlandstipendium financed by the German State and RegioCom, Leonardo-Scholarship finanzed by the EU. Studienstiftung des Deutschen Volkes fianced mainly by the German state. 
-All people who fought the struggle for free public education.
+I thank all people who supported me financially during my time as student: Daniela Filter, Matthias Filter, Sigrid Filter, Katharina Filter, Doris Barthel, Christine Kühn and Margarethe Leffler. \\
+
+I am thankful for having received scholarships from \textit{Studienstiftung des deutschen Volkes}, the European Commission (Leonardo da Vinci Scholarship), the German Federal Ministry of Education and regiocom GmbH (\textit{Deutschlandstipendium}).\\
+
+I thank all people who have been fighting for free public education.
 
 \newpage
 \thispagestyle{empty}
@@ -103,14 +105,14 @@ All people who fought the struggle for free public education.
 \renewcommand{\thepage}{\arabic{page}}
 \setcounter{page}{1}
 
-The digital revolution is affecting every part of our life. Also the humanities scholars witness a change in their work life when analog collections are digitized. They have to apply computer science methods to organize and analyze huge amount of data. The area "digital humanities" evolved during the last ten years and it can be defined as an "intersection between the humanities and information technology" \cite{Svensson2010}.\\
+The digital revolution is affecting every part of our life. Also the humanities scholars witness a change in their work life when analog collections are digitized. They have to apply algorithms to organize and analyze huge amount of data. The term ``digital humanitie'' evolved during the last ten years and it can be defined as an intersection between the humanities and information technology. \cite{Svensson2010}.\\
 
- The computer science department of the Universidad Nacional de Educación a Distancia (UNED) in Madrid cooperates with human scholars to conduct research in the digital humanities. In this project\footnote{\url{http://linhd.uned.es/p/proyecto-dimh}}, they work on historical maps. The maps were drawn between 1503 and 1805, digitized and are available on the web\footnote{\url{http://www.mcu.es/ccbae/es/consulta/resultados_busqueda.cmd?busq_codsecc=MCAGS}} for search. The maps have been annotated by human scholars. A example of a map is shown in Figure~\ref{figure:map} with its annotation in Figure~\ref{figure:metadata}. \\
+ The information retrieval research group at the computer science department of the Universidad Nacional de Educación a Distancia (UNED) in Madrid cooperates with human scholars to conduct research in digital humanities. In their current project\footnote{\url{http://linhd.uned.es/p/proyecto-dimh}}, they work on historical maps. The maps have been drawn between 1503 and 1805, digitized and are available on the web\footnote{\url{http://www.mcu.es/ccbae/es/consulta/resultados_busqueda.cmd?busq_codsecc=MCAGS}}. The maps were annotated by human scholars. An example of a map is shown in Figure~\ref{figure:map} and its annotation are shown in Figure~\ref{figure:metadata}.\\
  
 \begin{figure*}[!ht]
 	\centering
 	\includegraphics[width=\linewidth]{./images/map}
-\caption{Digitized Map}
+\caption{Digitized historical map}
 \label{figure:map}
 \end{figure*}
 
@@ -121,7 +123,7 @@ The digital revolution is affecting every part of our life. Also the humanities 
 \label{figure:metadata}
 \end{figure*}
 
-To extract knowledge from the collection, the research group advocates for the use of a mathematical techniques called \acrlong{fca} \cite{Castellanos,Cigarran}. After applying this technique, the maps are organized in hierarchical structure which is called concept lattice. A concept lattice is a special form of lattice. There exist a static visualizations for lattices which is called Hasse diagram. An example of a Hasse diagram is shown in Figure~\ref{figure:hasse}. In this diagram, you can see the power set of the set $\{x,y,z\}$ and the hierarchical relationships among them. The arrows indicate if a set (the origin) is a subset another set (the destination). The nodes are layered in regard to number of elements in a set. The node with the most items is in the top and the empty set is in the bottom. \\
+To extract knowledge from the collection, the research group advocates for the use of a mathematical technique called \acrlong{fca} \cite{Castellanos,Cigarran}. After applying this technique, the maps are organized in hierarchical structure which is called \textit{concept lattice}. A concept lattice is a special form of a \textit{lattice}. A lattice can be statically visualized in a \text{Hasse diagram}. An example of a Hasse diagram is shown in Figure~\ref{figure:hasse}. In this figure, you can see the power set of the set $\{x,y,z\}$ and the hierarchical relationships among them. The arrows indicate if a set (the origin) is a subset of another set (the destination). The nodes are layered in regard to the number of elements in a set. The node with all items is in the top and the empty set is in the bottom.
 
 \begin{figure*}[!ht]
 	\centering
@@ -130,8 +132,9 @@ To extract knowledge from the collection, the research group advocates for the u
 \label{figure:hasse}
 \end{figure*}
 
-A Hasse diagram can also visual concept lattices. The research group already computed a concept lattice and tries to visual it with Hasse diagrams. The result is shown in Figure~\ref{figure:firstVisualizaion}. They are not satisfied  with it because it is hard to see anything on it. The labels are overlapping and make it nearly impossible to read them. The huge number of edges make it hard to see anything.  \\
+Because a concept lattice is also a lattice, concept lattices can be represented in Hasse diagrams. The research group computes concept lattices and visualizes them with Hasse diagrams. One result is shown in Figure~\ref{figure:firstVisualizaion}. They are not satisfied  with it because it is hard to see anything on it. The labels are overlapping and the huge amount of edges makes it hard to see anything on it. This is not an individual case and happens when the concept lattice is large. It is my task to create a concept to interactively visualization large concept lattices. The concept should be implemented for a one concept lattice derived from the collection of 
 
+The visualization should convey the information of a concept lattice even if the concept lattice is large. I will develop a concept for visualizing large concept lattice and also implement it for this particular dataset. It should be mentioned, that I am just a part in a big system. It was not my decisoin to apply FCA to this dataset. The evualion will unweigerlich auch zeigen, ob der Gewählte anstaz für diesen datenstz gut is. Regardlich of the outcome of the rightness is my work because it is abstract enouht\\
 \begin{figure*}[!ht]
 	\centering
 	\includegraphics[width=\linewidth]{./images/firstVisualization}
@@ -140,10 +143,7 @@ A Hasse diagram can also visual concept lattices. The research group already com
 \end{figure*}
 
 
-I did an intenship at the research group of the UNED, in fute just called \textit{the reserach group}. which worked on XXx this stuff.
 
-
-It is my task to create an interactive visualization of their concept lattice. The visualization should convey the information of a concept lattice even if the concept lattice is large. I will develop a concept for visualizing large concept lattice and also implement it for this particular dataset. It should be mentioned, that I am just a part in a big system. It was not my decisoin to apply FCA to this dataset. The evualion will unweigerlich auch zeigen, ob der Gewählte anstaz für diesen datenstz gut is. Regardlich of the outcome of the rightness is my work because it is abstract enouht\\
 
 
  The remainder of this thesis is structured as follows: The background of Formal Concept Analysis and Interface Design are presented in Section~\ref{Background}. The discussion of related work takes place in Section~\ref{Related Work}. Inferring from the related work, I will present my work including idea and implementation in Section~\ref{Fancy 1.0}. In Section~\ref{Evaluation}, the evaluation takes place. Built upon the results of the evaluation, a new version is presented in Section~\ref{Fancy 2.0}. Eventually concluding in Section~\ref{Conclusions}.
@@ -399,7 +399,7 @@ Another approach are \textit{nested line diagrams} - line diagrams are another n
 \begin{figure*}[!ht]
 	\centering
 	\includegraphics[width=\linewidth]{./images/nested}
-\caption{Nested line diagram with two layers. Source: Carpineto and Romano \cite{carpineto2004concept}}
+\caption{Nested Hasse diagram with two layers. Source: Carpineto and Romano \cite{carpineto2004concept}}
 \label{figure:nested}
 \end{figure*}
 	
@@ -417,7 +417,7 @@ One could argue that you just have to visualize everything and then allow to zoo
 \begin{figure*}[!ht]
 	\centering
 	\includegraphics[width=0.5\linewidth]{./images/fcart}
-\caption{FCART, Hasse diagram visualization with over 20000 formal concepts, focus on node with blue borders. Source: Neznanov and Parinov \cite{Neznanov2014}}
+\caption{FCART, Hasse diagram with over 20000 formal concepts, focus on node with blue borders. Source: Neznanov and Parinov \cite{Neznanov2014}}
 \label{figure:fcart}
 \end{figure*}
 
@@ -449,7 +449,7 @@ Carpineto and Romano picked up the idea from Godin et al. and developed a \acrsh
 \begin{figure*}[!ht]
 	\centering
 	\includegraphics[width=\linewidth]{images/credo}
-\caption{Screenshot of CREDO, after query 'xml' and browsing after 'editor(5)' and 'windows free(2)'. Source: Carpineto and Romano \cite{Carpineto2004} }
+\caption{CREDO, after query 'xml' and browsing after 'editor(5)' and 'windows free(2)'. Source: Carpineto and Romano \cite{Carpineto2004} }
 \label{figure:credo}
 \end{figure*}
 
@@ -491,7 +491,7 @@ This section should only give a small overview about this technique. Completely 
 \begin{figure*}[!ht]
 	\centering
 	\includegraphics[width=\linewidth]{images/flamenco}
-\caption{Flamenco. Only items that are from Asia and made from fabrics are shown. Source: Yee et al. \cite{Yee2003}}
+\caption{Flamenco, only items that are from Asia and made from fabrics are shown. Source: Yee et al. \cite{Yee2003}}
 \label{figure:flamenco}
 \end{figure*}
 
@@ -552,7 +552,7 @@ The UML use case diagram is depicted in Figure~\ref{figure:usecase}.
 \begin{figure*}[!ht]
 	\centering
 	\includegraphics[width=\linewidth]{images/usecase}
-\caption{UML use case of Fancy FCA 1.0}
+\caption{UML use case diagram for Fancy FCA 1.0}
 \label{figure:usecase}
 \end{figure*}
 
@@ -711,7 +711,7 @@ Out of the five participants only three filled out the questionnaire. All result
 In addition to the evaluation session, there was an evaluation regarding accessibility\footnote{If people with disabilities can use the interface.}. It was conducted by people from the UNED: Miguel Angel Marqueta and Covadonga Rodrigo San Juan. The report can be found in Appendix~\ref{app:access}. Their comments were overall positive buy they highlighted some problems with the interface: It is possible to zoom in the bubble cloud, but there are no buttons on the screen for it. In the current state, the zooming can only be done with a mouse or a touchpad. They also pointed out, that it is hard to see if the result list updates. They updating process of the result list should be more visual.
 
 \section{Conclusions} 
-It is hard to draw conclusions because of the low number of participants. But it can be said that FCA, in this implementation, does not suits the needs of the user. It is very confusing for the users that they cannot search for arbitrary terms on the lattice. It is also the a major problem, that the users cannot refine their informations needs along dimension. They want to specify time ranges or locations. FCA cannot offer this because it only works on one-dimensional data. For the future, techniques like faceted search as described in Section~\ref{dyafs} should be applied. This could result into an interface similar to \url{http://www.oldmapsonline.org/}\\
+Zobel\cite{Zobel2004} proclaims that far too many human studies in computer science are amateurish and invalid. I have to admit, that this study is one of those amateurish studies. In addition, it is hard to draw conclusions because of the low number of participants. But it can be said that FCA, in this implementation, does not suits the needs of the user. It is very confusing for the users that they cannot search for arbitrary terms on the lattice. It is also the a major problem, that the users cannot refine their informations needs along dimension. They want to specify time ranges or locations. FCA cannot offer this because it only works on one-dimensional data. For the future, techniques like faceted search as described in Section~\ref{dyafs} should be applied. This could result into an interface similar to \url{http://www.oldmapsonline.org/}\\
  
 For the interface itself, it looks like that the users found it easy to use and easy to learn it. But there exist problems with the presentation of the result list. But also other problems were found. This problems should be addressed in future iterations of the software.
 \chapter{Fancy \acrshort{fca} 2.0}
