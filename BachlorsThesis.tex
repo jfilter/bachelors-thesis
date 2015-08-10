@@ -126,7 +126,7 @@ I thank all people who have been fighting for free public education.
 \label{figure:map}
 \end{figure*}
 
-The digital revolution is affecting every part of our life. Also, the humanities scholars witness a change in their worklife when analog collections are digitized. They have to apply algorithms to organize and analyze huge amount of data. The term ``digital humanities'' evolved during the last ten years and it can be defined as an intersection between the humanities and information technology  \cite{Svensson2010}. The information retrieval research group at the computer science department of the Universidad Nacional de Educación a Distancia (UNED) in Madrid cooperates with human scholars to conduct research in digital humanities. In their current project\footnote{\url{http://linhd.uned.es/p/proyecto-dimh}}, they work on historical maps. The maps have been drawn between 1503 and 1805, digitized and are available on the web\footnote{\url{http://www.mcu.es/ccbae/es/consulta/resultados_busqueda.cmd?busq_codsecc=MCAGS}}. These maps were annotated by human scholars. An example of a map is shown in Figure~\ref{figure:map} and its annotation are shown in Figure~\ref{figure:metadata}.\\
+The digital revolution is affecting every part of our life. So the humanities scholars witness a change in their work life when analog collections are digitized. They have to apply algorithms to organize and analyze huge amount of data. The term ``digital humanities'' evolved during the last ten years and it can be defined as an intersection between the humanities and information technology  \cite{Svensson2010}. The information retrieval research group at the computer science department of the Universidad Nacional de Educación a Distancia (UNED) in Madrid cooperates with human scholars to conduct research in digital humanities. In their current project\footnote{\url{http://linhd.uned.es/p/proyecto-dimh}}, they work on historical maps. The maps have been drawn between 1503 and 1805, digitized and are available on the web\footnote{\url{http://www.mcu.es/ccbae/es/consulta/resultados_busqueda.cmd?busq_codsecc=MCAGS}}. These maps were annotated by human scholars. An example of a map is shown in Figure~\ref{figure:map} and its annotation are shown in Figure~\ref{figure:metadata}.\\
 
 \begin{figure*}[!ht]
 	\centering
@@ -308,9 +308,7 @@ This thesis works with a given concept lattice to visualize it. Therefore it is 
 \subsection{The Concept Lattice of the Digitized Maps}
 \label{thedata}
 
-The research group built the concept lattices based on the annotations of 7492 maps. The first step is to construct the index terms of the documents. For this, they asked some human scholars for terms that they are interested in. They collected 100 terms which are the possible index terms. A document is described by an index terms if it occurs in the documents at least once. For this, the different dimensions of the annotations like author, location etc. are treated as a single document without any separation between the dimensions. From these index terms, they built the concept lattice which contains 131379 formal concepts.\\
-
-After 
+The research group built the concept lattices based on the annotations of 7492 maps. The first step is to construct the index terms of the documents. For this, they asked some human scholars for terms that they are interested in. They collected 100 terms which are the possible index terms. A document is described by an index terms if it occurs in the documents at least once. For this, the different dimensions of the annotations like author, location etc. are treated as a single document without any separation between the dimensions. From these index terms, they built the concept lattice which contains 131379 formal concepts. 
 
 Because this thesis focuses on the user interface, let us review user interface design principles before we discuss related work in Section~\ref{Related Work}.
 
@@ -427,7 +425,7 @@ One could argue that you just have to visualize everything and then allow to zoo
 
 Even though they chose a light color for the edges, the screen is almost filled only with the the color of the eges. In addition, the labels of the nodes in the top and bottom are overlapping which makes it hard to read them. Let us review some other approaches in the next section which completely break with the Hasse diagram. \\
 
-The local view on a Hasse diagram is called \textit{conceptual neighborhood} by Eklund et al. \cite{Eklund2009,Eklund2012} or \textit{hybrid navigation} by Carpineto and Romano \cite{Carpineto1996}. The basic idea is always the same: The interface is always focused on exactly \textit{one} formal concept. The user can navigate through the lattice by going up (becoming more general) or going down (becoming more special), which means removing terms or adding terms. They also offer the possibility to query the system. In most cases, the user would start with a search and focus on the corresponding formal concept if it exists. From there, the user can fine-tune the search. The idea originated from the information retrieval field and was first proposed by Godin et al. \cite{Godin1989}. \\
+The local view on a Hasse diagram is called \textit{conceptual neighborhood} by Eklund et al. \cite{Eklund2009,Eklund2012}, \textit{hybrid navigation} by Carpineto and Romano \cite{Carpineto1996} or \textit{semantic probe} by \cite{crampes2014visualizing} by Crampes and Planié. The basic idea is always the same: The interface is always focused on exactly \textit{one} formal concept. The user can navigate through the lattice by going up (becoming more general) or going down (becoming more special), which means removing terms or adding terms. They also offer the possibility to query the system. In most cases, the user would start with a search and focus on the corresponding formal concept if it exists. From there, the user can fine-tune the search. The idea originated from the information retrieval field and was first proposed by Godin et al. \cite{Godin1989}. \\
 
 At least three ideas underly this approach. Firstly, users tend to start with a short query and then refine their needs. Hearst \cite{Hearst2009} writes while referring to \cite{Marchionini2006,Bates1990}:
 \begin{quote}
@@ -737,9 +735,13 @@ For the interface itself, it looks like that the users found it easy to use and 
 \chapter{Fancy FCA 2.0}
 \label{Fancy 2.0}
 
-Built upon the conclusion of the evaluation, it was decided not follow FCA for the maps. 
+The evaluation showed the an FCA-based approach does not fulfill the needs of its potential users. But as we talked about in previous sections, it is used in other areas. For this, the work which resulted from the thesis could be useful to visualize arbitrary concept lattice. I decided to transform 
+ Fancy 1.0 into a general tool to visualize concept lattices. This section is mixture about changes that were already done and an outlook which is still to do. This is the second version of my work and therefor it is called Fancy 2.0. It will be available on the web: \url{http://fca.vis.one}.
 
-I was frustrated that I wasted my time on this useless crap so I decided to change it and make use of it. Even though
+To simplify the tool, some functionality was dropped: all logging is removed. In addition, the whole user authentication is removed as well. This means that it is also not possible to bookmark documents. Also the history is only saved for the current session. This was done, because it looks like that the user did not find this very interesting.
+
+What has to be included: Users should have the possibility to upload concept lattices. For the sake of simplicity, they can do it anonymously
+ without any authentication. This also means, that in this first version of this tool, already uploaded data cannot easily be removed. As discussed in XX, Fancy 1.0 has a design flaw: The complete data has to be loaded upfront to the browser, when a user uses the web site. This is especially hurtful because this tool should address large lattice. Large lattice can be very big. To address this, most of the program logic is done in the backend. This means that the client only gets the data of the current Focus. When she changes the Focus, the browser send a request to the server to get the new data. The data on the server has to be stored efficiency. For this I use mongodb, because it is easy to store hierarchal data in it.
 
 \chapter{Conclusions}
 \label{Conclusions}
