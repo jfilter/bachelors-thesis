@@ -491,7 +491,7 @@ Sacco and Tzitzikas \cite{Sacco2009} say that although FCA and Faceted Search ar
 \chapter{Fancy FCA 1.0}
 \label{Fancy 1.0}
 
-First, a concept is described to visual large concept lattices. Second, this concept is implemented as an interactive web application. The data (in form of a concept lattice) for this implementation comes from the research group and how the data was created is described in Section~\ref{thedata}. Third, the concept and the implementation are discussed.
+First, a concept is described to visual large concept lattices. Second, this concept is implemented as an interactive web application. The data (in form of a concept lattice) for this implementation comes from the research group as it was described in Section~\ref{thedata}. Third, the concept and the implementation are discussed.
 
 \section{Concept}
 
@@ -500,7 +500,7 @@ The concept of the interface is inferred form the discussing related work in Sec
 	\item She can select a child of the Focus as new Focus.
 	\item She can ``jump'' to a completely new Focus by using a search on the lattice\footnote{It is very important to realize, that the search is NOT done on the documents. It is only done on the attributes of the objects of the formal context. Informally, the search is only done on the index terms of the documents. If the users search for terms that are not the index terms of any documents, it will result in an error.}
 \end{enumerate}
-Let us demonstrate this with an example shown in Figure~\ref{figure:conceptExample}. After searching on the lattice after the attribute ``e'', the Focus is set to the formal concept surrounded with a dashed circle. Now, only the nodes surrounded with a black circle are visible to the user. This two formal concepts are called \textit{the Suggestions}, because they suggest the users which attributes to add to the current selection of the Focus. In this case, there is one suggestion to add ``c'' to the focus and refine the selection from 5 objects (2,4,6,8,10) to 4 objects (4,6,8,10). And the suggestion to add ``p'' to the focus and refine the selection to one objects (2). They are the children of the Focus and therefor per definition more specific than the Focus. \\
+Let us demonstrate this with an example shown in Figure~\ref{figure:conceptExample}. After searching on the lattice after the attribute ``e'', the Focus is set to the formal concept surrounded with a dashed circle. Now, only the nodes surrounded with a black circle are visible to the user. This two formal concepts are called \textit{the Suggestions}, because they suggest the users which attributes to add to the current selection of the Focus. In this case, there is one suggestion to add ``c'' to the focus and refine the selection from 5 objects (2,4,6,8,10) to 4 objects (4,6,8,10). And the suggestion to add ``p'' to the focus and refine the selection to one object (2). They are the children of the Focus and therefor per definition more specific than the Focus. \\
 
 \begin{figure*}[!ht]
 	\centering
@@ -509,24 +509,16 @@ Let us demonstrate this with an example shown in Figure~\ref{figure:conceptExamp
 \label{figure:conceptExample}
 \end{figure*}
 
-I identified weaknesses in the navigation of the Virtual Museum, that the users felt lost while using this kind of local view. To approach this problem, the users get two things for orientation.   
+We discussed the problems of the Museum earlier an and realized that the users needs some additional orientation with this kind of local view. Therefore we give them two possibilities to do so:
+\begin{itemize}
+	\item \textit{Breadcrumbs}: The breadcrumbs show the trail how the user got to the current Focus. The term comes from Hänsel and Gretel fairy tail\footnote{\url{https://en.wikipedia.org/wiki/Hansel_and_Gretel}}. It is often used in web pages to give orientation. They typical look like ``Home / Selection1 / Selection2''.
+	\item \textit{History}: Offer an overview about the history of the navigation actions.
+\end{itemize}
 
-
-can visit their navigation history. 
-
-
-\subsection{Usecases}
-The UML use case diagram is depicted in Figure~\ref{figure:usecase}.
-
-\begin{figure*}[!ht]
-	\centering
-	\includegraphics[width=\linewidth]{images/usecase}
-\caption{UML use case diagram for Fancy FCA 1.0}
-\label{figure:usecase}
-\end{figure*}
+Let us describes these actions in detail after taking a look at the genreal interface layout.
 
 \subsection{Interface Components}
-After describing the general navigation, we can identify already two important components of the interface: A \textit{Search Bar} and the \textit{Suggestions}. The users are probably also interested in the \textit{Results}. The Results are those objects from the Focus. We discussed the problems of the Museum earlier an and realized that the users need origination. Therefore we add \textit{Breadcrumbs}. And they want a history of actions we call this component just \textit{History}. The components of the interface are completed with a \textit{Menu} and you can see the general layout in Figure~\ref{figure:schema}. Each component is described in detail now. \\
+After describing the general navigation, we can identify already two important components of the interface: A \textit{Search Bar} and the \textit{Suggestions}. The users are probably also interested in the \textit{Results}. The Results are those objects from the Focus. Also the \textit{Breadcrumbs} and the \textit{History} are components to be shown. The components of the interface are completed with a \textit{Menu} and you can see the general layout in Figure~\ref{figure:schema}. The components are described in detail now. \\
 
 \begin{figure*}[!ht]
 	\centering
@@ -537,23 +529,32 @@ After describing the general navigation, we can identify already two important c
 
 \subsubsection{Search Bar and Results}
 
-All users know web search engines. In my opinion, it easy for users to work with a new system if it looks similar to system they already know. That is why the overall look of the interface should remind users of a search engines. The general advices to design user search interfaces by Hearst \cite{Hearst2009} should be followed. Results should be ordered in a vertical list. Each list item consists of a title and body. The title describes the items in short and the snippet goes more into detail. The can review the result in detail by clicking on the title. The title links to a web page where the user can investigate the result in detail. The user should have the possibility to bookmark the result. She can do it, if she is logged into the side. But it is also possible to use the site without being logged in.
+All users know web search engines. In my opinion, it easy for users to work with a new system if it looks similar to system they already know. That is why the overall look of the interface should remind users of a search engines. The general advices to design user search interfaces by Hearst \cite{Hearst2009} should be followed. Results should be ordered in a vertical list. Each list item consists of a title and a snippet. The title describes the items in short and the snippet goes more into detail. The can review the result in detail by clicking on the title. The title links to a web page where the user can investigate the result in detail. The snippet should give the users a small overview about the results. In addition, the user should have the possibility to bookmark the result if she is logged in. This was done because of Shneiderman's recommondation to let the user extract results.
 
 \subsubsection{Suggestions}
 
-The different suggestions are shown as a bubble cloud. Each bubble stand for one formal concepts and it is only label with terms that should be added. The size of the bubble corresponds to the number of the document the concept has. The exact number is shown as tooltip when the user hovers over the bubble.
+The different suggestions are shown as a bubble cloud. Each bubble stand for one formal concepts and it is only label with terms that should be added. The size of the bubble corresponds to the number of the document the formal concept has. The exact number is shown as tooltip when the user hovers over the bubble.
 
-\subsubsection{Breadcrumb}
+\subsubsection{Breadcrumbs}
 
-Breadcrumbs are included to give the user orientation. The Breadcrumbs indicate how the user got to the current focus. Of a given Focus, it shows the previous formal concepts of the Focus. It is really hard to describe it abstract. So let us take a look at an example. The user starts with the initial Focus. From there he searched for ``x''. Then he clicked on the suggestion ``y''. The breadcrumbs show ``Home / x / y''. The current Focus has the terms ``x y''. Each part of the breadcrumbs links back the previous focus. If you click on ``x'', the Focus changes back to the Focus with ``x''. If you click on ``Home'', you end up in the initial Focus. 
+Breadcrumbs are included to give the user orientation. The Breadcrumbs indicate how the user got to the current focus. Of a given Focus, it shows the parental formal concepts of the Focus. It is really hard to describe it abstract. So let us take a look at an example. The user starts with the initial Focus. From there he searched for ``x''. Then he clicked on the suggestion ``y''. The breadcrumbs show ``Home / x / y''. The current Focus has the terms ``x y''. Each part of the breadcrumbs links back the previous focus. If you click on ``x'', the Focus changes back to the Focus with ``x''. If you click on ``Home'', you end up in the initial Focus. This should increase the orientation of the user because the user always knows how she can get to the start and she knows her current selection. It also increases the confidence of the user to just try out to click a suggestion. If she does not like it, she can always easily go back. 
 
 \subsubsection{History}
 
-With the history, the user can look back is navigational history. It exceeds to possibility of the Breadcrumbs because it gives more information. The breadcrumb only go back in a current navigation process. The users can always see the complete history of the current session. If she is logged in, the history of all time is shown.
+With the history, the user can look back is navigational history. It exceeds to possibility of the Breadcrumbs to backtrack because the Breadcrumbs can only show a few steps back. When the user ``jumps'' to a completely new Focus, the Breadcrumbs cannot help her to go back to previous Focuses. With this History she can go back to all previous focuses. If the user is logged into the system, the all-time history is collected and shown. If not, only the session history is shown. If the users starts using the site and loges in after some time, all the previous session history should be send to the server as well. The history is basically a list of history items. A history item is described by the terms of the Focus. In the proposed wireframe, the History panel is small, because is it most of the time collapsed (hidden) to the user. When clicking on the panel, it will uncollapse and show all the history items. This was done so save previous space.\\
+
+All together, an UML use case diagram can be drawn which is shown in Figure~\ref{figure:usecase}. You can see, that the user needs to authenticate to the system (login) to use some functionalities.
+
+\begin{figure*}[!ht]
+	\centering
+	\includegraphics[width=\linewidth]{images/usecase}
+\caption{UML use case diagram for Fancy FCA 1.0}
+\label{figure:usecase}
+\end{figure*}
 
 \section{Implementation}
 
-The implementation was done with data provided from the research group. So they gave the already computed lattice and all the information of the documents. You can find the system running here and 30-seconds video of it here. \\
+The implementation was done with data provided from the research group. So they gave the already computed lattice and all the information of the documents. You can find the system running at \url{http://fancy.vis.one} and 30-seconds video of it here. \\
 
 The implementation is done as a web application because all users have already a web browser installed. There is no setup necessary. The implementation of a web application can be split up into backend and frontend development. The backend is responsible for the programming code that runs on the server. The frontend is responsible for the code that runs in the browser. Let us start with the backend.
 
@@ -567,7 +568,7 @@ We need a database to store data. The research group wanted to store logs\footno
 
 Because the interface is a webpage, the used technologies were HTML, CSS and Javascript. HTML is the markup language to create webpages and the backbone of the web. CSS adds style to the webpages. Javascript add interactivity to the webpages. But like in the backend, instead of writing pure Javascript I programmed in CoffeeScript which was compiled into Javascript. I used the framework Bootstrap\footnote{\url{http://getbootstrap.com}} because it allows me to quickly create appealing webpages. Bootstrap has templates for all kind of components like forms, buttons, navigational elements, a grid system, icons etc.. Instead of reinventing the wheel, I use Bootstrap to use basic components.\\
 
-Now let us take a look a some screenshots of the system to demonstrate the implementation. In Figure~\ref{figure:fancy1}, you can the initial state of the interface. The bubble cloud on the right shows the Suggestions. It is a little bit unorganized, but the initial state has to show the most Suggestions. This is because this state is the most general formal concept. For the layout of the bubbles, I use the Javascript framework D3\footnote{\url{http://d3js.org}} \cite{Bostock2011}. D3 utilized SVG to draw elements which are also accessible via the Document Object Model (DOM) API, which means I can catch events like ``mouse over an item'' or ``click on an item''. The word cloud is a customized graph force-directed layout based on the work from Vallandingham \cite{Vallandingham}. \\
+Now let us take a look a some screenshots of the system to demonstrate the implementation. In Figure~\ref{figure:fancy1}, you can the initial state of the interface. The bubble cloud on the right shows the Suggestions. It is a little bit unorganized, but the initial state has to show the most Suggestions. This is because this state is the most general formal concept. Most of the time, the bubble cloud is more organized because there are less Suggestion. For the layout of the bubbles, I use the Javascript framework D3\footnote{\url{http://d3js.org}} \cite{Bostock2011}. D3 utilized SVG to draw elements which are also accessible via the Document Object Model (DOM) API, which means I can catch events like ``mouse over an item'' or ``click on an item''. The word cloud is a customized graph force-directed layout based on the work from Vallandingham \cite{Vallandingham}. \\
 
 \begin{figure*}[!ht]
 	\centering
@@ -576,7 +577,7 @@ Now let us take a look a some screenshots of the system to demonstrate the imple
 \label{figure:fancy1}
 \end{figure*}
 
- You can see in Figure~\ref{figure:fancy2} the use of a ``typeahead'' which can also be called ``auto-complete''. For this, I use the Javascript library Twitter typeahead.JS\footnote{\url{https://twitter.github.io/typeahead.js}}. In Figure~\ref{figure:fancy3}, we can see two screenshots which both focus on the left part of the interface. Let us start with the left one. In there, we can see various components. Starting with the search bar, we can see the terms of the Focus. We are looking for documents which the index terms ``papel tinta fabrica''. Below the search bar, you can see the breadcrumbs. They allow, for instance, to backtrack to just the Focus ``papel tinta'', if the user clicks on ``tinta''. Below the breadcrumbs, you can see the label ``Navigational History''. But first, let us take a look at the ``Results''. The number after ``Results'' show how many results are there. In this case 227. Let us take a look how the result items are presented. First, there is a title. If you click on the title, you will get to an external webpage, with further information. Below the title is a snippet of the result. The terms of the Focus are highlighted. In the bottom right corner, you see the icon to bookmark this item. Now imagine to to click on the ``Navigational History'' label. You would end up in the view right. You can see that the ``Navigational History'' is uncollapsed. It shows a list of History. If you click on a item, the Focus changes. \\
+ You can see in Figure~\ref{figure:fancy2} the use of a ``Typeahead'' which can also be called ``auto-complete''. For this, I use the Javascript library Twitter typeahead.JS\footnote{\url{https://twitter.github.io/typeahead.js}}. In Figure~\ref{figure:fancy3}, you can see two screenshots which both focus on the left part of the interface. Let us start with the left one. In there, we can see various components. Starting with the search bar, we can see the terms of the Focus. We are looking for documents which the index terms ``papel tinta fabrica''. Below the search bar, you can see the breadcrumbs. They allow, for instance, to backtrack to just the Focus ``papel tinta'', if the user clicks on ``tinta''. Below the breadcrumbs, you can see the label ``Navigational History''. But first, let us take a look at the ``Results''. The number after ``Results'' show how many results are there. In this case 227. Let us take a look how the result items are presented. First, there is a title. If you click on the title, you will get to an external webpage, with further information. Below the title is a snippet of the result. The terms of the Focus are highlighted. In the bottom right corner, you see the icon to bookmark this item. Now imagine to to click on the ``Navigational History'' label. You would end up in the view right. You can see that the ``Navigational History'' is uncollapsed. It shows a list of History. If you click on a item, the Focus changes. \\
  
 \begin{figure*}[!ht]
 	\centering
@@ -592,13 +593,15 @@ Now let us take a look a some screenshots of the system to demonstrate the imple
 \label{figure:fancy3}
 \end{figure}
 
-When the user starts browsing, a \GLS{JSON} file with all the data is downloaded to his client. The file contains the information of the lattice and also about the documents. The programming logic which controls the interface, is done in the frontend. This reduces the communication between the client (the browser) and the server to a minimum.
+When the user starts browsing, a \GLS{JSON} file with all the data is downloaded to his client. The file contains the information of the lattice and also about the documents. The programming logic which controls the interface is done in the frontend. This reduces the communication between the client and the server to a minimum because all the data is already at client. It just has to be decided which parts of the data are shown to the user.
 
 \section{Discussion}
 
-For the concept, it is to question, if the word cloud is an appropriate technique to show the Suggestions. The Suggestion consists of terms and a number of documents. This information can also be shown in a table. A table is a structured to present information. But the word cloud avoid a clear order in the data. In a table, probably only the top suggestions would be considered. This is dangerous, because the number of documents a suggestions represents, should not guide the users. What is also to question, is that only children of the Focus are currently presented. For now, the parents of the Focus are ignored. They should be added. Maybe in a next iteration.\\
+For the concept, it is to question, if the bubble cloud is an appropriate technique to show the Suggestions. The Suggestion consists of terms and a number of documents. This information can also be shown in a table. A table is a structured to present information. But the word cloud avoid a clear order in the data. In a table, probably only the top suggestions would be considered. This is dangerous, because the number of documents a suggestions represents, should not guide the users. What is also to question, is that only children of the Focus are currently presented. For now, the parents of the Focus are ignored. They should be added. Maybe in a next iteration.\\
 
-The whole has a problem because the \GLS{JSON} file with all the data is huge. The user has to download over eight megabytes before he can start using the interface. This can be fixed by porting the logic from the frontend into the backend. By doing this, only the data that is currently need would be send to the client. It would also be a good idea to include thumbnails of the the maps to the result. This could not be done, because it was not possible to get thumbnails of the maps.
+The implementation has a problem because of the huge size of the \GLS{JSON} file. The user has to download over eight megabytes before she can start using the interface. The user also needs a computer with a lot of memory because the browser has to handle a lot of data. In this case, the eight megabytes are compressed and the browser uncompress the data to over 80 megabytes. Especially older computer may have problems with this webpage. The design decision to download all the data upfront was made before it was clear, that the JSON file would be so huge. This can be fixed by porting the programming logic from the frontend into the backend. By doing this, only the data that is currently needed would be send to the client. This would require more communication between client and server but greatly reduces the amount of data that the browser has to handle. \\
+
+ It would also be a good idea to include thumbnails of the the maps to the result. This could not be done, because it was not possible to get thumbnails of the maps. This should be fixed in further iterations of the software. It was also decided to show only the 100 first results in the result list because of browser performance reasons. To fix this, it should be allowed reload additional results.
 
 \chapter{Evaluation}
 \label{Evaluation}
