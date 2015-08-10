@@ -52,15 +52,16 @@
 
 \newglossaryentry{syntactic sugar}
 {
-    name=Syntactic Sugar,
-    description={Syntax that improves the readability and the expressivity of a programming language.}
+    name=syntactic sugar,
+    description={Syntax that improves the readability and the expressivity of a programming language}
 }
 
 \newglossaryentry{session}
 {
-    name=Session,
-    description={The time a user browses a web site. It describes the time between the first arrival at a site until she stops using the site.}
+    name=session,
+    description={The time a user browses a web site. It describes the time between the first arrival at a site until she stops using the site}
 }
+
 
 \begin{document}
 
@@ -79,7 +80,7 @@ Formal Concept Analysis is a mathematical method to create hierarchical relation
 \thispagestyle{empty}
 \mbox{}
 
-\chapter*{Kurzfassung}
+\chapter*{Zusammenfassung}
 
 Formale Begriffsanalyse ist eine mathematische Methode, um hierarchische Beziehungen zwischen Objekten zu erstellen. Diese Objekte in Verbindung mit deren Beziehungen führen zu einer Struktur genannt Begriffsverband. Wenn der Begriffsverband groß ist, kann er nicht einfach in einer statischen Visualisierung dargestellt werden. Interaktive Visualisierungen versuchen, die Erkenntnisse der großen Begriffsverbände zu vermitteln. Sie beschränken sich darauf, nur kleine Teile des Verbandes zu zeigen und lassen den Benutzer schrittweise den Verband durch ``durchstöbern'' erkunden. In dieser Arbeit schlage ich ein interaktives Visualisierungskonzept für große Begriffsverbände vor, in dem Benutzer zusätzlich die ``durchstöbern''-Aktionen rückgängig machen können. Ich setze dieses Konzept in ein Programm für einen vorgegebenen Begriffsverband um, welches im weltweiten Netz läuft. Dieser Verband wurde von Anmerkungen über digitalisierte historische Karten erstellt. Die Umsetzung wurde mit einem Benutzerstudie (n=5) evaluiert. Die Ergebnisse zeigen, dass der vorgegebene Begriffsverband nicht die Informationen enthält, nach denen die Benutzer suchen, aber dass das Visualisierungskonzept selbst vielversprechend aussieht, da die Benutzer fanden, dass es einfach zu bedienen war.
 
@@ -483,7 +484,7 @@ It is possible to search but this search is very basic because it does not offer
   
 \subsection{Conclusion}
 
-The Virtual Museum of the Pacific is one of the few examples of FCA that breaches traditional static visualizations. They idea to show only the directly related formal concepts is promising because this scales better than Hasse diagrams. My concept is based upon the work from the museum but addresses critical problems: the missing orientation, the missing history and the basic search interface. The concept is described in Section~\ref{Fancy 1.0}. Before that, let us review a related non-FCA-based technique.\\
+The Virtual Museum of the Pacific is one of the few examples of FCA that breaches traditional static visualizations. They idea to show only the directly related formal concepts is promising because this scales better than Hasse diagrams. My concept is based upon the work from the museum but addresses critical problems: the missing orientation, the missing history and the basic search interface. The concept is described in Section~\ref{Fancy 1.0}. Before that, let us review a related non-FCA-based technique.
 
 \section{Faceted Search}
 \label{dyafs}
@@ -554,7 +555,7 @@ Breadcrumbs are included to give the user orientation. The Breadcrumbs indicate 
 
 \subsubsection{History}
 
-With the history, the user can look back his navigational history. It exceeds the possibility of the Breadcrumbs to backtrack because the Breadcrumbs can only show a few steps back. When the user ``jumps'' to a completely new Focus, the Breadcrumbs cannot help her to go back to previous Focuses. With this History, she can go back to all previous focuses. If the user is logged into the system, the all-time history is collected and shown. If not, only the session history is shown. If the users starts using the site and logs in after some time, all the previous session history should be send to the server as well. The history is basically a list of history items. A history item is described by the terms of the Focus. In the proposed wireframe, the History panel is small, because it is collapsed (hidden) to the user most of the time. When the panel is clicked, it will uncollapse and show all the history items. This was done to save space.\\
+With the history, the user can look back his navigational history. It exceeds the possibility of the Breadcrumbs to backtrack because the Breadcrumbs can only show a few steps back. When the user ``jumps'' to a completely new Focus, the Breadcrumbs cannot help her to go back to previous Focuses. With this History, she can go back to all previous focuses. If the user is logged into the system, the all-time history is collected and shown. If not, only the history of the current \gls{session} is shown. If the users starts using the site and logs in after some time, all the previously collected \gls{session} history should be send to the server as well. The history is basically a list of history items. A history item is described by the terms of the Focus. In the proposed wireframe, the History panel is small, because it is collapsed (hidden) to the user most of the time. When the panel is clicked, it will uncollapse and show all the history items. This was done to save space.\\
 
 All together, an UML use case diagram can be drawn which is shown in Figure~\ref{figure:usecase}. You can see that the user needs to authenticate to the system (login) to use some functionalities.
 
@@ -569,17 +570,17 @@ All together, an UML use case diagram can be drawn which is shown in Figure~\ref
 
 The implementation was done with data provided from the research group. So they gave the already computed lattice and all the information of the documents. You can find the system running at \url{http://fancy.vis.one} and a 30-seconds video of it here. \\
 
-The implementation is done as a web application because all users already have a web browser installed. There is no setup necessary. The implementation of a web application can be split up into backend and frontend development. The backend is responsible for the programming code that runs on the server. The frontend is responsible for the code that runs in the browser. Let us start with the backend.
+The implementation is done as a web application because all users already have a web browser installed. There is no setup necessary. The implementation of a web application can be split up into client side  and server side part. The server side is responsible for the programming code that runs on the server. The client is responsible for the code that runs in the browser. Let us start with the client side.
 
-\subsection{Backend}
+\subsection{Server Side}
 
-It has to be decided first, which programming language and framework to use for the web application. I chose Express.JS \footnote{\url{http://expressjs.com}} of the runtime environment Node.JS\footnote{\url{https://nodejs.org}} because it uses the programming language Javascript. Javascript is also used for the frontend. So we only need to stick to one programming language. But instead of writing Javascript, we use CoffeeScript\footnote{\url{http://coffeescript.org}}, which adds semantic sugar to Javascript and compiles to Javascript.\\
+It has to be decided first, which programming language and framework to use for the web application. I chose Express.JS \footnote{\url{http://expressjs.com}} of the runtime environment Node.JS\footnote{\url{https://nodejs.org}} because it uses the programming language JavaScript. JavaScript is also used for the client side because it is the only programming language which runs in a browser. So we only need to stick to one programming language if we use JavaScript. But instead of writing JavaScript, we use CoffeeScript\footnote{\url{http://coffeescript.org}}, which adds \gls{syntactic sugar} to Javascript and compiles to JavaScript.\\
 
 We need a database to store data. The research group wanted to store logs\footnote{The logs were never evaluated because the tool was never used in production.} of the user interaction. In addition, we have to save the history of users and their bookmarked documents on the server. For this, I use MySQL as database because it was already installed on the server where the software should run. Because of the use of an Object-relational mapping (ORM) framework, Sequelize \footnote{\url{http://sequelizejs.com}}, the database can be changed easily. The ORM creates an abstraction and it allows the programmer to interact with the database without writing raw SQL queries.
 
-\subsection{Frontend}
+\subsection{Client Side}
 
-Because the interface is a webpage, the used technologies were HTML, CSS and Javascript. HTML is the markup language to create webpages and the backbone of the web. CSS adds style to the webpages. Javascript adds interactivity to the webpages. But like in the backend, instead of writing pure Javascript I programmed in CoffeeScript which was compiled into Javascript. I used the framework Bootstrap\footnote{\url{http://getbootstrap.com}} because it allows me to quickly create appealing webpages. Bootstrap has templates for all kinds of components like forms, buttons, navigational elements, a grid system, icons etc.. Instead of reinventing the wheel, I use Bootstrap to use basic components.\\
+Because the interface is a webpage, the used technologies were HTML, CSS and Javascript. HTML is the markup language to create webpages and the backbone of the web. CSS adds style to the webpages. Javascript adds interactivity to the webpages. But like on the server side, instead of writing pure Javascript I programmed in CoffeeScript which was compiled into Javascript. I used the framework Bootstrap\footnote{\url{http://getbootstrap.com}} because it allows me to quickly create appealing webpages. Bootstrap has templates for all kinds of components like forms, buttons, navigational elements, a grid system, icons etc.. Instead of reinventing the wheel, I use Bootstrap to use basic components.\\
 
 Now let us take a look at some screenshots of the system to demonstrate the implementation. In Figure~\ref{figure:fancy1}, you can see the initial state of the interface. The bubble cloud on the right shows the Suggestions. It is a little bit unorganized but the initial state has to show the most Suggestions. This is because this state is the most general formal concept. Most of the time, the bubble cloud is more organized because there are less Suggestions. For the layout of the bubbles, I use the Javascript framework D3\footnote{\url{http://d3js.org}} \cite{Bostock2011}. D3 utilized SVG to draw elements which are also accessible via the Document Object Model (DOM) API, which means I can catch events like ``mouse over an item'' or ``click on an item''. The word cloud is a customized graph force-directed layout based on the work from Vallandingham \cite{Vallandingham}. \\
 
@@ -590,7 +591,7 @@ Now let us take a look at some screenshots of the system to demonstrate the impl
 \label{figure:fancy1}
 \end{figure*}
 
- In Figure~\ref{figure:fancy2}, you can see the use of a ``Typeahead'' which can also be called ``auto-complete''. For this, I use the Javascript library Twitter typeahead.JS\footnote{\url{https://twitter.github.io/typeahead.js}}. In Figure~\ref{figure:fancy3}, you can see two screenshots which both focus on the left part of the interface. Let us start with the left one. In there, we can see various components. Starting with the search bar, we can see the terms of the Focus. We are looking for documents with the index terms ``papel tinta fabrica''. Below the search bar, you can see the breadcrumbs. They allow, for instance, to backtrack to just the Focus ``papel tinta'', if the user clicks on ``tinta''. Below the breadcrumbs, you can see the label ``Navigational History''. But first, let us take a look at the ``Results''. The number after ``Results'' show how many results there are, in this case 227. Let us take a look how the result items are presented. First, there is a title. If you click on the title, you will get to an external webpage with further information. Below the title is a snippet of the result. The terms of the Focus are highlighted. In the bottom right corner, you see the icon to bookmark this item. Now imagine to click on the ``Navigational History'' label. You would end up in the view right. You can see that the ``Navigational History'' is uncollapsed. It shows a list of History. If you click on a item, the Focus changes. \\
+ In Figure~\ref{figure:fancy2}, you can see the use of a ``Typeahead'' which can also be called ``auto-complete''. For this, I use the Javascript library Twitter typeahead.JS\footnote{\url{https://twitter.github.io/typeahead.js}}. In Figure~\ref{figure:fancy3}, you can see two screenshots which both focus on the left part of the interface. Let us start with the left one. In there, we can see various components. Starting with the search bar, we can see the terms of the Focus. We are looking for documents with the index terms ``papel tinta fabrica''. Below the search bar, you can see the breadcrumbs. They allow, for instance, to backtrack to just the Focus ``papel tinta'', if the user clicks on ``tinta''. Below the breadcrumbs, you can see the label ``Navigational History''. But first, let us take a look at the ``Results''. The number after ``Results'' show how many results there are, in this case 227. Let us take a look how the result items are presented. First, there is a title. If you click on the title, you will get to an external webpage with further information. Below the title is a snippet of the result. The terms of the Focus are highlighted. In the bottom right corner, you see the icon to bookmark this item. Now imagine to click on the ``Navigational History'' label. Then, the interface changes into the picture on the right in Figure~\ref{figure:fancy3}. There, you can see that the ``Navigational History'' is uncollapsed. It shows a list of History items. If you click on an item, the Focus changes. \\
  
 \begin{figure*}[!ht]
 	\centering
@@ -606,20 +607,21 @@ Now let us take a look at some screenshots of the system to demonstrate the impl
 \label{figure:fancy3}
 \end{figure}
 
-When the user starts browsing, a \GLS{JSON} file with all the data is downloaded to his client. The file contains the information of the lattice and also about the documents. The programming logic which controls the interface is done in the frontend. This reduces the communication between the client and the server to a minimum because all the data is already at the client. It just has to be decided which parts of the data are shown to the user.
+When the user starts browsing, a \GLS{JSON} file with all the data is downloaded to his client. The file contains the information of the lattice and also about the documents. The programming logic is done on the client side. This reduces the communication between the client and the server to a minimum because all the data is already at the client. It just has to be decided which parts of the data are shown to the user. For instance it 
 
 \section{Discussion}
+\label{fancydis}
 
 For the concept, it is to question if the bubble cloud is an appropriate technique to show the Suggestions. The Suggestion consists of terms and a number of documents. This information can also be shown in a table. A table is structured to present information. But the word cloud avoids a clear order in the data. In a table, probably only the top suggestions would be considered. This is dangerous, because the number of documents a suggestions represents should not guide the users. What is also to question, is that only children of the Focus are currently presented. For now, the parents of the Focus are ignored. They should be added. Maybe in a next iteration.\\
 
-The implementation has a problem because of the huge size of the \GLS{JSON} file. The user has to download over eight megabytes before she can start using the interface. The user also needs a computer with a lot of memory because the browser has to handle a lot of data. In this case, the eight megabytes are compressed and the browser uncompresses the data to over 80 megabytes. Especially older computers may have problems with this webpage. The design decision to download all the data upfront was made before it was clear that the JSON file would be so huge. This can be fixed by porting the programming logic from the frontend into the backend. By doing this, only the data that is currently needed would be send to the client. This would require more communication between client and server but greatly reduces the amount of data that the browser has to handle. \\
+The implementation has a problem because of the huge size of the \GLS{JSON} file. The user has to download over eight megabytes before she can start using the interface. The user also needs a computer with a lot of memory because the browser has to handle a lot of data. In this case, the eight megabytes are compressed and the browser uncompresses the data to over 80 megabytes. Especially older computers may have problems with this webpage. The design decision to download all the data upfront was made before it was clear that the JSON file would be so huge. This can be fixed by porting the programming logic from the client side into the server side. By doing this, only the data that is currently needed would be send to the client. This would require more communication between client and server but greatly reduces the amount of data that the browser has to handle. \\
 
  It would also be a good idea to include thumbnails of the the maps to the result. This could not be done, because it was not possible to get thumbnails of the maps. This should be fixed in further iterations of the software. It was also decided to show only the 100 first results in the result list because of browser performance reasons. To fix this, it should be allowed to reload additional results.
 
 \chapter{Evaluation}
 \label{Evaluation}
 
-The design of an interface is highly subjective. User studies can help to evaluate the quality of an interface. For this, a brief review of different techniques for human studies is given first. Then I describe the setup of the study, followed the results and finally discuss and conclude.
+The design of an interface is highly subjective. User studies can help to evaluate the quality of an interface. For this, a brief review of different techniques for human studies is given first. Then I describe the setup of the study, followed by the results and finally conclusions.
 
 \section{Background}
 
@@ -736,9 +738,11 @@ For the interface itself, it looks like the users found it easy to use and easy 
 \chapter{Fancy FCA 2.0}
 \label{Fancy 2.0}
 
-Built upon the conclusion of the evaluation, it was decided not follow FCA for the maps. 
+The evaluation clearly showed that an FCA-based approach does not fulfill the needs of its potential users. But as we talked about in previous sections, it is used in other areas. That is why the work that resulted from the thesis could be useful to visualize arbitrary concept lattices. I decided to transform Fancy 1.0 into a general tool to visualize concept lattices. This section is a mixture about changes that were already made and an outlook that still needs to be done, it is still work in progress. This is the second version of my work and therefore it is called Fancy 2.0. It will be available on the web: \url{http://fca.vis.one}.\\
 
-I was frustrated that I wasted my time on this useless crap so I decided to change it and make use of it. Even though
+To simplify the tool, some functionality was dropped: All logging is removed. In addition, the whole user authentication is removed as well. This means that it is not possible to bookmark documents. Also the history is only saved for the current \gls{session}. This was done because it looks like the user did not find this very interesting.\\
+
+What has to be included: Users should have the possibility to upload concept lattices. For the sake of simplicity, they can do it anonymously without any authentication. This also means that in this first version of this tool, already uploaded data cannot easily be removed. As discussed in \ref{fancydis}, Fancy 1.0 has a design flaw: The complete data has to be loaded to the browser upfront, when someone uses the website. This is especially harmful because this tool should address large lattices and large lattices can be very big. To address this, most of the program logic is done on the server side. This means that the client only gets the data of the current Focus. When she changes the Focus, the browser sends a request to the server to get the new data. The data on the server has to be stored efficiently. I use mongodb\footnote{\url{https://www.mongodb.org/}} for that because it is easy to store hierarchical data in it.
 
 \chapter{Conclusions}
 \label{Conclusions}
@@ -747,7 +751,7 @@ First, as described in the introduction, digital humanities is the intersection 
 
 Second, I proposed a method to visualize large concept lattice. It focuses only on small parts of the lattices and the user can incrementally explore the lattice. Thereby she feels confident to explore the lattice because she can always backtrack to earlier actions. I can say with slight confidence\footnote{The evaluation setup was very chaotic.} that the users liked this approach. But further user studies are needed to judge if my proposal suits the needs of the users. \\
 
-Third, for the use of FCA in IR, the evaluation showed that it is difficult. If the concept lattice is build from a word list of possible index terms, it can irritate the users why only a small portion of all possible words is in the concept lattice. This procedure does not look promising and should be avoided in future research.
+Third, for the use of FCA in information retrieval, the evaluation showed that it is difficult. If the concept lattice is build from a word list of possible index terms, it can irritate the users why only a small portion of all possible words is in the concept lattice. This procedure does not look promising and should be avoided in future research.
 \newpage
 \bibliographystyle{plain}
 \bibliography{biblography}
@@ -800,6 +804,8 @@ Furthermore, he/she wants to explore if there is also another aspects (i.e., bes
 
 
 \newpage
+
+\chapter*{Eigenständigkeitserklärung}
 
 Ich versichere hiermit, die vorliegende Arbeit selbst verfasst, Zitate gekennzeichnet und keine anderen als die offengelegten Quellen und Hilfsmittel benutzt zu haben.\\
 
