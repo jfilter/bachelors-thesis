@@ -491,7 +491,7 @@ Sacco and Tzitzikas \cite{Sacco2009} say that although FCA and Faceted Search ar
 \chapter{Fancy FCA 1.0}
 \label{Fancy 1.0}
 
-First, a concept is described to visual large concept lattices. Second, this concept is implemented as an interactive web application. The data (in form of a concept lattice) for this implementation comes from the research group and how the data was created is described in \ref{thedata}. Third, the concept and the implementation are discussed.
+First, a concept is described to visual large concept lattices. Second, this concept is implemented as an interactive web application. The data (in form of a concept lattice) for this implementation comes from the research group and how the data was created is described in Section~\ref{thedata}. Third, the concept and the implementation are discussed.
 
 \section{Concept}
 
@@ -507,6 +507,22 @@ Let us demonstrate this with an example shown in Figure~\ref{figure:conceptExamp
 	\includegraphics[width=\linewidth]{images/focus}
 \caption{After searching for ``e'' lies the Focus on the formal concept with a dashed circle. Only his children (black circles) are visible to the user. }
 \label{figure:conceptExample}
+\end{figure*}
+
+I identified weaknesses in the navigation of the Virtual Museum, that the users felt lost while using this kind of local view. To approach this problem, the users get two things for orientation.   
+
+
+can visit their navigation history. 
+
+
+\subsection{Usecases}
+The UML use case diagram is depicted in Figure~\ref{figure:usecase}.
+
+\begin{figure*}[!ht]
+	\centering
+	\includegraphics[width=\linewidth]{images/usecase}
+\caption{UML use case diagram for Fancy FCA 1.0}
+\label{figure:usecase}
 \end{figure*}
 
 \subsection{Interface Components}
@@ -534,16 +550,6 @@ Breadcrumbs are included to give the user orientation. The Breadcrumbs indicate 
 \subsubsection{History}
 
 With the history, the user can look back is navigational history. It exceeds to possibility of the Breadcrumbs because it gives more information. The breadcrumb only go back in a current navigation process. The users can always see the complete history of the current session. If she is logged in, the history of all time is shown.
-
-\subsection{Usecases}
-The UML use case diagram is depicted in Figure~\ref{figure:usecase}.
-
-\begin{figure*}[!ht]
-	\centering
-	\includegraphics[width=\linewidth]{images/usecase}
-\caption{UML use case diagram for Fancy FCA 1.0}
-\label{figure:usecase}
-\end{figure*}
 
 \section{Implementation}
 
@@ -597,11 +603,11 @@ The whole has a problem because the \GLS{JSON} file with all the data is huge. T
 \chapter{Evaluation}
 \label{Evaluation}
 
-The design of an interface is highly subjective. User studies can help to evaluate an interface. For this, a brief review of different techniques for human studies is given first. Then we describe the setup of the study, describe the results and finally discuss and conclude. \\
+The design of an interface is highly subjective. User studies can help to evaluate the goodness of an interface. For this, a brief review of different techniques for human studies is given first. Then we describe the setup of the study, followed the results and finally discuss and conclude.
 
 \section{Background}
 
-We will only scratch the surface here. A comprehensive introduction into "Methods for Evaluating Interactive Information Retrieval Systems with User" gives Kelly \cite{Kelly2007}. A shorter introduction gives Hearst in Chapter 2 in her book "User Search Interfaces" \cite{Hearst2009}.\\
+We will only scratch the surface here. A comprehensive introduction into "Methods for Evaluating Interactive Information Retrieval Systems with User" gives Kelly \cite{Kelly2007}. A shorter introduction suited for "User Search Interfaces" gives Hearst in Chapter 2 of her book \cite{Hearst2009}.
 
 \subsection{Basics}
 
@@ -614,7 +620,7 @@ So we want to measure usability, but how is it defined? The ISO 9241-11, 1998 \c
 
 \subsection{Experiment vs. Evaluation}
 
-It is important to distinguish between the terms 'experiment' and an 'evaluation'. Kelly \cite{Kelly2007} writes:
+It is important to distinguish between the terms ``experiment'' and an ``evaluation''. Kelly \cite{Kelly2007} writes:
 \begin{quote}
 Evaluations are conducted to assess the goodness of a system, interface or interaction technique and can take many forms [..] Experiments have historically been the main method for interactive system evaluation, but experiments can also be conducted to understand behavior [..] Two important characteristics of experiments are that there are at least two things being compared (e.g., system type) and that some manipulation takes place [..] In some types of [interactive information retrieval] studies only a single system is evaluated. This is a weaker form of evaluation since it is not possible to demonstrate how much better users perform or how different their behaviors and inter actions are since there is no point of comparison. Traditional usability tests are examples of this type of evaluation. Traditional usability tests are usually conducted with a single version of a system, with the goal of identifying potential usability problems.	
 \end{quote}
@@ -623,7 +629,7 @@ In this thesis, the system is only evaluated to find usability problems. No comp
 
 \subsection{Informal Usability Testing}
 
-Hearst \cite{Hearst2009} describes Informal Usability Testing as "Showing designs to participants and recording their responses". It is often used in short iterative cycles to quickly evaluate a design. In this thesis, only informal usability studies are conducted because the conductors do not have proper equipment nor any experience with user studies.
+Hearst \cite{Hearst2009} describes Informal Usability Testing as "Showing designs to participants and recording their responses". It is often used in short iterative cycles to quickly evaluate a design. In this thesis, only informal usability studies are conducted because the conductors do not have proper equipment nor any experience with other user studies.
 
 \subsection{Questionnaires}
 
@@ -636,33 +642,38 @@ A questionnaire comprises a set of questions and is cheap and fast way to gather
 
 \subsection{Thinking Aloud}
 
-Kelly \cite{Kelly2007} writes by referring to Ericsson and Simon \cite{Ericsson1993}: "The think-aloud method asks subjects to articulate their thinking and decision-making as they engage in [interactive information retrieval]". The comments from the participants have to be collected. Either by recording the session or by taking notes. It is hoped that the conductors can learn from the thinking process of the participant. There exist variations of this technique. Because it can be exhausting, challenging and awkward to talk to yourself all the time, participants are encouraged to report either at some fixed times or when the feel the need.
+Kelly \cite{Kelly2007} explains by referring to Ericsson and Simon \cite{Ericsson1993} that the think-aloud method asks subjects to articulate their thinking and decision-making as they engage with the interface. The comments from the participants have to be collected. Either by recording the session or by taking notes. It is hoped that the conductors can learn from the thinking process of the participant. There exist variations of this technique. Because it can be exhausting, challenging and awkward to talk to yourself all the time, participants are encouraged to report either at some fixed times or when they want.
 
 \section{Setup}
 
-Sadly, I only had minor influence on the setup of this study because I was not allowed to set it up. The conductors in charge where amateurs and did not had any experience with human studies. The evaluation was done with five people with a background in humanities. Only from three participants were the demographic collected: Female 60 years old, female 49 years old, male 44 years old. All participant listed to an introductory presentation which was given in Spanish. I do not know what was that to them because my Spanish is not good enough. The participants were split into two groups: One with three participants and one with two participants. There were split because there was not enough time to do individual session.\footnote{But to be honest, I am not really sure why it was decided to do this.} All members of the group sat in front of the interface and the participants rotated in front of the interface. I was responsible for the group with three participants. From the group with two people, it was not possible collect any data during data study. All participants filled in a questionnaire afterwards. So just I describe the procedure of the group I was responsible of. After the introductory lecture, all participant got a handout. The handout consists of four parts:
+Sadly, I only had minor influence on the setup of this study because I was not allowed to set it up. The conductors in charge where amateurs and did not had any experience with human studies. The evaluation was done with five people with a background in humanities. Only from three participants were the demographic collected: Female 60 years old, female 49 years old, male 44 years old. All participant listed to an introductory presentation which was given in Spanish. I do not know what was the content of the presentation because I do not speak Spanish well enough. The participants were split into two groups: One with three participants and one with two participants. These two groups sat in the same room approximately four meters distant from each other. They were split into groups because there was not enough time to do individual session.\footnote{Not my decision.} All members of a group sat in front of \textit{one} computer. The participants rotated in front of the computer. I was responsible for the group with three participants. From the group with two people, it was not possible collect data during the session. All five participants filled in a questionnaire after the session. So now I will just describe the procedure of my group. \\
+
+	After the introductory lecture, all participant got a handout. The handout consists of four parts:
 \begin{enumerate}
 	\item A description of the interface. But this was an academic text and not meant to be a manual. I doubt that anybody read it.
-	\item Four Tasks the participants should do. They are included in the Appendix~\ref{app:tasks}. These tasks were ridiculous long and the third task was not even doable!
-	\item A questionnaire witch ten closed questions from USE questionnaire \cite{lund2001measuring}. \ref{app:closed}
-	\item Fourth open questions as asked by Kelly  \cite{Kelly2008}. \ref{app:open}
+	\item Four Tasks the participants should do. They are included in the Appendix~\ref{app:tasks}. I do not think that these tasks were suited for a user study. They were too long and they revealed to much to the user. In my opinion, the user has to figure our her own how to solve a given task. The third task was not even doable, because the term was not in the lattice.
+	\item A questionnaire witch ten closed questions from USE questionnaire \cite{lund2001measuring} (Chosen by me). The question are also in the Appendix~\ref{app:closed}.
+	\item Three open questions as asked by Kelly \cite{Kelly2008} (Chosen by me). And additionally one question which should compare the evaluated system with the original search engine\footnote{\url{http://www.mcu.es/ccbae/es/consulta/resultados_busqueda.cmd?busq_codsecc=MCAGS}}. It was not my idea to include this question. I agree, that it is a good idea to compare this two system, but the whole study was not designed to compare it. The other search engine was not even presented. All four questions are in the Appendix~\ref{app:open}.
 \end{enumerate}
 
-So from the other group, we had no data while there were using the interface and I cannot tell how they did it. In my group, I encouraged the participants to talk to me while they were using the interface. I did not force them to speak to all the time, but I asked them time to time. The session was recored with an iPhone 6 Plus\footnote{\url{https://www.apple.com/iphone-6}} and analyzed afterwards. The instructor wanted the participants to do the tasks, but I knew that the task were complete nonsense and persuaded the participants to just use the interface. But after some time, I had no excuse left to not do the tasks and I finally surrendered and let them do the tasks. But this was okay, because I already collected enough data. After around 55 mins the session was done and the participants filled in the pen-and-paper questionnaires - in Spanish. The instructor allowed the participants to fill out the questionnaire in Spanish\footnote{Spanish people believe that their English is very bad. Which is not totality true but you believe anything if you repeat it often enough.}. This made the open questions nearly worthless because the translation process was not carefully done\footnote{Why? Because they did not fucking care}.
-
+During the session, I encouraged the participants to talk to me while they were using the interface. I did not force them to speak to all the time, but I asked them time to time. The session was recored with an iPhone 6 Plus\footnote{\url{https://www.apple.com/iphone-6}} and analyzed afterwards. The instructor wanted the participants to do the tasks, but I knew that the tasks were complete nonsense and persuaded the participants to just use the interface. But after some time, I had no excuse left to not do the tasks and I finally surrendered and let them do the tasks. At this time, I already collected enough data. After around 55 mins the session was done and the participants filled in the pen-and-paper questionnaires - in Spanish. The instructor allowed the participants to fill out the questionnaire in Spanish. This made the analyzes of the responses very difficult. Even thought they were translated, I do not have access to all the written responses because the translation process was not carefully done.
 \section{Results}
 
-It was hard to extract knowledge from this chaotic evaluation setup. I group the results into two categories: closed questions and everything else as \textit{comments} to keep things short. There were not any major differences among the comments so we can group it togethter. It is also worth mentioning, that this evaluation study was the first time for the participants, that they were confronted with a FCA-based approach. This lead to some comments on the approach itself.
+It was hard to extract knowledge from this chaotic evaluation setup. I group the results into two categories: closed questions and everything else as \textit{comments} to keep things short. There were not any major differences among the verbal comments during the session and the open questions after the session. This can also be due to the fact, that I did not have access to the original sources and only to a sloppy translation. It is also worth mentioning, that the evaluation study was the first time for the participants to use a FCA-based system. This lead to some comments on the approach itself.
 
 \subsection{Comments}
-All participants wrote down and said, that they were missing the possible to refine the search by a time range, location and author of the map. They said, that this is the very important for their work. One participant could not believe, why the search was not working when she search ``Valencia''. The term was not included in the word list and thereby not in the lattice. She mentioned, that this should get fixed immediately. Two results gave suggestions to improve the result list. Both said, that the thumbnails should definitely be included and that they were not interested in the text snippet. By removing the text snippets and thereby reducing the height of a result item, they could see more results at once. They were very interested to see as much titles as possible. No participant used the possibility to save documents. One participant highlighted, that he wanted to see related \\
+All participants wrote down and said, that they were missing the possible to refine the search by a time range, location and author of the map. They said, that this is the very important for their work. In addition, one participant could not believe, why the search was not working when she searched for ``Valencia''. The term was not included in the word list and thereby not in the lattice. So the search resulted in an empty search results. She mentioned, that this should get fixed immediately. One participant said that she thinks, that the content of the concept lattice is biased. She thinks other terms would be better. Another participant disagrees and thinks that the words are appropriate. \\
 
-In regard to the interface in general, the comments were positiv. The participants liked the clean design. One participant wrote that using the system was funny. Two participants said, that they liked the interface but not the content. Two participants wrote it easy to use. I observed, that the users did not used the search very often. They were interested in the skimming over the bubble cloud.
+I confronted one participant with the question what they exactly need, because I think that the original search engine\footnote{\url{http://www.mcu.es/ccbae/es/consulta/resultados_busqueda.cmd?busq_codsecc=MCAGS}} already offers what they are asking for. She responded that she thinks I am right. But she also showed the search engines some times fails to deliver results. In addition, I showed to her another website which displayed old maps\footnote{\url{http://www.oldmapsonline.org/}}. She responded, that she liked the idea. \\
+
+Two participants gave suggestions to improve the result list. Both said, that the thumbnails should definitely be included and that they were not interested in the text snippet. By removing the text snippets and thereby reducing the height of a result item, they could see more results at once. They were very interested to see as much titles as possible. No participant used the possibility to save documents. Two participants said, that they found it a good idea to link to the original website. One participant explained, that she is very interested to see related maps to a given maps. This would be the original way how humanists do their research.\\
+
+In regard to the appearance of the interface in general, the comments were positiv. The participants liked the clean design. One participant wrote that using the system was funny. Two participants said, that they liked the interface but not the content. Two participants wrote it easy to use. I observed, that the users did not used the search very often. They were more interested in the skimming over the word cloud.
 
 \subsection{Closed Questions}
 
 \begin{table}[h]
-\caption{Responses from closed questions. Participants (n=3) had to choose between 0 (disagree) and 7 (agree). }
+\caption{Responses from closed questions. Participants (n=3) had to choose between 1 (disagree) and 7 (agree). }
 \label{table:closed}
 \centering
 
@@ -695,28 +706,30 @@ It is fun to use&$5.\bar{6}$\\
 \end{tabular}
 \end{table}
 
-Out of the five participants only three filled out the questionnaire. All results are in the Appendix~\ref{app:closed}. The average responses are shown in Table~\ref{table:closed}. The results correspond to the comments made by participants. The weakest results got the sentences "It meets my needs" and "It does everything I would expect it to do". We elaborated on this, that the participants want to refine their information needs etc.. The best result got the sentence "It is easy to use". It looks like the participants liked the interface.
+Out of the five participants only three filled out the questionnaire. All results are in the Appendix~\ref{app:closed}. The average responses are shown in Table~\ref{table:closed}. The results correspond to the comments made by participants. The weakest results got the sentences "It meets my needs" and "It does everything I would expect it to do". The participants made a lot comments about this in the previous section. The best result got the sentence "It is easy to use". Overall the results are positive, but it is hard to draw conclusions because it is not clear how the bad content affected the perception of the user. The study should be repeated in a case, when the concept lattice itself is useful. This would yield better results.
+
 \section{Accessibility Analysis}
 
-In addition to the evaluation session, there was an evaluation regarding accessibility\footnote{If people with disabilities can use the interface.}. It was conducted by people from the UNED: Miguel Angel Marqueta and Covadonga Rodrigo San Juan. The report can be found in Appendix~\ref{app:access}. Their comments were overall positive buy they highlighted some problems with the interface: It is possible to zoom in the bubble cloud, but there are no buttons on the screen for it. In the current state, the zooming can only be done with a mouse or a touchpad. They also pointed out, that it is hard to see if the result list updates. They updating process of the result list should be more visual.
+In addition to the evaluation session, there was an evaluation regarding accessibility\footnote{If people with disabilities can use the interface.}. It was conducted by people from the UNED: Miguel Angel Marqueta and Covadonga Rodrigo San Juan. The report can be found in Appendix~\ref{app:access} but they also did some verbal comments which will be told here. Their comments were overall positive but they highlighted some problems with the interface: It is possible to zoom in the bubble cloud, but there are no buttons on the screen for it. In the current state, the zooming can only be done with a mouse or a touchpad. They also pointed out, that the users cannot see if the result list was updated. They updating process of the result list should be more visual. They mentions, that the heart icon to bookmark documents may be misleading and should be changed. 
 
 \section{Conclusions} 
-Zobel\cite{Zobel2004} proclaims that far too many human studies in computer science are amateurish and invalid. I have to admit, that this study is one of those amateurish studies. In addition, it is hard to draw conclusions because of the low number of participants. But it can be said that FCA, in this implementation, does not suits the needs of the user. It is very confusing for the users that they cannot search for arbitrary terms on the lattice. It is also the a major problem, that the users cannot refine their informations needs along dimension. They want to specify time ranges or locations. FCA cannot offer this because it only works on one-dimensional data. For the future, techniques like faceted search as described in Section~\ref{dyafs} should be applied. This could result into an interface similar to \url{http://www.oldmapsonline.org/}\\
+Zobel \cite{Zobel2004} proclaims that far too many human studies in computer science are amateurish and invalid. I have to admit, that this study is one of those amateurish studies. In addition to the chaotic setup, it is hard to draw conclusions because of the low number of participants. But it can be said that how FCA was applied to the documents collection, does not suits the needs of the user. It is very confusing for the users that they cannot search for arbitrary terms on the lattice. It is also the a major problem, that the users cannot refine their informations needs along dimension. They want to specify exact time ranges, locations and authors. FCA cannot offer this because it only works on one-dimensional data. For the future, techniques like faceted search as described in Section~\ref{dyafs} should be applied. This could result into an interface similar to \url{http://www.oldmapsonline.org/}.\\
  
-For the interface itself, it looks like that the users found it easy to use and easy to learn it. But there exist problems with the presentation of the result list. But also other problems were found. This problems should be addressed in future iterations of the software.
+For the interface itself, it looks like that the users found it easy to use and easy to learn it. But there exist problems with the presentation of the result list. But also other minor problems were found. This problems should be addressed in future iterations of the software. It is to question, if the users want to bookmarks search results. The results always links to a web page. So it can be argued, that it is not need to offer this possibility.
+
 \chapter{Fancy FCA 2.0}
 \label{Fancy 2.0}
 
-\blindtext
+Built upon the conclusion of the evaluation, it was decided not follow FCA for the maps. 
 
 \chapter{Conclusions}
 \label{Conclusions}
 
-First, at described in the introduction, digital humanities is about building tools for human scholars. Building tools it NOT the primary focus of computer science research. Computer science research is mainly focused on finding new algorithms, refining algorithms, apply algorithms to new problems etc.. There are not famous for being the best software engineers. It is a very bad idea, to take computer science researchers and say to them: ``Now build some tools for human scholars.'' as this was done in this case. As this thesis showed, this approach was an utter failure. The researchers want to apply bleeding-edge methods as FCA when building this tools. But all the human scholars needed, was a very simple search interface with some custom query filters. But, at least of an ordinary information retrieval scientist, is not very interesting and so they are trying some fancy stuff. To do real research in digital humanities, people needed who live and breathe digital humanities. I think, this is the reason why wise people coined the term ``digital humanities'' to make clear that it is fundamentally different from computer science. \\
+First, at described in the introduction, digital humanities is the intersection between humanities and information technologies. This boils down to the development of digital tools for human scholars. This was also the underlying task the research group should do, but: Building tools it NOT the primary focus of computer science research. Computer science research is mainly focused on finding new algorithms, refining algorithms, apply algorithms to new problems etc.. Computer scientists are not famous for being the best software engineers. It is a very bad idea, to take computer scientists and say to them: ``Now build some tools for human scholars!'' as this was done in this case. As this thesis showed, this approach was an utter failure. The researchers wanted to apply bleeding-edge methods, as FCA, when building these tools. But all the human scholars (supposedly\footnote{Requirements were never defined.}) needed, was a very simple search interface with some custom query filters. But, at least of an ordinary computer scientist, this is not very challenging and so they are trying some sophisticated methods. To do real research in digital humanities, people are needed who live and breathe digital humanities. I think, this is the reason why wise people coined the term ``digital humanities'' to make clear that it is fundamentally different from computer science research. \\
 
-Second, I proposed a method to visualize large concept lattice. It focuses only on small parts of the lattices and the user can incrementally explore the lattice. Thereby she feels confident to explore the lattice because she can always backtrack to earlier actions. I can say with slight confidence\footnote{The evaluation setup was very chaotic.}, that the user liked this approach. But further user studies with experiments are needed to judge if my proposal suits the needs of the users. \\
+Second, I proposed a method to visualize large concept lattice. It focuses only on small parts of the lattices and the user can incrementally explore the lattice. Thereby she feels confident to explore the lattice because she can always backtrack to earlier actions. I can say with slight confidence\footnote{The evaluation setup was very chaotic.}, that the user liked this approach. But further user studies are needed to judge if my proposal suits the needs of the users. \\
 
-Third, for the use of FCA in IR, the evaluation showed that it is difficult. If the concept lattice is build from word list of possible index terms, it can irritate the user why only a small portion is in the concept lattice. This does not look promising and should be dropped.
+Third, for the use of FCA in IR, the evaluation showed that it is difficult. If the concept lattice is build from word list of possible index terms, it can irritate the users why only a small portion of all possible words is in the concept lattice. This procedure does not look promising and should be avoided in future research.
 \newpage
 \bibliographystyle{plain}
 \bibliography{biblography}
