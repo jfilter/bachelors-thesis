@@ -82,7 +82,7 @@ Formal Concept Analysis is a mathematical method to create hierarchical relation
 
 \chapter*{Zusammenfassung}
 
-Formale Begriffsanalyse ist eine mathematische Methode, um hierarchische Beziehungen zwischen Objekten zu erstellen. Diese Objekte in Verbindung mit deren Beziehungen führen zu einer Struktur genannt Begriffsverband. Wenn der Begriffsverband groß ist, kann er nicht einfach in einer statischen Visualisierung dargestellt werden. Interaktive Visualisierungen versuchen, die Erkenntnisse der großen Begriffsverbände zu vermitteln. Sie beschränken sich darauf, nur kleine Teile des Verbandes zu zeigen und lassen den Benutzer schrittweise den Verband durch ``durchstöbern'' erkunden. In dieser Arbeit schlage ich ein interaktives Visualisierungskonzept für große Begriffsverbände vor, in dem Benutzer zusätzlich die ``durchstöbern''-Aktionen rückgängig machen können. Ich setze dieses Konzept in ein Programm für einen vorgegebenen Begriffsverband um, welches im weltweiten Netz läuft. Dieser Verband wurde von Anmerkungen über digitalisierte historische Karten erstellt. Die Umsetzung wurde mit einem Benutzerstudie (n=5) evaluiert. Die Ergebnisse zeigen, dass der vorgegebene Begriffsverband nicht die Informationen enthält, nach denen die Benutzer suchen, aber dass das Visualisierungskonzept selbst vielversprechend aussieht, da die Benutzer fanden, dass es einfach zu bedienen war.
+Formale Begriffsanalyse ist eine mathematische Methode, um hierarchische Beziehungen zwischen Objekten zu erstellen. Diese Objekte in Verbindung mit deren Beziehungen führen zu einer Struktur namens Begriffsverband. Wenn der Begriffsverband groß ist, kann er nicht einfach in einer statischen Visualisierung dargestellt werden. Interaktive Visualisierungen versuchen, die Erkenntnisse der großen Begriffsverbände zu vermitteln. Sie beschränken sich darauf, nur kleine Teile des Verbandes zu zeigen und lassen den Benutzer schrittweise den Verband durch ``durchstöbern'' erkunden. In dieser Arbeit schlage ich ein interaktives Visualisierungskonzept für große Begriffsverbände vor, in dem Benutzer zusätzlich die ``durchstöbern''-Aktionen rückgängig machen können. Ich setze dieses Konzept in ein Programm für einen vorgegebenen Begriffsverband um, welches im weltweiten Netz läuft. Dieser Verband wurde von Anmerkungen über digitalisierte, historische Karten erstellt. Die Umsetzung wurde mit einem Benutzerstudie (n=5) evaluiert. Die Ergebnisse zeigen, dass der vorgegebene Begriffsverband nicht die Informationen enthält, nach denen die Benutzer suchen, aber dass das Visualisierungskonzept selbst vielversprechend aussieht, da die Benutzer fanden, dass es einfach zu bedienen war.
 
 \newpage
 \thispagestyle{empty}
@@ -127,7 +127,7 @@ I thank all people who have been fighting for free public education.
 \label{figure:map}
 \end{figure*}
 
-The digital revolution is affecting every part of our life. So the humanities scholars witness a change in their work life when analog collections are digitized. They have to apply algorithms to organize and analyze huge amount of data. The term ``digital humanities'' evolved during the last ten years and it can be defined as an intersection between the humanities and information technology  \cite{Svensson2010}. The information retrieval research group at the computer science department of the Universidad Nacional de Educación a Distancia (UNED) in Madrid cooperates with human scholars to conduct research in digital humanities. In their current project\footnote{\url{http://linhd.uned.es/p/proyecto-dimh}}, they work on historical maps. The maps have been drawn between 1503 and 1805, digitized and are available on the web\footnote{\url{http://www.mcu.es/ccbae/es/consulta/resultados_busqueda.cmd?busq_codsecc=MCAGS}}. These maps were annotated by human scholars. An example of a map is shown in Figure~\ref{figure:map} and its annotation are shown in Figure~\ref{figure:metadata}.\\
+The digital revolution is affecting every part of our life. So also the humanities scholars witness a change in their work life when analog collections are digitized. They have to apply algorithms to organize and analyze huge amount of data. The term ``digital humanities'' evolved during the last ten years and it can be defined as an intersection between the humanities and information technology  \cite{Svensson2010}. The information retrieval research group at the computer science department of the Universidad Nacional de Educación a Distancia (UNED) in Madrid cooperates with humanities scholars to conduct research in digital humanities. In their current project\footnote{\url{http://linhd.uned.es/p/proyecto-dimh}}, they work on historical maps. The maps have been drawn between 1503 and 1805, digitized and are available on the web\footnote{\url{http://www.mcu.es/ccbae/es/consulta/resultados_busqueda.cmd?busq_codsecc=MCAGS}}. These maps were annotated by humanities scholars. An example of a map is shown in Figure~\ref{figure:map} and its annotation are shown in Figure~\ref{figure:metadata}.\\
 
 \begin{figure*}[!ht]
 	\centering
@@ -156,7 +156,7 @@ Because a concept lattice is also a lattice, concept lattices can be represented
 
 So the topic of this thesis is the theoretical elaboration about FCA and its visualization. This will lead to an own concept which will be implemented with the concept lattice derived from the collection of digitized maps. The implementation will be evaluated with a user study with five participants. The result of the study will show if my concept and its implementation are attractive for the users. It also possible to draw some conclusions about the given concept lattice (and FCA) itself, because the visualization can only be as good as its content.\\
 
- The remainder of this thesis is structured as follows: The background of Formal Concept Analysis and Interface Design Principles is presented in Section~\ref{Background}. The discussion of related work takes place in Section~\ref{Related Work}. Inferring from the related work, I will present my concept  and implementation in Section~\ref{Fancy 1.0}, which will  be evaluated in Section~\ref{Evaluation}. Built upon the conclusion of the evaluation, a new version of my work including a description about future words are presented in Section~\ref{Fancy 2.0}, before eventually concluding in Section~\ref{Conclusions}.
+ The remainder of this thesis is structured as follows: The background of Formal Concept Analysis and interface design principles is presented in Section~\ref{Background}. The discussion of related work takes place in Section~\ref{Related Work}. Inferring from the related work, I will present my concept  and implementation in Section~\ref{Fancy 1.0}, which will  be evaluated in Section~\ref{Evaluation}. Built upon the conclusions of the evaluation, a new version of my concept is presented in Section~\ref{Fancy 2.0}, before eventually concluding in Section~\ref{Conclusions}.
  
 \chapter{Background}
 \label{Background}
@@ -213,7 +213,7 @@ Let the operator $'$ for $B \subseteq M$ be defined as following:
 
 $B'$ is the set of objects that have at least the attributes given in $B$. \\
 
-$A$ is called \textit{closed}, if $A \subseteq G$ such that $A = A''$. The same is true for $B \subseteq M$ and $B = B''$. For example, let a set of objects be defined as $A_1 = \{1,4\} \subseteq G$. This results into: $A_1' = \{square\}$ and $A_1'' = \{1,4,9\}$. $A_1$ is not closed but $A_2 = \{1,4,9\} \subseteq G$ is called closed because $A_2 = A_2''$. \\   
+$A$ is called \textit{closed}, if $A \subseteq G$ such that $A = A''$. The same is true for $B \subseteq M$ and $B = B''$. For example, let a set of objects be defined as $A_1 = \{1,4\} \subseteq G$. This results into: $A_1' = \{square\}$ and $A_1'' = \{1,4,9\}$. $A_1$ is not closed but $A_2 = \{1,4,9\} \subseteq G$ is closed because $A_2 = A_2''$. \\   
 
 A \textit{formal concept} is a pair of $(A, B)$ where $A \subseteq G$ and $B \subseteq M$ and $A = B' \wedge B = A' $. Informally, all objects in $A$ share exactly the same attributes in $B$. $A$ is a set of objects called the \textit{extent} of a formal concept. $B$ is a set of attributes called the \textit{intent} of a formal concept. The extent and the intent of all formal concepts are always closed. From the example in Table~\ref{table:example}, we can derive several formal concepts. Three randomly chosen concepts are shown in Table~\ref{table:exampleConcepts}. \\
 
@@ -268,7 +268,7 @@ After this general introduction, I will describe in the next section how we can 
 
 Up to now, I only showed simple examples to illustrate the basics of FCA. So where was it applied? According to Poelmans et al. \cite{Poelmans2013}, FCA has been applied in many disciplines such as software engineering, knowledge discovery and information retrieval. They conducted two comprehensive surveys on the application of FCA \cite{Poelmans2013, Poelmans2013b}.\\
 
-In the case of information retrieval, the objects are the documents. These documents are described by index terms, which are the attributes of the objects. The selection of appropriate index terms for a certain document is beyond the scope of this thesis. The interested reader finds more about this topic in the work from Manning et al. \cite{manning2008introduction}. Documents are described by index terms in Table~\ref{table:fcair} taken from Godin et al. \cite{Godin1993}. The concept lattice is visualized in Figure~\ref{figure:fcair}.
+In the case of information retrieval, the objects are the documents. These documents are described by index terms, which are the attributes of the objects. The selection of appropriate index terms for a certain document is beyond the scope of this thesis. The interested reader finds more about this topic in the work from Manning et al. \cite{manning2008introduction}. Let us look at an example from Godin et al. \cite{Godin1993} in Table~\ref{table:fcair}. There, you can see that the documents are described by index terms. The corresponding concept lattice is visualized in Figure~\ref{figure:fcair}.
 
 \begin{table}[h]
 \caption{Documents described by Index Terms. Source: Godin et al. \cite{Godin1993}}
@@ -300,7 +300,7 @@ In the case of information retrieval, the objects are the documents. These docum
 \label{figure:fcair}
 \end{figure*}
 
-Carpineto and Romano \cite{Carpineto2005} describe that a concept can be seen as a query (intent) with a set of retrieved documents (extent) and that neighboring concepts can be seen as minimal query changes. When the user queries a FCA-based system, the intents of the formal concepts are checked for a match (or a partial match if there is no match in the first place\footnote{It can happen that the query terms does not have a corresponding formal concept but a subset of other intents of formal concepts. This happens where there are other additional terms which always occur together with all terms of the query.}). So for instance with the query "child fantasy friendship" the documents 4 and 6 would be retrieved. You can find the formal concept surrounded with a circle in Figure~\ref{figure:fcair}.\\
+Carpineto and Romano \cite{Carpineto2005} describe that a formal concept can be seen as a query (intent) with a set of retrieved documents (extent) and that neighboring formal concepts can be seen as minimal query changes. When the user queries a FCA-based system, the intents of the formal concepts are checked for a match (or a partial match if there is no match in the first place\footnote{It can happen that the query does not have a corresponding formal concept but there exists other formal concepts where the query is a subset of its intent. This happens when there exists additional words that are not in the query and always occur together with the query terms. For the given example shown in Figure~\ref{figure:fcair}, imagine a user would search just for ``child''. The most general formal concept of all matches would be retrieved in such a case.}). So for instance with the query "child fantasy friendship" the documents 4 and 6 would be retrieved. You can find the formal concept surrounded with a circle in Figure~\ref{figure:fcair}.\\
 
 Sacco and Tzitzikas \cite{Sacco2009} describe two information access modes: \textit{focalized search} and\textit{exploratory search}. In focalized search, the user is interested to find relevant information to a given query (which results from a known information need). In exploratory search, the user wants to explore the relationships among items in a data collection. While FCA provides the user with the ability to do focalized search, it also offers sophisticated exploratory capabilities. When the user queries the system (as described above), not only the documents of the formal concepts (which was determined based on the query) are retrieved, but she can also investigate the position of the corresponding node in the lattice. Is the node in the upper half and thereby more general? Or is it in the bottom half and thereby more specific? What are the related formal concepts? How do they differ? Would there be a lot more documents if I would remove a term from the query? All these questions can be answered and because the whole lattice is already computed, this can be done relatively fast. Without going into detail, a major problem of FCA is the time-consuming creation of a lattice. But the focus of this thesis is the visualization of concept lattices and not the creation of concept lattices. This section should give a slight introduction and the interested reader is advised to study the work from Carpineto and Romano \cite{carpineto2004concept} for a detailed investigation. \\
 
@@ -309,14 +309,14 @@ This thesis works with a given concept lattice to visualize it. Therefore it is 
 \subsection{The Concept Lattice of the Digitized Maps}
 \label{thedata}
 
-The research group built the concept lattices based on the annotations of 7492 maps. The first step is to construct the index terms of the documents. For this, they asked some human scholars for terms that they are interested in. They collected 100 terms which are the possible index terms. A document is described by an index terms if it occurs in the documents at least once. For this, the different dimensions of the annotations like author, location etc. are treated as a single document without any separation between the dimensions. From these index terms, they built the concept lattice which contains 131379 formal concepts.\\
+The research group built the concept lattices based on the annotations of 7492 maps. The first step is to construct the index terms of the documents. For this, they asked some humanities scholars for terms that they are interested in. They collected 100 terms which are the possible index terms. Then they created the index terms for each document. An index term describes a documents if it occurs somewhere in the annotation. The different dimensions of the annotations like author or location are ignored. It only matters if it occurs somewhere. From these index terms, they built the concept lattice which contains 131,379 formal concepts.\\
 
 Because this thesis focuses on the user interface, let us review user interface design principles before we discuss related work in Section~\ref{Related Work}.
 
 \section{Interface Design}
 \label{id}
 
-The user interface is responsible for the interaction with users. The interaction of humans with computers has its own research area, Human-Computer Interaction (HCI), and one of its pioneers is Ben Shneiderman. In the following, two of his principles will be presented: The "Eight Golden Rules of Interface Design" \cite{Shneiderman2010} and the "Visual Information Seeking Mantra" \cite{Shneiderman1996}.
+The user interface is responsible for the interaction with users. The interaction of humans with computers has its own research area, human-computer interaction, and one of its pioneers is Ben Shneiderman. In the following, two of his principles will be presented: The "Eight Golden Rules of Interface Design" \cite{Shneiderman2010} and the "Visual Information Seeking Mantra" \cite{Shneiderman1996}.
 
 \subsection{Eight Golden Rules of Interface Design}
 \label{Golden}
@@ -330,8 +330,8 @@ These rules \cite{Shneiderman2010} are general advices for user interface design
 	\item Design dialogs to yield closure: Sequences of actions should be grouped. Give feedback on completion of a group.
 	\item Prevent errors: Design the system so that the user cannot even do errors in the first place. But if she does some, offer instructions how to recover.
 	\item Permit easy reversal of actions: Actions should be undoable. This gives the user confidence to explore the system.
-	\item Support internal locus of control: The user should think that she is in charge.
-	\item Reduce short-term memory load: Reduce the number of things the user has to keep in mind while using the system.
+	\item Support internal locus of control: The user should think that she is always in charge.
+	\item Reduce short-term memory load: Reduce the number of things that the user has to keep in mind while using the system.
 \end{itemize}
 
 There exist alternative principles, for instance: Donald Norman's Design Principles \cite{Norman2013} or Jakob Nielsen's "10 Usability Heuristics for User Interface Design" \cite{Nielsen1995}. They are very similar and only differ in insignificant details.\\
@@ -340,9 +340,9 @@ These principles can be applied to all user interfaces. In the next section, des
 
 \subsection{Visual Information Seeking Mantra}
 
-The visual information seeking mantra (the Mantra) was introduced by Ben Shneiderman \cite{Shneiderman1996} and is based on his experience with past projects. Albeit the Mantra was intended to be a "descriptive and explanatory" \cite{Card1999} one, "in effect, the Mantra has become a prescriptive principle for many information visualization designers”, write Craft and Cairns \cite{Craft2005}. \\
+The visual information seeking mantra (the Mantra) was introduced by Ben Shneiderman \cite{Shneiderman1996} and is based on his experience with past projects. Albeit the Mantra was intended to be "descriptive and explanatory" \cite{Card1999}, "in effect, the Mantra has become a prescriptive principle for many information visualization designers”, write Craft and Cairns \cite{Craft2005}. \\
 
-The Mantra describes design principles for interfaces when users view collection of items. These items are described by multiple attributes. The starting principles are: overview first, zoom and filter, and then details on demand. These four principles will be explained below and extended by three other principles.
+The Mantra describes design principles for interfaces when users view a collection of items. These items are described by multiple attributes. The starting principles are: overview first, zoom and filter, and then details on demand. These four principles will be explained below and extended by three other principles.
 \begin{itemize}
 	\item Overview: Gain an overview of the entire collection.
 	\item Zoom: Zoom in on items of interest.
@@ -357,7 +357,7 @@ Some tasks need more explanation.
 
 \subsubsection{Zoom and Filter}
 
-These tasks are responsible for reducing the complexity of the data collection. 'Zoom' means that the user focuses on items she wants to see. 'Filter' means that she can hide items which are not interesting for her.
+These tasks are responsible for reducing the complexity of the data collection. ``Zoom'' means that the user focuses on items she wants to see. ``Filter'' means that she can hide items which are not interesting for her.
 
 \subsubsection{History}
 
@@ -365,18 +365,18 @@ It is important to give the user the possibility to easily recover from mistakes
 
 \subsubsection{Extract}
 
-Once interesting objects are found, the user should have the possibility to extract them from the system. Shneiderman describes printing, emailing or saving the item to the disk as 'extraction'.
+Once interesting objects are found, the user should have the possibility to extract them from the system. Shneiderman describes printing, emailing or saving the item to the disk as ``extraction''. Nowadays, this probably means the user should be able to share the items on her desired social network.
 
 \subsection{Final Remarks}
 
-The presented ideas are based mostly on the experience of one person: Ben Shneiderman. The huge number of citations show that his work is influential but Craft and Cairns \cite{Craft2005} call for empirical justification of the Mantra. HCI is a young research area, better and more polished guidelines will emerge the future. Until then, the work from Ben Shneiderman seems to be a valid starting point. \\
+The presented ideas are mostly based on the experience of one person: Ben Shneiderman. The huge number of citations show that his work is influential but Craft and Cairns \cite{Craft2005} call for empirical justification of the Mantra. Human-computer interaction is a young research area, better and more polished guidelines will emerge the future. Until then, the work from Ben Shneiderman seems to be a valid starting point. \\
 
 These principles are up to interpretation and adaption. Every system is different and has its different needs. For this reason, let us review what other people did and how they designed their interface for FCA-based systems.
 
 \chapter{Related Work}
 \label{Related Work}
 
-After introducing formal concept analysis in Section~\ref{Formal Concept Analysis}, let us review and discuss related work. In the first three sections, I go over different FCA-based approaches. Eventually, we evaluate one FCA-based approach in detail: The Virtual Museum of the Pacific. In Section~\ref{dyafs}, a non-FCA based approach is shown which is related to FCA: Faceted Search. \\
+After introducing formal concept analysis in Section~\ref{Formal Concept Analysis}, let us review and discuss related work. In the first three sections, I will go over different FCA-based approaches. Eventually, I will evaluate one FCA-based approach in detail: The Virtual Museum of the Pacific. In Section~\ref{dyafs}, a non-FCA based approach is shown which is related to FCA: Faceted Search. \\
 
 \section{Full Hasse Diagrams}
 
@@ -386,15 +386,16 @@ But in the domain of information retrieval you get formal contexts with a lot of
 
 \section{Pruned Hasse Diagrams}
 
-The Hasse diagrams can be pruned by reducing the number of vertices. The different techniques are discussed in the next section.
+The first idea: Prune the Hasse diagram by reducing the number of vertices. In the following are techniques to do so.
 
 \subsection{Reduce Number of Formal Concepts}
 
-One way to reduce the number of vertices is to compute the \textit{iceberg lattices} as described by Stumme et al. \cite{Stumme2002}. They result from the application of a data mining technique "frequent item-set mining" from Agrawal et al. \cite{Agrawal1993}. Only formal concepts are selected which are considered "frequent". A formal concept is frequent if its intent, the set of attributes, is frequent. Let $B$ be the intent and $minSupport \in [0, 1]$, then $B$ is frequent if $ |B'|/|G| \geq minSupport$. This means the attribute set has to specify a high portion of objects; at least $minSupport$. This approach has some drawback as Kuznetsov et al. \cite{Kuznetsov20072} point out that "exotic" or "emergent" concepts that are not represented by a large number of objects can be interesting too and should not be overlooked. They propose to only select "stable" concepts \cite{Kuznetsov20072}. The intent of stable concepts does not depend much on each object of the extent. It is also possible to apply traditional cluster techniques like fuzzy K-Means clustering to FCA \cite{AswaniKumar2010}. \\
+One way to reduce the number of vertices is to compute the \textit{iceberg lattices} as described by Stumme et al. \cite{Stumme2002}. They result from the application of a data mining technique "frequent item-set mining" from Agrawal et al. \cite{Agrawal1993}. Only formal concepts are selected which are considered "frequent". A formal concept is frequent if its intent, the set of attributes, is frequent. Let $B$ be the intent and $minSupport \in [0, 1]$, then $B$ is frequent if $ |B'|/|G| \geq minSupport$. This means the attribute set has to specify a high portion of objects; at least $minSupport$. This approach has some drawback as Kuznetsov et al. \cite{Kuznetsov20072} point out that "exotic" or "emergent" formal concepts that are not represented by a large number of objects can be interesting too and should not be overlooked. They propose to only select "stable" formal concepts \cite{Kuznetsov20072}. A formal concept is stable if its intent does not depend much on each object of its extent. It is also possible to apply traditional cluster techniques like fuzzy K-Means clustering to a concept lattice \cite{AswaniKumar2010}. \\
 
-	While all these techniques undoubtably reduce the number of formal concepts, it is to question whether the results are of any help. In our case of information retrieval, we apply FCA to explore the data and get insights about the lattice structure. When pruning the nodes, you are losing many data relationships, many formal concepts and, consequently, the "power" of FCA as exploratory technique is significantly reduced. When we deal with large concept lattices, the number of nodes has to be very low if we want to represent them with Hasse diagrams. Nowadays, the question is not how do I visualize 16 formal concepts as in Figure~\ref{figure:example} - it is rather how can I visualize 160000 formal concepts.\\
+	While all these techniques undoubtably reduce the number of formal concepts, it is to question whether the results are of any help. In our case of information retrieval, we apply FCA to explore the data and get insights about the lattice structure. When pruning the nodes, you are losing many data relationships, many formal concepts and, consequently, the "power" of FCA as exploratory technique is significantly reduced. When we deal with large concept lattices, the number of nodes has to be very low if we want to represent them with Hasse diagrams. Nowadays, the question is not how do I visualize 16 formal concepts as in Figure~\ref{figure:example} - it is rather how can I visualize 160,000 formal concepts.\\
 	
-	Pruning alone is not a proper way to handle large concept lattices. But it can be useful in combination with techniques that are presented in Section~\ref{Local View} to reduce the clutter.
+	Pruning alone is not a proper way to handle large concept lattices. But it can be useful to reduce the clutter of a concept lattice.
+	
 \subsection{Nest Formal Concepts}	
 
 Another approach is the use of \textit{nested line diagrams} - line diagrams are another name for Hasse diagrams. For this, all attributes are partitioned into layers. For example, if you just have two layers, an attribute is either in layer one or two. For the first layer: You built up a Hasse diagram with the attributes \textit{solely} of the first layer. For each vertex in the resulting Hasse diagram, you built up a Hasse diagrams \textit{inside} the vertex. These secondary Hasse diagrams are built from the concept lattice derived from the objects in the vertex (the objects that are the extent of the formal concept). This can be done for an arbitrary number of layers. An example from Carpineto and Romano \cite{carpineto2004concept} is shown in Figure~\ref{figure:nested}. The general idea should be clear without explaining the context - if not, Carpineto and Romano \cite{carpineto2004concept} describe it in more detail. \\
@@ -415,32 +416,31 @@ Instead of showing the full Hasse diagram, the user can have a local view on the
 
 \subsection{Basics}
 
-One could argue that you just have to visualize everything and then allow to zoom on nodes. This techniques is common among network visualizations \cite{Herman2000}. But because of the high connectivity of the graph, this is not helpful to Hasse diagrams. You can see this in the tool ``FCART'' presented by Neznanov and Parinov \cite{Neznanov2014}. In Figure~\ref{figure:fcart} they visualize a concept lattice comprising more than 20000 concepts. \\
-
 \begin{figure*}[!ht]
 	\centering
 	\includegraphics[width=0.5\linewidth]{./images/fcart}
-\caption{FCART, Hasse diagram with over 20000 formal concepts, focus on node with blue borders. Source: Neznanov and Parinov \cite{Neznanov2014}}
+\caption{FCART, Hasse diagram with over 20,000 formal concepts, focus on node with blue borders. Source: Neznanov and Parinov \cite{Neznanov2014}}
 \label{figure:fcart}
 \end{figure*}
 
+One could argue that you just have to visualize everything and then allow to zoom on nodes. This techniques is common among network visualizations \cite{Herman2000}. But because of the high connectivity of the graph, this is not helpful to Hasse diagrams. You can see this in the tool ``FCART'' presented by Neznanov and Parinov \cite{Neznanov2014}. In Figure~\ref{figure:fcart} they visualize a concept lattice comprising more than 20,000 concepts. \\
+
 Even though they chose a light color for the edges, the screen is almost filled only with the the color of the eges. In addition, the labels of the nodes in the top and bottom are overlapping which makes it hard to read them. Let us review some other approaches in the next section which completely break with the Hasse diagram. \\
 
-The local view on a Hasse diagram is called \textit{conceptual neighborhood} by Eklund et al. \cite{Eklund2009,Eklund2012}, \textit{hybrid navigation} by Carpineto and Romano \cite{Carpineto1996} or \textit{semantic probe} by \cite{crampes2014visualizing} by Crampes and Planié. The basic idea is always the same: The interface is always focused on exactly \textit{one} formal concept. The user can navigate through the lattice by going up (becoming more general) or going down (becoming more special), which means removing terms or adding terms. They also offer the possibility to query the system. In most cases, the user would start with a search and focus on the corresponding formal concept if it exists. From there, the user can fine-tune the search. The idea originated from the information retrieval field and was first proposed by Godin et al. \cite{Godin1989}. \\
+The local view on a Hasse diagram is called \textit{conceptual neighborhood} by Eklund et al. \cite{Eklund2009,Eklund2012}, \textit{hybrid navigation} by Carpineto and Romano \cite{Carpineto1996} or \textit{semantic probe} by Crampes and Planié \cite{crampes2014visualizing}. The basic idea is always the same: The interface is always focused on exactly \textit{one} formal concept. The user can navigate through the lattice by choosing children or parents of the focused formal concept. Choosing a parent means going up in the concept lattice (removing a term and thereby becoming more general). Choosing a child means going down (adding a term and thereby becoming more special). An essential part of the system is a query interface because the user has to start somehow with a focused formal concept. In most cases, the user would start with a search and focus on the corresponding formal concept (if the search is successful). From there, the user can refine the search. The idea originated from the information retrieval field and was first proposed by Godin et al. \cite{Godin1989}. \\
 
-At least three ideas underly this approach. Firstly, users tend to start with a short query and then refine their needs. Hearst \cite{Hearst2009} writes while referring to \cite{Marchionini2006,Bates1990}:
+At least three ideas underly this approach. First, users tend to start with a short query and then refine their needs. Hearst \cite{Hearst2009} writes while referring to \cite{Marchionini2006,Bates1990}:
 \begin{quote}
 	A commonly-observed search strategy is one in which the information seeker issues a quick, imprecise query in the hopes of getting into approximately the right part of the information space, and then doing a series of local navigation operations to get closer to the information of interest.
 \end{quote}
 
-Secondly, it is easier for the users to choose from suggestions than to formulate a query. Aula \cite{Aula2005} writes that searching is a more demanding method for locating information than browsing, as it involves several phases, such as planning and executing queries, evaluating the results, and refining the queries, whereas browsing only requires the user to recognize promising-looking links. \\
+Second, it is easier for the users to choose from suggestions than to formulate a query. Aula \cite{Aula2005} writes that searching is a more demanding method for locating information than browsing, as it involves several phases, such as planning and executing queries, evaluating the results, and refining the queries, whereas browsing only requires the user to recognize promising-looking links. \\
 
 Third, after the initial search, the neighboring concepts are basically suggestions to the users. This prevents them from getting empty results. This is related to the design principle: "Prevent errors" presented in Section~\ref{Golden}. Zero results are not really errors, but they can be seen as a failure in a search process.\\
 
 Godin et al. \cite{Godin1993} evaluated their FCA-based approach in comparison to boolean retrieval and hierarchical retrieval and proclaim that their experiment suggests that retrieval using a concept lattice may be an attractive alternative since it combines a good performance for subject searching along with browsing potential.
 
 \subsection{Applications}
-Carpineto and Romano picked up the idea from Godin et al. and developed a FCA search engine ULYSSES \cite{Carpineto1995,Carpineto1996}. The user can fine-tune what neighboring vertices are displayed by bounding the information seeking space. They are not only showing directly adjacent vertices but also vertices that do not exceed a given distance. It is also possible to restrict the space to vertices which are above, below, left or right of the focus. The system is shown in Figure~\ref{figure:ulysses}. \\
 
 \begin{figure*}[!ht]
 	\centering
@@ -449,6 +449,8 @@ Carpineto and Romano picked up the idea from Godin et al. and developed a FCA se
 \label{figure:ulysses}
 \end{figure*}
 
+Carpineto and Romano picked up the idea from Godin et al. and developed a local view system ULYSSES \cite{Carpineto1995,Carpineto1996}. The user can fine-tune what neighboring vertices are displayed by bounding the information seeking space. They are not only showing directly adjacent vertices but also vertices that do not exceed a given distance. It is also possible to restrict the space to vertices which are above, below, left or right of the focus. The system is shown in Figure~\ref{figure:ulysses}. \\
+
 \begin{figure*}[!ht]
 	\centering
 	\includegraphics[width=\linewidth]{images/credo}
@@ -456,9 +458,9 @@ Carpineto and Romano picked up the idea from Godin et al. and developed a FCA se
 \label{figure:credo}
 \end{figure*}
 
-In their work, CREDO \cite{Carpineto2004}, Carpineto and Romano followed the look of ordinary search engines. The presentation of the concept lattice is not oriented at the Hasse Diagram. It looks more like a folder structure. It is shown in \ref{figure:credo}. Work that is similar comes from Koester \cite{Koester2006}, Dau et al. \cite{Dau2008}, Nauer and Yannik \cite{Nauer2009} and Cigarran et al. \cite{Cigarran2004}. In all these cases, FCA is applied in slightly different manner. The search is done with ordinary search engines in the background (e.g. Yahoo!) and the concept lattice is built from the results of the search. So for every new search, there is a new concept lattice. This is different from our approach, where there is just one static concept lattice. \\
+In their work CREDO \cite{Carpineto2004}, Carpineto and Romano followed the look of ordinary search engines. The presentation of the concept lattice is not inspired by a Hasse diagram. It looks more like a folder structure. It is shown in Figure~\ref{figure:credo}. Work that is similar comes from Koester \cite{Koester2006}, Dau et al. \cite{Dau2008}, Nauer and Yannik \cite{Nauer2009} and Cigarran et al. \cite{Cigarran2004}. In all these cases, FCA is applied in slightly different manner. The search is done with ordinary search engines in the background (e.g. Yahoo!) and the concept lattice is built from the results of the search. So for every new search, there is a new concept lattice. This is different from our approach, where there is just one static concept lattice. \\
 
-Let us now review work of FCA on document collections. Eklund et al. applied FCA to email organization \cite{Eklund2004}, image browsing \cite{Ducrou2006,Ducrou2008} and a later work is the ``Virtual Museum of the Pacific'' \cite{Eklund2009,Eklund2012}. I will focus on the museum because it does exactly what we are trying to do: Visualize a concept lattice built from image metadata. Furthermore, it is a rare example of FCA outside of the academic community. It also runs in the browser and it was built in 2009 - so it is fairly recent. In addition, they conducted a usability study with museum experts and non-experts \cite{Eklund2012}.
+Let us now review work of FCA on document collections. Eklund et al. applied FCA to email organization \cite{Eklund2004}, image browsing \cite{Ducrou2006,Ducrou2008} and a later work is the ``Virtual Museum of the Pacific'' \cite{Eklund2009,Eklund2012}. I will focus on the museum because it does exactly what we are trying to do: Visualize a concept lattice built from image metadata. Furthermore, it is a rare example of FCA outside of the academic community. It also runs in the browser and it was built in 2009 - so it is fairly recent. In addition, they conducted a usability study with museum experts and non-experts \cite{Eklund2012}. We can take a look at the study and see how the user found a system with a local view navigation.
 
 \subsection{Virtual Museum of the Pacific}
 \label{Museum}
@@ -482,7 +484,7 @@ It is possible to search but this search is very basic because it does not offer
  \end{quote}
   In my opinion, they are not addressing these problems - even though the navigation is a big part of the interface. It feels like that they are blaming the problems on the unfamiliarity of the users when they write \cite{Eklund2012}: "there were a number of common issues [with the interface], mostly relating to the unfamiliarity of the interface". This is a weak argument because users are always unfamiliar with new interfaces. But after all, this evaluation gave valuable insight into the perception of users with a local view navigation.
   
-\subsection{Conclusion}
+\subsection{Conclusions}
 
 The Virtual Museum of the Pacific is one of the few examples of FCA that breaches traditional static visualizations. They idea to show only the directly related formal concepts is promising because this scales better than Hasse diagrams. My concept is based upon the work from the museum but addresses critical problems: the missing orientation, the missing history and the basic search interface. The concept is described in Section~\ref{Fancy 1.0}. Before that, let us review a related non-FCA-based technique.
 
@@ -500,7 +502,7 @@ This section should only give a small overview about this technique. Completely 
 
 This interface is similar to the "local view" on Hasse diagrams presented in Section~\ref{Local View}. The main idea: The dataset comprises several dimensions called \textit{facets}. The user can restrict dimension to certain values. Only items which fulfill the restrictions given by the user are shown. In addition, the user gets suggestions for further restrictions. In Figure~\ref{figure:flamenco}, you can see that the location is restricted to "Asia" and shapes etc. are restricted to "fabrics". On the left, you can see the suggestions and how many items would be left after restricting. \\
 
-Sacco and Tzitzikas \cite{Sacco2009} say that although FCA and Faceted Search are apparently two distinct approaches to information modeling and access, and they use a different terminology, they are closely related. They also mention that faceted search reduces the cognitive efforts because it ensures that the results are manageable. It feels like faceted search is superior to the local view on concepts lattice, if the data consist of more than one dimension. For this reason, the use of FCA for this particular dataset is questionable because it actually comprises several dimensions (author, location, time et al.). Nevertheless, the research group applied FCA and it was my task to visualize the concept lattice. The resulting interface is described in the next section.
+Sacco and Tzitzikas \cite{Sacco2009} say that although FCA and Faceted Search are apparently two distinct approaches to information modeling and access, and they use a different terminology, they are closely related. They also mention that faceted search reduces the cognitive efforts because it ensures that the results are manageable. It feels like faceted search is superior to the local view on concepts lattice, if the data consist of more than one dimension. For this reason, the use of FCA for this particular dataset of historial maps is questionable because the data actually comprises several dimensions (author, location, time et al.). Nevertheless, the research group applied FCA and it was my task to visualize the concept lattice. The resulting interface is described in the next section.
 
 \chapter{Fancy FCA 1.0}
 \label{Fancy 1.0}
@@ -523,9 +525,9 @@ Let me demonstrate this with an example shown in Figure~\ref{figure:conceptExamp
 \label{figure:conceptExample}
 \end{figure*}
 
-We discussed the problems of the Museum earlier and realized that the users need some additional orientation with this kind of local view. Therefore we give them two possibilities to do so:
+We discussed the problems of the Museum earlier and realized that the users need some additional orientation with this kind of local view. Therefore I give them two possibilities to do so:
 \begin{itemize}
-	\item \textit{Breadcrumbs}: The breadcrumbs show the trail how the user got to the current Focus. The term comes from Hänsel and Gretel fairy tale\footnote{\url{https://en.wikipedia.org/wiki/Hansel_and_Gretel}}. It is often used in web pages to give orientation. They typically look like ``Home / Selection1 / Selection2''.
+	\item \textit{Breadcrumbs}: The breadcrumbs show the trail how the user got to the current Focus. The term comes from the Hänsel and Gretel fairy tale\footnote{\url{https://en.wikipedia.org/wiki/Hansel_and_Gretel}}. It is often used in web pages to give orientation. They typically look like ``Home / Selection1 / Selection2''.
 	\item \textit{History}: Offer an overview about the history of the navigation actions.
 \end{itemize}
 
@@ -749,7 +751,7 @@ The implementation of this changes is not finished yet and can be followed here:
 \chapter{Conclusions}
 \label{Conclusions}
 
-First, as described in the introduction, digital humanities is the intersection between humanities and information technologies. This boils down to the development of digital tools for human scholars. This was also the underlying task the research group should do, but: Building tools is NOT the primary focus of computer science research. Computer science research is mainly focused on finding new algorithms, refining algorithms, applying algorithms to new problems etc.. Computer scientists are not famous for being the best software engineers. It is a very bad idea to take computer scientists and say to them: ``Now build some tools for human scholars!'' as this was done in this case. As this thesis showed, this approach was quite a failure. The researchers wanted to apply bleeding-edge methods, like FCA, when building these tools. But all the human scholars (supposedly\footnote{Requirements were never defined.}) needed, was a very simple search interface with some custom query filters. But at least for an ordinary computer scientist, this is not very challenging and so they are trying some sophisticated methods. To do real research in digital humanities, people are needed who live and breathe digital humanities. I think, this is the reason why wise people coined the term ``digital humanities'' to make clear that it is fundamentally different from computer science research. \\
+First, as described in the introduction, digital humanities is the intersection between humanities and information technologies. This boils down to the development of digital tools for humanities scholars. This was also the underlying task the research group should do, but: Building tools is NOT the primary focus of computer science research. Computer science research is mainly focused on finding new algorithms, refining algorithms, applying algorithms to new problems etc.. Computer scientists are not famous for being the best software engineers. It is a very bad idea to take computer scientists and say to them: ``Now build some tools for humanities scholars!'' as this was done in this case. As this thesis showed, this approach was quite a failure. The researchers wanted to apply bleeding-edge methods, like FCA, when building these tools. But all the humanities scholars (supposedly\footnote{Requirements were never defined.}) needed, was a very simple search interface with some custom query filters. But at least for an ordinary computer scientist, this is not very challenging and so they are trying some sophisticated methods. To do real research in digital humanities, people are needed who live and breathe digital humanities. I think, this is the reason why wise people coined the term ``digital humanities'' to make clear that it is fundamentally different from computer science research. \\
 
 Second, I proposed a method to visualize large concept lattice. It focuses only on small parts of the lattices and the user can incrementally explore the lattice. Thereby she feels confident to explore the lattice because she can always backtrack to earlier actions. I can say with slight confidence\footnote{The evaluation setup was very chaotic.} that the users liked this approach. But further user studies are needed to judge if my proposal suits the needs of the users. \\
 
